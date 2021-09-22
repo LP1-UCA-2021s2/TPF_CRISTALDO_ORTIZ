@@ -49,9 +49,6 @@ int main(void) {
 	printf("\nIntroduzca el tamaño del tablero: ");
 	scanf("%i",&boardSize);
 	boardSize=check_size_board(boardSize);
-	boardSize=boardSize+(boardSize-1);
-	printf("%i",boardSize);
-	int board[boardSize][boardSize];
 	move_player();
 	return EXIT_SUCCESS;
 }
