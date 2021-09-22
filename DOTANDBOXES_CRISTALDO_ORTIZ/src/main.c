@@ -26,6 +26,10 @@ void initialize_board(int **array){
 		for(int j=0;j<boardSize;j++){
 			if(i%2==0 && j%2==0){
 				array[i][j]=DOT;
+			}else{
+				if(i%2!=0 && j%2!=0){
+					array[i][j]=EMPTYBOX;
+				}
 			}
 		}
 	}
@@ -34,9 +38,17 @@ void print_board(int **array){
 	//Imprime el tablero
 	for(int i=0;i<boardSize;i++){
 		for(int j=0;j<boardSize;j++){
-			if(array[i][j]==DOT){
+			/*switch(array[i][j]){
+			case DOT:
 				printf(" * ");
-			}
+				break;
+			case EMPTYBOX:
+				printf("   ");
+				break;
+			case LINE:
+				printf("-");
+			}*/
+			printf(" %i ",array[i][j]);
 		}printf("\n");
 	}
 }
@@ -47,10 +59,10 @@ int valid_move(int initialRow,int initialColumn,int finalRow, int finalColumn){
 	//Para tener en cuenta la diferencia del movimiento no debe ser mayor a 1
 	int columnDifference=initialColumn-finalColumn;
 	int rowDifference=initialRow-finalRow;
-	if(columnDifference==0 && abs(rowDifference)==1){
+	if(columnDifference==0 && abs(rowDifference)==2){
 		return TRUE;
 	}else{
-		if(rowDifference==0 && abs(columnDifference)==1){
+		if(rowDifference==0 && abs(columnDifference)==2){
 			return TRUE;
 		}else{
 			return FALSE;
@@ -74,7 +86,17 @@ void move_player(int **board){
 		printf("\nMovimiento invalido");
 	}
 }
+void play_pc(int **board){
+	int row=random_number(boardSize-1,0);
+	int column=random_number(boardSize-1,0);
+	while(board[row][column]==DOT || board[row][column]==EMPTYBOX || board[row][column]==LINE){
+		row=random_number(boardSize-1,0);
+		column=random_number(boardSize-1,0);
+	}
+	board[row][column]=LINE;
+}
 int main(void) {
+	srand(time(NULL));
 	printf("\nIntroduzca el tamaño del tablero: ");
 	scanf("%i",&boardSize);
 	boardSize=check_size_board(boardSize);
@@ -82,6 +104,15 @@ int main(void) {
 	int **board=create_board(boardSize);
 	initialize_board(board);
 	print_board(board);
-	move_player(board);
+	//move_player(board);
+	for(int i=0;i<3;i++){
+		play_pc(board);
+		puts(" ");
+		print_board(board);
+		printf("\n----------------------\n");
+	}
+	play_pc(board);
+	puts(" ");
+	print_board(board);
 	return EXIT_SUCCESS;
 }
