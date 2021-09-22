@@ -104,13 +104,7 @@ int main(void) {
 	int **board=create_board(boardSize);
 	initialize_board(board);
 	print_board(board);
-	//move_player(board);
-	for(int i=0;i<3;i++){
-		play_pc(board);
-		puts(" ");
-		print_board(board);
-		printf("\n----------------------\n");
-	}
+	move_player(board);
 	play_pc(board);
 	puts(" ");
 	print_board(board);
