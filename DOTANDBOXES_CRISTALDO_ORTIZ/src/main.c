@@ -211,14 +211,8 @@ int **points(int turns){
 }
 int box(int **array){
 	//una manera de saber si en el tablero hay una caja cerrada
-	for(int i=0;i<boardSize;i++){
-		for(int j=0;j<boardSize;j++){
-			if((i%2!=0 && j%2!=0)){
-				if(array[i][j]==2 && array[i+1][j-1]==2 && array[i+2][j]==2 && array[i+1][j+1]){
-					return BOX;
-				}
-			}
-		}
+	if(array[i][j]==2 && array[i+1][j-1]==2 && array[i+2][j]==2 && array[i+1][j+1]){
+		return BOX;
 	}
 }
 
