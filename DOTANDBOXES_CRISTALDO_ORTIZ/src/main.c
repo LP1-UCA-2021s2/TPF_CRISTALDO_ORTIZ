@@ -44,19 +44,26 @@ int valid_move(int initialRow,int initialColumn,int finalRow, int finalColumn){
 		}
 	}
 }
-void choice_colors(){
+int choice_colors(){
 	// el jugador elige el color
 	int color, option;
-	puts("Desea elegir color ? 1- Si 0-No");
+	printf("\nDesea elegir color ? 1- Si 0-No");
 	scanf("%i",&option);
 	option = yes_no_options(option);
 	if(option == TRUE){
-		puts("Elegir color a usar 1- Rojo 0-Azul");
+		printf("\nElegir color a usar 1- Rojo 0-Azul");
 		scanf("%i",&color);
 			while(color != 1 && color !=0){
-				puts("Opción inexistente");
-				puts("Elegir color 1- Rojo 0-Azul");
+				printf("\nOpción inexistente");
+				printf("\nElegir color 1- Rojo 0-Azul");
 				scanf("%i",&color);
+			}
+			if(color == TRUE){
+				puts("Color a usar: Rojo ");
+				return RED;
+			}else{
+				puts("Color a usar: Azul ");
+				return BLUE;
 			}
 	}else{
 		puts("Elección de color aleatoriamente");
@@ -64,34 +71,26 @@ void choice_colors(){
 	}
 	if(color == TRUE){
 		puts("Color a usar: Rojo ");
+		return RED;
 	}else{
 		puts("Color a usar: Azul ");
+		return BLUE;
 	}
-
 }
-int end_game(int **board, int row, int column){
-	//Funcion que determina el fin del juego
-	int collector=0;
-	collector=collector + box(board,row,column);
-	int condition=(boardSize-1)*(boardSize-1);
-	if(collector < condition){
-		return FALSE;
-	}else{
+int end_game(){
 		return TRUE;
-	}
 }
 void move_player(int **array){
 	int initialRow,initialColumn,finalRow,finalColumn;
-	puts("Introduzca la Posicion Inicial");
+	printf("\nIntroduzca la Posicion Inicial");
 	scanf("\nFila %i , Columna %i",&initialRow,&initialColumn);
-	puts("Introduzca la Posicion Final: ");
+	printf("\nIntroduzca la Posicion Final: ");
 	scanf("\nFila: %i, Columna: %i",&finalRow,&finalColumn);
 	while(array[finalRow][finalColumn] == LINE ){ //verificar que no esta ocupado
-		puts("Posicion Final ocupada o no existe. Intente de nuevo");
-		puts("Introduzca la Posicion Final: ");
+		printf("\nPosicion Final ocupada o no existe. Intente de nuevo");
+		printf("\nIntroduzca la Posicion Final: ");
 		scanf("\nFila: %i, Columna: %i",&finalRow,&finalColumn);
 	}
-
 }
 void play_pc(int **board){
 	int row=random_number(boardSize-1,0);
@@ -133,7 +132,7 @@ void turns(int **array,int player){
 	//funcion para saber si terminan los turnos, osea, define el fin del juego y
 }
 
-void choice_turns(){
+int choice_turns(){
 	//elegir quién comienza
 	int choice,player;
 	puts("Elegir quién comienza? 1-Si 0-No");
@@ -147,15 +146,23 @@ void choice_turns(){
 			puts("Elegir quién comienza 1-CPU 0-JUGADOR");
 			scanf("%i",&player);
 		}
-
+		if(player == TRUE){
+			puts("Comienza CPU ");
+			return CPU;
+		}else{
+			puts("Comienza JUGADOR ");
+			return PLAYER;
+		}
 	}else{
 		puts("Elección de quién empieza aleatoriamente");
 				player = random_number(1,0);
 	} // imprime la elección
 	if(player == TRUE){
 		puts("Comienza CPU ");
+		return CPU;
 	}else{
 		puts("Comienza JUGADOR ");
+		return PLAYER;
 	}
 
 }
@@ -169,24 +176,25 @@ void choice_turns(){
 	return add_points;
 }*/
 void star_game(){
-	while(0){
-		int **board = choice_board();
-		choice_colors();
+	int **board = choice_board();
+	if(choice_turns()==PLAYER){
+		//Juega el jugador primero
 		move_player(board);
+		print_board(board);
 		play_pc(board);
-		puts(" ");
+		print_board(board);
+	}else{
+		//Juega la pc
+		play_pc(board);
+		print_board(board);
+		move_player(board);
 		print_board(board);
 	}
 }
 int main(void) {
 	srand(time(NULL));
 	if(play_game() == 1){
-		int **board = choice_board();
-		choice_colors();
-		move_player(board);
-		play_pc(board);
-		puts(" ");
-		print_board(board);
+		star_game();
 	}else{
 		puts("Saliendo del juego");
 		exit(0); //termina

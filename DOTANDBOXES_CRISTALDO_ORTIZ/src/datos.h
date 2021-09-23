@@ -17,8 +17,8 @@
 #define VERTICALINE 5
 #define EMPTYBOX 3
 #define BOX 4
-#define PLAYER1 0
-#define PLAYER2 1
+#define CPU 0
+#define PLAYER 1
 #define RED 0
 #define BLUE 1
 int boardSize;
