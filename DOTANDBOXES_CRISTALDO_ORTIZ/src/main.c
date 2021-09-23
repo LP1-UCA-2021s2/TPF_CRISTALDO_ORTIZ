@@ -1,4 +1,22 @@
 #include "datos.h"
+
+int play_game(){
+	// el jugador decide si quiere jugar o no
+	int go;
+	puts("Iniciar el juego? 1- si 0-no");
+	scanf("%d",&go);
+	while(go != 1 && go !=0){
+		puts("Opción inexistente");
+		puts("Iniciar el juego? 1- si 0-no");
+		scanf("%d",&go);
+	}
+	if(go == TRUE){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+
+}
 int random_number(int max,int min){
 	//Funcion que me genera numeros aleatorios entre dos numeros
 	return rand()%(max-min+1) + min;
@@ -69,17 +87,33 @@ int valid_move(int initialRow,int initialColumn,int finalRow, int finalColumn){
 		}
 	}
 }
+int choice_colors(){
+	// el jugador elige el color
+	int color;
+	puts("Elegir color  1- Rojo 0-Azul");
+	scanf("%d",&color);
+	while(color != 1 && color !=0){
+		puts("Opción inexistente");
+		puts("Elegir color  1- Rojo 0-Azul");
+		scanf("%d",&color);
+	}
+	if(color == TRUE){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+
+}
 void move_player(int **board){
-	//mensaje para ethel: te dejo esta funcion para que mejores
 	int initialRow,initialColumn,finalRow,finalColumn;
-	printf("\nIntroduzca la posicion inicial fila: ");
-	scanf("%i",&initialRow);
-	printf("\nIntroduzca la posicion inicial columna: ");
-	scanf("%i",&initialColumn);
-	printf("\nIntroduzca la posicion final fila: ");
-	scanf("%i",&finalRow);
-	printf("\nIntroduzca la posicion final columna: ");
-	scanf("%i",&finalColumn);
+	puts("Introduzca la Posicion Inicial");
+	scanf("\nFila %i",&initialRow);
+	scanf("\nColumna %i",&initialColumn);
+	printf("\nPosición Inicial: %i, %i",initialRow,initialColumn);
+	puts("Introduzca la Posicion Final: ");
+	scanf("\nFila%i",&finalRow);
+	scanf("\nColumna%i",&finalColumn);
+	printf("\nPosición Final: %i, %i",finalRow,finalColumn);
 	if(valid_move(initialRow,initialColumn,finalRow,finalColumn)){
 		printf("\nMovimiento valido");
 	}else{
@@ -95,18 +129,44 @@ void play_pc(int **board){
 	}
 	board[row][column]=LINE;
 }
+int **choice_board(){
+	//el jugador decide si elige el tamaño del tablero o no
+	//si es no, se genera de forma aleatoria
+	int option;
+	puts("Elegir tamaño del tablero? 1-si 0-no");
+	scanf("%d",&option);
+	if(option == TRUE){
+		printf("\nIntroduzca el tamaño del tablero: ");
+		scanf("%i",&boardSize);
+		boardSize=check_size_board(boardSize);
+		boardSize=boardSize+(boardSize-1);
+		int **board=create_board(boardSize);
+		initialize_board(board);
+		print_board(board);
+		return board;
+		}else{
+			boardSize = random_number(15,3);
+			boardSize=check_size_board(boardSize);
+			boardSize=boardSize+(boardSize-1);
+			int **board=create_board(boardSize);
+			initialize_board(board);
+			print_board(board);
+			return board;
+		}
+}
 int main(void) {
 	srand(time(NULL));
-	printf("\nIntroduzca el tamaño del tablero: ");
-	scanf("%i",&boardSize);
-	boardSize=check_size_board(boardSize);
-	boardSize=boardSize+(boardSize-1);
-	int **board=create_board(boardSize);
-	initialize_board(board);
-	print_board(board);
-	move_player(board);
-	play_pc(board);
-	puts(" ");
-	print_board(board);
+	if(play_game() == 1){
+		int **board = choice_board();
+			choice_colors();
+			move_player(board);
+			play_pc(board);
+			puts(" ");
+			print_board(board);
+	}else{
+		puts("Salir juego");
+		exit(0); //termina
+	}
+
 	return EXIT_SUCCESS;
 }
