@@ -52,6 +52,14 @@ void print_board(int **array){
 		}printf("\n");
 	}
 }
+int box(int **board,int row, int column){
+	//Funcion si es que se formo la caja
+	if(board[row][column+1]==LINE && board[row][column-1]==LINE && board[row+1][column]==LINE && board[row-1][column]==LINE){
+		return TRUE;
+	}else{
+		return FALSE;
+	}
+}
 int valid_move(int initialRow,int initialColumn,int finalRow, int finalColumn){
 	//Verifica si hace un movimiento valido (vertical y horizontal)
 	//#Si la resta entre las columnas es 0 es un movimiento vertical
