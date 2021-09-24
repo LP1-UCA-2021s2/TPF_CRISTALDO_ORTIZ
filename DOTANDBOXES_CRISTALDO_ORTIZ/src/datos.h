@@ -14,7 +14,6 @@
 #define FALSE 0
 #define DOT 1
 #define LINE 2
-#define VERTICALINE 5
 #define EMPTYBOX 3
 #define BOX 4
 #define CPU 0
@@ -26,7 +25,7 @@ int add_points[2] = {0};
 	//suma 10 puntos
 	//suma los puntos de la cpu en posi 1
 	//los puntos del jugador en posi 0
-//funciones
+//Funciones
 int random_number(int max,int min){
 	//Funcion que me genera numeros aleatorios entre dos numeros
 	return rand()%(max-min+1) + min;
@@ -67,19 +66,12 @@ void print_board(int **array){
 	printf("\n");
 	for(int i=0;i<boardSize+(boardSize-1);i++){
 		for(int j=0;j<boardSize +(boardSize-1);j++){
-			/*switch(array[i][j]){
-			case DOT:
-				printf(" * ");
-				break;
-			case EMPTYBOX:
-				printf("   ");
-				break;
-			case LINE:
-				printf("-");
-			}*/
 			printf(" %i ",array[i][j]);
 		}printf("\n");
 	}
 }
-
+void line(){
+	//Procedimiento con objetivo meramente estetico
+	printf("\n------------------------------------------");
+}
 #endif /* SRC_DATOS_H_ */
