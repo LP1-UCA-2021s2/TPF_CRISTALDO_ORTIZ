@@ -22,6 +22,10 @@
 #define RED 0
 #define BLUE 1
 int boardSize;
+int add_points[2] = {0};
+	//suma 10 puntos
+	//suma los puntos de la cpu en posi 1
+	//los puntos del jugador en posi 0
 //funciones
 int random_number(int max,int min){
 	//Funcion que me genera numeros aleatorios entre dos numeros
@@ -46,8 +50,8 @@ int **create_board(int size){
 }
 void initialize_board(int **array){
 	//Iniciliza el tablero para el juego
-	for(int i=0;i<boardSize;i++){
-		for(int j=0;j<boardSize;j++){
+	for(int i=0;i<boardSize +(boardSize-1);i++){
+		for(int j=0;j<boardSize +(boardSize-1);j++){
 			if(i%2==0 && j%2==0){
 				array[i][j]=DOT;
 			}else{
@@ -61,8 +65,8 @@ void initialize_board(int **array){
 void print_board(int **array){
 	//Imprime el tablero
 	printf("\n");
-	for(int i=0;i<boardSize;i++){
-		for(int j=0;j<boardSize;j++){
+	for(int i=0;i<boardSize+(boardSize-1);i++){
+		for(int j=0;j<boardSize +(boardSize-1);j++){
 			/*switch(array[i][j]){
 			case DOT:
 				printf(" * ");

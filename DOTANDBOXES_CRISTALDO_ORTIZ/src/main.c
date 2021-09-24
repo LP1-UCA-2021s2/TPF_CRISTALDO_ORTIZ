@@ -27,22 +27,27 @@ int box(int **board,int row, int column){
 		return FALSE;
 	}
 }
-int valid_move(int initialRow,int initialColumn,int finalRow, int finalColumn){
-	//Verifica si hace un movimiento valido (vertical y horizontal)
-	//#Si la resta entre las columnas es 0 es un movimiento vertical
-	//#Si la resta entre las filas es 0 es un movimiento horizontal
-	//Para tener en cuenta la diferencia del movimiento no debe ser mayor a 1
-	int columnDifference=initialColumn-finalColumn;
-	int rowDifference=initialRow-finalRow;
-	if(columnDifference==0 && abs(rowDifference)==2){
-		return TRUE;
+int verify_move(int **board,int row,int column){
+	//cuando esta hacia el oeste
+	if(board[row][column+1]== EMPTYBOX){
+		return column+1;
 	}else{
-		if(rowDifference==0 && abs(columnDifference)==2){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
+		//cuando esta hacia el este
+		if(board[row][column-1]== EMPTYBOX){
+				return column-1;
+			}else{
+				//cuando esta hacia sur
+				if(board[row+1][column]== EMPTYBOX){
+						return row+1;
+					}else{
+						//cuando esta hacia el norte
+						if(board[row-1][column]== EMPTYBOX){
+								return row-1;
+							}
+					}
+			}
 	}
+	return 0;
 }
 int choice_colors(){
 	// el jugador elige el color
@@ -77,21 +82,10 @@ int choice_colors(){
 		return BLUE;
 	}
 }
-int end_game(){
-		return TRUE;
+void end_game(){
+		exit(0);
 }
-void move_player(int **array){
-	int initialRow,initialColumn,finalRow,finalColumn;
-	printf("\nIntroduzca la Posicion Inicial");
-	scanf("\nFila %i , Columna %i",&initialRow,&initialColumn);
-	printf("\nIntroduzca la Posicion Final: ");
-	scanf("\nFila: %i, Columna: %i",&finalRow,&finalColumn);
-	while(array[finalRow][finalColumn] == LINE ){ //verificar que no esta ocupado
-		printf("\nPosicion Final ocupada o no existe. Intente de nuevo");
-		printf("\nIntroduzca la Posicion Final: ");
-		scanf("\nFila: %i, Columna: %i",&finalRow,&finalColumn);
-	}
-}
+
 void play_pc(int **board){
 	int row=random_number(boardSize-1,0);
 	int column=random_number(boardSize-1,0);
@@ -99,6 +93,7 @@ void play_pc(int **board){
 		row=random_number(boardSize-1,0);
 		column=random_number(boardSize-1,0);
 	}
+	printf("Posicion : %i, %i",row,column);
 	board[row][column]=LINE;
 }
 int **choice_board(){
@@ -128,9 +123,7 @@ int **choice_board(){
 			return board;
 		}
 }
-void turns(int **array,int player){
-	//funcion para saber si terminan los turnos, osea, define el fin del juego y
-}
+
 
 int choice_turns(){
 	//elegir quién comienza
@@ -166,47 +159,59 @@ int choice_turns(){
 	}
 
 }
-/*int **points(int turns){
-	//manera de sumar puntos
-	int add_points[2] = {0};
-	add_points[turns] =+ 10;
-	//suma 10 puntos
-	//suma los puntos de la cpu en posi 1
-	//los puntos del jugador en posi 0
-	return add_points;
-<<<<<<< HEAD
 
+
+void move_player(int **array){ //FUNCIONA
+	int Row,Column;
+	puts("Introduzca la Posicion a colocar la raya. Considerar que los 1 son los puntos y los 3 son vacío ");
+	printf("\nFila: ");
+	scanf("%i",&Row);
+	printf("\nColumna: ");
+	scanf("%i",&Column);
+	printf("Posición %i, %i",Row,Column);
+	while(array[Row][Column] == LINE || array[Row][Column] == EMPTYBOX || array[Row][Column] == DOT ){ //verificar que no esta ocupado
+		printf("\nPosicion ocupada o no existe. Intente de nuevo");
+		printf("\nFila: ");
+		scanf("%i",&Row);
+		printf("\nColumna: ");
+		scanf("%i",&Column);
+		printf("Posición %i, %i",Row,Column);
+	}
+	array[Row][Column] = LINE;
+	int existBox = box(array,Row,Column);
+	if(existBox == TRUE){
+		add_points[PLAYER]+= 10;
+		printf("Puntaje Jugador: %i",add_points[PLAYER]);
+	}
 }
-int box(int **array){
-	//una manera de saber si en el tablero hay una caja cerrada
-	if(array[i][j]==2 && array[i+1][j-1]==2 && array[i+2][j]==2 && array[i+1][j+1]){
-		return BOX;
-=======
-}*/
-void star_game(){
+void start_game(){ // AGG TURNOS, MENSAJE, PUNTOS,INDICAR FIN MAYBE
+
 	int **board = choice_board();
+	//while()
 	if(choice_turns()==PLAYER){
 		//Juega el jugador primero
+		choice_colors();
 		move_player(board);
 		print_board(board);
 		play_pc(board);
 		print_board(board);
+
 	}else{
 		//Juega la pc
+		choice_colors();
 		play_pc(board);
 		print_board(board);
 		move_player(board);
 		print_board(board);
->>>>>>> e0a3082e21110776f9b40b081db3f788bdfa86db
 	}
 }
 int main(void) {
 	srand(time(NULL));
 	if(play_game() == 1){
-		star_game();
+		start_game();
 	}else{
 		puts("Saliendo del juego");
-		exit(0); //termina
+		end_game(); //termina
 	}
 
 	return EXIT_SUCCESS;
