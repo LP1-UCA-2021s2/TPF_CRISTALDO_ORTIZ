@@ -19,6 +19,38 @@ int play_game(){
 	}
 
 }
+int **create_board(int size){
+	//Crea el tablero
+	int **array;
+	array=malloc(size*sizeof(int *));
+	for(int i=0;i<size;i++){
+		array[i]=malloc(size*sizeof(int *));
+	}
+	return array;
+}
+void initialize_board(int **array){
+	//Iniciliza el tablero para el juego
+	for(int i=0;i<boardSize +(boardSize-1);i++){
+		for(int j=0;j<boardSize +(boardSize-1);j++){
+			if(i%2==0 && j%2==0){
+				array[i][j]=DOT;
+			}else{
+				if(i%2!=0 && j%2!=0){
+					array[i][j]=EMPTYBOX;
+				}
+			}
+		}
+	}
+}
+void print_board(int **array){
+	//Imprime el tablero
+	printf("\n");
+	for(int i=0;i<boardSize+(boardSize-1);i++){
+		for(int j=0;j<boardSize +(boardSize-1);j++){
+			printf(" %i ",array[i][j]);
+		}printf("\n");
+	}
+}
 int box(int **board,int row, int column){
 	//Funcion si es que se formo la caja
 	if(board[row][column+1]==LINE && board[row][column-1]==LINE && board[row+1][column]==LINE && board[row-1][column]==LINE){
@@ -28,30 +60,39 @@ int box(int **board,int row, int column){
 	}
 }
 void verify_move(int **board,int *row,int *column){
+	//Procedimiento que verifica cerca de que 3 se puso una linea
 	for(int i=0;i<boardSize+(boardSize-1);i++){
 		for(int j=0;j<boardSize+(boardSize-1);j++){
 			if(i%2!=0 && j%2!=0){
 				if(i-1==*row && j==*column){
-					*row=*row+1;
-				}else{
-					if(i+1==*row && j==*column){
+					if(box(board,*row+1,*column)){
 						*row=*row+1;
-					}else{
-						if(j-1==*column && i==*row){
-							*column=*column+1;
-						}else{
-							if(j+1==*column && i==*row){
-								*column=*column-1;
-							}
-						}
 					}
 				}
+				if(i+1==*row && j==*column){
+					if(box(board,*row-1,*column)){
+						*row=*row-1;
+					}
+				}
+				if(j-1==*column && i==*row){
+					if(box(board,*row,*column+1)){
+						*column=*column+1;
+					}
+				}
+				if(j+1==*column && i==*row){
+					if(box(board,*row,*column-1)){
+						*column=*column-1;
+					}
+				}
+
+
+
 			}
 		}
 	}
 }
 int choice_colors(){
-	// el jugador elige el color
+	//FUncion que elige el color
 	int color, option;
 	printf("\nDesea elegir color ? 1- Si 0-No");
 	scanf("%i",&option);
@@ -84,6 +125,8 @@ int choice_colors(){
 	}
 }
 int end_game(int **array){
+	//FUncion que determina cuando finaliza la partida
+	//acumula la cantidad de cajas formadas en el tablero
 	int acumuletor=0;
 	for(int i=0;i<boardSize+(boardSize-1);i++){
 			for(int j=0;j<boardSize +(boardSize-1);j++){
@@ -107,7 +150,6 @@ int **choice_board(){
 		scanf("%i",&boardSize);
 		boardSize=check_size_board(boardSize);
 		newSize=boardSize+(boardSize-1);
-		printf("el tamaño del tablero %i y el nuevo %i ",boardSize,newSize);
 		int **board=create_board(newSize);
 		initialize_board(board);
 		print_board(board);
@@ -166,15 +208,15 @@ void move_pc(int **board){
 	printf("\nEligiendo.....");
 	row=random_number(max,0);
 	column=random_number(max,0);
-	while(board[row][column]==DOT || board[row][column]==LINE || board[row][column]==EMPTYBOX){
+	while(board[row][column]==DOT || board[row][column]==LINE || board[row][column]==EMPTYBOX || board[row][column] == BOX){
 		row=random_number(max,0);
 		column=random_number(max,0);
 	}
-	printf("\nPosicion a poner la recta: %i, %i",row,column);
+	printf("\nPosicion a poner la linea: %i, %i",row,column);
 	board[row][column]=LINE;
 	verify_move(board,&row,&column);
 	if(box(board,row,column)){
-		add_points[PLAYER]+= 10;
+		add_points[CPU]+= 10;
 		board[row][column]=BOX;
 		printf("\nPuntaje CPU: %i",add_points[PLAYER]);
 	}
@@ -190,7 +232,7 @@ void move_player(int **array){
 	printf("\nColumna: ");
 	scanf("%i",&column);
 	printf("\nPosición %i, %i",row,column);
-	while(array[row][column] == LINE || array[row][column] == EMPTYBOX || array[row][column] == DOT ){ //verificar que no esta ocupado
+	while(array[row][column] == LINE || array[row][column] == EMPTYBOX || array[row][column] == DOT || array[row][column] == BOX){ //verificar que no esta ocupado
 		printf("\nPosicion ocupada o no existe. Intente de nuevo");
 		printf("\nFila: ");
 		scanf("%i",&row);
@@ -207,25 +249,25 @@ void move_player(int **array){
 	}
 }
 void start_game(){
-	//Procedimiento que hace que funcione el juego
-	int **board = choice_board();
-	if(choice_turns()==PLAYER){
-		choice_colors();
-		//Juega el jugador
-		while(end_game(board)<(boardSize+1)){
-			move_player(board);
-			print_board(board);
+	//Procedimiento que se utilizar para empezar el juego por turnos
+	int **board =choice_board();
+		if(choice_turns()==PLAYER){
+			choice_colors();
+			//Juega el jugador
+			while(end_game(board)<(boardSize+1)){
+				move_player(board);
+				print_board(board);
+				move_pc(board);
+				print_board(board);
+			}
+		}else{
+			//Juega la pc
+			while(end_game(board)<(boardSize+1)){
 			move_pc(board);
 			print_board(board);
+			move_player(board);
+			print_board(board);
 		}
-		printf("\nTermino el juego");
-	}else{
-		//Juega la pc
-		choice_colors();
-		move_pc(board);
-		print_board(board);
-		move_player(board);
-		print_board(board);
 	}
 }
 int main(void) {
@@ -236,6 +278,5 @@ int main(void) {
 		puts("Saliendo del juego");
 		exit(0);
 	}
-
 	return EXIT_SUCCESS;
 }

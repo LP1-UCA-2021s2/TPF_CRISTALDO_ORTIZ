@@ -4,7 +4,6 @@
  *  Created on: 21 sept. 2021
  *      Author: lp1-2021
  */
-
 #ifndef SRC_DATOS_H_
 #define SRC_DATOS_H_
 #include<stdlib.h>
@@ -18,8 +17,8 @@
 #define BOX 4
 #define CPU 0
 #define PLAYER 1
-#define RED 0
-#define BLUE 1
+#define RED 4
+#define BLUE 5
 int boardSize;
 int add_points[2] = {0};
 	//suma 10 puntos
@@ -37,38 +36,6 @@ int check_size_board(int number){
 		scanf("%i",&number);
 	}
 	return number;
-}
-int **create_board(int size){
-	//Crea el tablero
-	int **array;
-	array=calloc(size,sizeof(int *));
-	for(int i=0;i<size;i++){
-		array[i]=calloc(size,sizeof(int *));
-	}
-	return array;
-}
-void initialize_board(int **array){
-	//Iniciliza el tablero para el juego
-	for(int i=0;i<boardSize +(boardSize-1);i++){
-		for(int j=0;j<boardSize +(boardSize-1);j++){
-			if(i%2==0 && j%2==0){
-				array[i][j]=DOT;
-			}else{
-				if(i%2!=0 && j%2!=0){
-					array[i][j]=EMPTYBOX;
-				}
-			}
-		}
-	}
-}
-void print_board(int **array){
-	//Imprime el tablero
-	printf("\n");
-	for(int i=0;i<boardSize+(boardSize-1);i++){
-		for(int j=0;j<boardSize +(boardSize-1);j++){
-			printf(" %i ",array[i][j]);
-		}printf("\n");
-	}
 }
 void line(){
 	//Procedimiento con objetivo meramente estetico
