@@ -59,37 +59,48 @@ int box(int **board,int row, int column){
 		return FALSE;
 	}
 }
-void verify_move(int **board,int *row,int *column){
+int verify_move(int **board,int *row,int *column,int player){
+	int acumuletor,flag=FALSE;
 	//Procedimiento que verifica cerca de que 3 se puso una linea
 	for(int i=0;i<boardSize+(boardSize-1);i++){
 		for(int j=0;j<boardSize+(boardSize-1);j++){
 			if(i%2!=0 && j%2!=0){
 				if(i-1==*row && j==*column){
 					if(box(board,*row+1,*column)){
-						*row=*row+1;
+						acumuletor=*row+1;
+						board[acumuletor][*column]=BOX;
+						add_points[player]+= 10;
+						flag=TRUE;
 					}
 				}
 				if(i+1==*row && j==*column){
 					if(box(board,*row-1,*column)){
-						*row=*row-1;
+						acumuletor=*row-1;
+						board[acumuletor][*column]=BOX;
+						add_points[player]+= 10;
+						flag=TRUE;
 					}
 				}
 				if(j-1==*column && i==*row){
 					if(box(board,*row,*column+1)){
-						*column=*column+1;
+						acumuletor=*column+1;
+						board[*row][acumuletor]=BOX;
+						add_points[player]+= 10;
+						flag=TRUE;
 					}
 				}
 				if(j+1==*column && i==*row){
 					if(box(board,*row,*column-1)){
-						*column=*column-1;
+						acumuletor=*column-1;
+						board[*row][acumuletor]=BOX;
+						add_points[player]+= 10;
+						flag=TRUE;
 					}
 				}
-
-
-
 			}
 		}
 	}
+	return flag;
 }
 int choice_colors(){
 	//FUncion que elige el color
@@ -199,10 +210,10 @@ int choice_turns(){
 	}
 
 }
-void move_pc(int **board){
+int move_pc(int **board){
 	//Funcion que se encarga de realiazar los movimientos de la pc
 	int max=(boardSize+(boardSize-1))-1;
-	int row,column;
+	int row,column,flag;
 	printf("\nTurno de la CPU");
 	line();
 	printf("\nEligiendo.....");
@@ -214,16 +225,17 @@ void move_pc(int **board){
 	}
 	printf("\nPosicion a poner la linea: %i, %i",row,column);
 	board[row][column]=LINE;
-	verify_move(board,&row,&column);
-	if(box(board,row,column)){
-		add_points[CPU]+= 10;
-		board[row][column]=BOX;
-		printf("\nPuntaje CPU: %i",add_points[PLAYER]);
+	flag=verify_move(board,&row,&column,CPU);
+	printf("\nPuntaje CPU: %i",add_points[CPU]);
+	if(flag==TRUE){
+		return flag;
+	}else{
+		return flag;
 	}
 }
-void move_player(int **array){
+int move_player(int **array){
 	//Procedimiento que se encarga de los movimientos del jugador
-	int row,column;
+	int row,column,flag;
 	printf("\nTurno del jugador");
 	line();
 	puts("\nIntroduzca la Posicion a colocar la raya. Considerar que los 1 son los puntos y los 3 son vacío ");
@@ -241,34 +253,51 @@ void move_player(int **array){
 		printf("\nPosición %i, %i",row,column);
 	}
 	array[row][column] = LINE;
-	verify_move(array,&row,&column);
-	if(box(array,row,column)){
-		add_points[PLAYER]+=10;
-		array[row][column]=BOX;
-		printf("\nPuntaje Jugador: %i",add_points[PLAYER]);
+	flag=verify_move(array,&row,&column,PLAYER);
+	printf("\nPuntaje Jugador: %i",add_points[PLAYER]);
+	if(flag==TRUE){
+		return flag;
+	}else{
+		return flag;
 	}
 }
 void start_game(){
 	//Procedimiento que se utilizar para empezar el juego por turnos
-	int **board =choice_board();
+	int **board =choice_board(),flag=FALSE;
 		if(choice_turns()==PLAYER){
 			choice_colors();
 			//Juega el jugador
 			while(end_game(board)<(boardSize+1)){
-				move_player(board);
-				print_board(board);
-				move_pc(board);
-				print_board(board);
+				if(flag==FALSE){
+					flag=move_player(board);
+					print_board(board);
+				}else{
+					flag=FALSE;
+				}
+				if(flag==FALSE){
+					flag=move_pc(board);
+					print_board(board);
+				}else{
+					flag=FALSE;
+				}
 			}
 		}else{
 			//Juega la pc
 			while(end_game(board)<(boardSize+1)){
-			move_pc(board);
-			print_board(board);
-			move_player(board);
-			print_board(board);
+				if(flag==FALSE){
+					flag=move_player(board);
+					print_board(board);
+				}else{
+					flag=FALSE;
+				}
+				if(flag==FALSE){
+					flag=move_pc(board);
+					print_board(board);
+				}else{
+					flag=FALSE;
+				}
+			}
 		}
-	}
 }
 int main(void) {
 	srand(time(NULL));
