@@ -63,6 +63,7 @@ GtkWidget *label_nameFirtsTurn;
 GtkWidget *dialog;
 const gchar *name1;
 const gchar *name2;
+const gchar *message;
 
 /*FUNCIONES*/
 void open_statistics(GtkWidget *widget, gpointer data);

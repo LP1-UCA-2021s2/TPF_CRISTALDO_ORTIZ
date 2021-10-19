@@ -66,6 +66,9 @@ int main(int argc,char *argv[]) {
 	btn_cancel1=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel1"));
 	g_signal_connect(btn_cancel1,"clicked", G_CALLBACK(isClickedCancel),NULL);
 
+	btn_cancel2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel2"));
+	g_signal_connect(btn_cancel2,"clicked", G_CALLBACK(isClickedCancel),NULL);
+
 	btn_ethel=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ethel"));
 	g_signal_connect(btn_ethel,"clicked", G_CALLBACK(isClickedEthel),NULL);
 

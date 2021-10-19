@@ -39,7 +39,7 @@ int verify_move(int **board,int *row,int *column,int player,int color);
 void choice_colors(int *color1,int *color2);
 int end_game(int **array);
 int **choice_board(void);
-int choice_turns(void);
+void choice_turns(int choice);
 int move_pc(int **board,int color);
 int move_player(int **array,int color);
 void start_game();

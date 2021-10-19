@@ -309,7 +309,7 @@ int **choice_board(){
 			return board;
 		}
 }
-int choice_turns(){
+void choice_turns(int choice){
 	/*
 	* Funcion que permite 2 opciones, que el usuario eliga quien comienza o se selecciona aleatoriamente.
 	* Parametros:
@@ -318,37 +318,37 @@ int choice_turns(){
 	* 	CPU		-> Si comienza el CPU
 	* 	PLAYER 	-> Si comienza el jugador
 	*/
-	int choice,player;
-	puts("Elegir quién comienza? 1-Si 0-No");
-	scanf("%i",&choice);
-	choice = yes_no_options(choice);
+	int player;
+	//puts("Elegir quién comienza? 1-Si 0-No");
+	//scanf("%i",&choice);
+	//choice = yes_no_options(choice);
 	if(choice==TRUE){
-		puts("Elegir quién comienza 1-CPU 0-JUGADOR");
+		//El usuario elige quien comienza
+		gtk_widget_show_all(window_choiceTurn);
+		gtk_widget_hide(window_name);
+		gtk_label_set_text(GTK_LABEL(label_namePlayer),name1);
+		gtk_label_set_text(GTK_LABEL(label_namePc),name2);
+		cancel=1;
+		back=4;
+		/*puts("Elegir quién comienza 1-CPU 0-JUGADOR");
 		scanf("%i",&player);
 		while(player != 1 && player !=0){
 			puts("Opción inexistente");
 			puts("Elegir quién comienza 1-CPU 0-JUGADOR");
 			scanf("%i",&player);
-		}
+		}*/
+	}else{
+		//Se elige quien comienza aleatoriamente
+		back=4;
+		player = random_number(1,0);
 		if(player == TRUE){
-			puts("Comienza CPU ");
-			return CPU;
+			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
 		}else{
-			puts("Comienza JUGADOR ");
-			return PLAYER;
+			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
 		}
-	}else{
-		puts("Elección de quién empieza aleatoriamente");
-				player = random_number(1,0);
+		gtk_widget_show_all(window_turnSelected);
+		gtk_widget_hide(window_name);
 	}
-	if(player == TRUE){
-		puts("Comienza CPU ");
-		return CPU;
-	}else{
-		puts("Comienza JUGADOR ");
-		return PLAYER;
-	}
-
 }
 int move_pc(int **board,int color){
 	/*
@@ -417,15 +417,14 @@ int move_player(int **array,int color){
 		return flag;
 	}
 }
-void start_game(){
-	/*
+/*void start_game(){
+
 	* Procedimiento que se encarga de iniciar el juego, organizar los turnos por banderas y
 	* verificar si se termina el juego.
 	* Parametros:
 	* 	Ninguno.
 	* Retorno:
 	* 	Ninguno.
-	*/
 	int **board =choice_board(),flag=FALSE,color1,color2;
 		if(choice_turns()==PLAYER){
 			choice_colors(&color1,&color2);
@@ -462,7 +461,7 @@ void start_game(){
 				}
 			}
 		}
-}
+}*/
 void open_statistics(GtkWidget *widget, gpointer data){
 	/*
 	 * Procedimiento que abre la ventana de estadisticas
@@ -537,44 +536,49 @@ void isClickedBack(GtkWidget *widget, gpointer data){
 	}
 }
 void isClickedCancel(GtkWidget *widget, gpointer data){
-	switch(cancel){
-	case 1:
-		dialog = gtk_message_dialog_new(GTK_WINDOW(window_choiceTurn),
-		           GTK_DIALOG_DESTROY_WITH_PARENT,
-		           GTK_MESSAGE_QUESTION,
-		           GTK_BUTTONS_YES_NO,
-		           "Estas seguro que desea salir?, no se guardara la partida actual.");
-		 gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
-		 if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
-			  gtk_widget_hide(window_choiceTurn);
-			  gtk_widget_show_all(window_menu);
-			  emptyEntry(txt_player);
-			  emptyEntry(txt_pc);
-		 }
-		 gtk_widget_destroy(dialog);
-		 break;
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_choiceTurn),
+			           GTK_DIALOG_DESTROY_WITH_PARENT,
+			           GTK_MESSAGE_QUESTION,
+			           GTK_BUTTONS_YES_NO,
+			           "Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		switch(cancel){
+			case 1:
+				gtk_widget_hide(window_choiceTurn);
+				gtk_widget_show_all(window_menu);
+				emptyEntry(txt_player);
+				emptyEntry(txt_pc);
+				break;
+			case 2:
+				gtk_widget_hide(window_turnSelected);
+				gtk_widget_show_all(window_menu);
+				break;
+
+			}
 	}
+	gtk_widget_destroy(dialog);
 }
 void isClickedPlayer(GtkWidget *widget, gpointer data){
 	/*Funcion cuando se apreta el boton para seleccionar quien comienza primero*/
+	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 	back=5;
 }
 void isClickedPc(GtkWidget *widget, gpointer data){
+	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 	back=5;
 }
 void isClickedEthel(GtkWidget *widget, gpointer data){
-	const gchar *description="Ayudo con el diseño de la interfaz";
 	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Ethel.jpg");
-	gtk_label_set_text(GTK_LABEL(label_description),description);
+	gtk_label_set_text(GTK_LABEL(label_description),"Ayudo con el diseño de la interfaz");
 }
 void isClickedDaniela(GtkWidget *widget, gpointer data){
-	const gchar *description="Programo y lloro";
 	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Danusita.jpg");
-	gtk_label_set_text(GTK_LABEL(label_description),description);
+	gtk_label_set_text(GTK_LABEL(label_description),"Programo y lloro");
 }
 void isClickedNext1(GtkWidget *widget, gpointer data){
 	playerName[0]='\0';
@@ -599,18 +603,7 @@ void isClickedNext1(GtkWidget *widget, gpointer data){
 		            GTK_BUTTONS_YES_NO,
 		            "Dese elegir quien comienza primero?");
 		gtk_window_set_title(GTK_WINDOW(dialog), "Consultita");
-
-		if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
-			gtk_widget_show_all(window_choiceTurn);
-			gtk_widget_hide(window_name);
-			gtk_label_set_text(GTK_LABEL(label_namePlayer),name1);
-			gtk_label_set_text(GTK_LABEL(label_namePc),name2);
-			cancel=1;
-			back=4;
-		}else{
-			gtk_widget_show_all(window_turnSelected);
-			gtk_widget_hide(window_name);
-		}
+		choice_turns(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES);
 		gtk_widget_destroy(dialog);
 	}
 }
