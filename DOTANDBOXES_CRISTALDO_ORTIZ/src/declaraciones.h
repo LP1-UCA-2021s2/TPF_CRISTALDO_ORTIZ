@@ -19,6 +19,8 @@ int boardSize;
 int back;
 int next;
 int cancel;
+int ColorPlayer1;
+int ColorPlayer2;
 char playerName[50];
 char pcName[50];
 	//suma 10 puntos
@@ -36,7 +38,7 @@ void print_board(int **array);
 int box(int **board,int row, int column);
 int select_color(int color);
 int verify_move(int **board,int *row,int *column,int player,int color);
-void choice_colors(int *color1,int *color2);
+void choice_colors(int choice);
 int end_game(int **array);
 int **choice_board(void);
 void choice_turns(int choice);
