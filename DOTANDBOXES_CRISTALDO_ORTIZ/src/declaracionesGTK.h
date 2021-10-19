@@ -25,6 +25,9 @@ GtkWidget *window_winer;
 GtkWidget *window_chau;
 /*IMAGENES*/
 GtkWidget *image_programmer;
+GtkWidget *image_playerFirtsTurn;
+GtkWidget *image_color1;
+GtkWidget *image_color2;
 /*BOTONES*/
 //Botones del menu principal
 GtkWidget *btn_newGame;
@@ -37,33 +40,49 @@ GtkWidget *btn_back2;
 GtkWidget *btn_back3;
 GtkWidget *btn_back4;
 GtkWidget *btn_back5;
+GtkWidget *btn_back6;
+GtkWidget *btn_back7;
+GtkWidget *btn_back8;
 //Botones next
 GtkWidget *btn_next1;
 GtkWidget *btn_next2;
+GtkWidget *btn_next3;
+GtkWidget *btn_next4;
 //Botones cancel
 GtkWidget *btn_cancel1;
 GtkWidget *btn_cancel2;
+GtkWidget *btn_cancel3;
+GtkWidget *btn_cancel4;
+GtkWidget *btn_cancel5;
 //Otros botones
 GtkWidget *btn_player;
 GtkWidget *btn_pc;
 GtkWidget *btn_ethel;
 GtkWidget *btn_daniela;
+GtkWidget *btn_color1;
+GtkWidget *btn_color2;
+GtkWidget *btn_ok;
 
 /*ENTRADAS*/
 GtkWidget *txt_player;
 GtkWidget *txt_pc;
+GtkWidget *txt_boardSize;
 
 /*LABELS*/
 GtkWidget *label_description;
 GtkWidget *label_namePlayer;
 GtkWidget *label_namePc;
 GtkWidget *label_nameFirtsTurn;
+GtkWidget *label_namePlayer1;
+GtkWidget *label_namePc1;
 
 /*Dialogos*/
 GtkWidget *dialog;
+
 const gchar *name1;
 const gchar *name2;
 const gchar *message;
+const gchar *FirtsTurn;
 
 /*FUNCIONES*/
 void open_statistics(GtkWidget *widget, gpointer data);
@@ -79,4 +98,7 @@ void isClickedPc(GtkWidget *widget, gpointer data);
 void isClickedEthel(GtkWidget *widget, gpointer data);
 void isClickedDaniela(GtkWidget *widget, gpointer data);
 void isClickedNext1(GtkWidget *widget, gpointer data);
+void isClickedNext2(GtkWidget *widget, gpointer data);
+void isClickedColor1(GtkWidget *widget, gpointer data);
+void isClickedColor2(GtkWidget *widget, gpointer data);
 #endif /* SRC_DECLARACIONESGTK_H_ */

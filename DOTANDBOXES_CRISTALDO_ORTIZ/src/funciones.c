@@ -211,7 +211,7 @@ int verify_move(int **board,int *row,int *column,int player,int color){
 	}
 	return flag;
 }
-void choice_colors(int *color1,int *color2){
+void choice_colors(int option){
 	/*
 	* Procedimiento que permite 2 opciones, que el usuario seleccione el color deseado o se selecciona
 	* aleatoriamente.
@@ -221,39 +221,41 @@ void choice_colors(int *color1,int *color2){
 	* Retorno:
 	*  	Ninguno
 	*/
-	int color, option;
-	printf("\nDesea elegir color ? 1- Si 0-No");
-	scanf("%i",&option);
-	option = yes_no_options(option);
+	int color;
+	//printf("\nDesea elegir color ? 1- Si 0-No");
+	//scanf("%i",&option);
+	//option = yes_no_options(option);
 	if(option == TRUE){
-		printf("\nElegir color a usar 1- Rojo 0-Azul");
-		scanf("%i",&color);
-			while(color != 1 && color !=0){
-				printf("\nOpción inexistente");
-				printf("\nElegir color 1- Rojo 0-Azul");
-				scanf("%i",&color);
-			}
-			if(color == TRUE){
-				puts("Color a usar: Rojo ");
-				*color1=RED;
-				*color2=BLUE;
-			}else{
-				puts("Color a usar: Azul ");
-				*color1=BLUE;
-				*color2=RED;
-			}
+		//El usuario elige el color que desea
+		//printf("\nElegir color a usar 1- Rojo 0-Azul");
+		//scanf("%i",&color);
+			//while(color != 1 && color !=0){
+				//printf("\nOpción inexistente");
+				//printf("\nElegir color 1- Rojo 0-Azul");
+				//scanf("%i",&color);
+			//}
+		gtk_widget_show_all(window_choiceColor);
+		gtk_widget_hide(window_turnSelected);
+		cancel=3;
+		back=6;
 	}else{
-		puts("Elección de color aleatoriamente");
-		color = random_number(1,0);
-	}
-	if(color == TRUE){
-		puts("Color a usar: Rojo ");
-		*color1=RED;
-		*color2=BLUE;
-	}else{
-		puts("Color a usar: Azul ");
-		*color1=BLUE;
-		*color2=RED;
+		//puts("Elección de color aleatoriamente");
+		gtk_label_set_text(GTK_LABEL(label_namePlayer1),name1);
+		gtk_label_set_text(GTK_LABEL(label_namePc1),name2);
+		color=random_number(1,0);
+		if(color == TRUE){
+			//El jugador le toca el rojo y a la pc el azul
+			gtk_image_set_from_file(GTK_IMAGE(image_color1),"img/color1.png");
+			gtk_image_set_from_file(GTK_IMAGE(image_color2),"img/color2.png");
+		}else{
+			//A la pc le toca el roja y al jugador el azul
+			gtk_image_set_from_file(GTK_IMAGE(image_color1),"img/color2.png");
+			gtk_image_set_from_file(GTK_IMAGE(image_color2),"img/color1.png");
+		}
+		back=7;
+		cancel=4;
+		gtk_widget_show_all(window_colorSelected);
+		gtk_widget_hide(window_turnSelected);
 	}
 }
 int end_game(int **array){
@@ -340,6 +342,7 @@ void choice_turns(int choice){
 	}else{
 		//Se elige quien comienza aleatoriamente
 		back=4;
+		cancel=2;
 		player = random_number(1,0);
 		if(player == TRUE){
 			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
@@ -532,6 +535,21 @@ void isClickedBack(GtkWidget *widget, gpointer data){
 		gtk_widget_hide(window_turnSelected);
 		gtk_widget_show_all(window_choiceTurn);
 		back=4;
+		cancel=1;
+		break;
+	case 6:
+		/*Cuando se vuelve de la ventana choiceColor a turnSelected*/
+		back=5;
+		cancel=2;
+		gtk_widget_hide(window_choiceColor);
+		gtk_widget_show_all(window_turnSelected);
+		break;
+	case 7:
+		/*Cuando se vuelve de la ventana turnSelected a choiceColor*/
+		back=6;
+		cancel=3;
+		gtk_widget_hide(window_colorSelected);
+		gtk_widget_show_all(window_choiceColor);
 		break;
 	}
 }
@@ -554,7 +572,14 @@ void isClickedCancel(GtkWidget *widget, gpointer data){
 				gtk_widget_hide(window_turnSelected);
 				gtk_widget_show_all(window_menu);
 				break;
-
+			case 3:
+				gtk_widget_hide(window_choiceColor);
+				gtk_widget_show_all(window_menu);
+				break;
+			case 4:
+				gtk_widget_hide(window_colorSelected);
+				gtk_widget_show_all(window_menu);
+				break;
 			}
 	}
 	gtk_widget_destroy(dialog);
@@ -565,12 +590,14 @@ void isClickedPlayer(GtkWidget *widget, gpointer data){
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 	back=5;
+	cancel=2;
 }
 void isClickedPc(GtkWidget *widget, gpointer data){
 	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 	back=5;
+	cancel=2;
 }
 void isClickedEthel(GtkWidget *widget, gpointer data){
 	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Ethel.jpg");
@@ -580,6 +607,26 @@ void isClickedDaniela(GtkWidget *widget, gpointer data){
 	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Danusita.jpg");
 	gtk_label_set_text(GTK_LABEL(label_description),"Programo y lloro");
 }
+void isClickedColor1(GtkWidget *widget, gpointer data){
+	cancel=4;
+	back=7;
+	gtk_widget_hide(window_choiceColor);
+	gtk_widget_show_all(window_colorSelected);
+	gtk_label_set_text(GTK_LABEL(label_namePlayer1),name1);
+	gtk_label_set_text(GTK_LABEL(label_namePc1),name2);
+	gtk_image_set_from_file(GTK_IMAGE(image_color1),"img/color1.png");
+	gtk_image_set_from_file(GTK_IMAGE(image_color2),"img/color2.png");
+}
+void isClickedColor2(GtkWidget *widget, gpointer data){
+	cancel=4;
+	back=7;
+	gtk_widget_hide(window_choiceColor);
+	gtk_widget_show_all(window_colorSelected);
+	gtk_label_set_text(GTK_LABEL(label_namePlayer1),name1);
+	gtk_label_set_text(GTK_LABEL(label_namePc1),name2);
+	gtk_image_set_from_file(GTK_IMAGE(image_color1),"img/color2.png");
+	gtk_image_set_from_file(GTK_IMAGE(image_color2),"img/color1.png");
+}
 void isClickedNext1(GtkWidget *widget, gpointer data){
 	playerName[0]='\0';
 	pcName[0]='\0';
@@ -588,6 +635,7 @@ void isClickedNext1(GtkWidget *widget, gpointer data){
 	sprintf(playerName,"%s",name1);
 	sprintf(pcName,"%s",name2);
 	if(name1[0]=='\0' || name2[0]=='\0'){
+		//Verifica que se completaran los campos
 		  dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
 		            GTK_DIALOG_DESTROY_WITH_PARENT,
 		            GTK_MESSAGE_WARNING,
@@ -607,4 +655,14 @@ void isClickedNext1(GtkWidget *widget, gpointer data){
 		gtk_widget_destroy(dialog);
 	}
 }
-
+void isClickedNext2(GtkWidget *widget, gpointer data){
+	FirtsTurn=gtk_label_get_text(GTK_LABEL(label_nameFirtsTurn));
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
+			            GTK_DIALOG_DESTROY_WITH_PARENT,
+			            GTK_MESSAGE_QUESTION,
+			            GTK_BUTTONS_YES_NO,
+			            "Dese elegir el color?");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Consultita");
+	choice_colors(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES);
+	gtk_widget_destroy(dialog);
+}
