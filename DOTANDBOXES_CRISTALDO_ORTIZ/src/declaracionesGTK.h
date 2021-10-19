@@ -79,6 +79,10 @@ GtkWidget *label_namePc1;
 /*Dialogos*/
 GtkWidget *dialog;
 
+/*OTROS*/
+GtkWidget *board;
+GtkWidget *box_board;
+
 const gchar *name1;
 const gchar *name2;
 const gchar *message;
@@ -99,6 +103,10 @@ void isClickedEthel(GtkWidget *widget, gpointer data);
 void isClickedDaniela(GtkWidget *widget, gpointer data);
 void isClickedNext1(GtkWidget *widget, gpointer data);
 void isClickedNext2(GtkWidget *widget, gpointer data);
+void isClickedNext3(GtkWidget *widget, gpointer data);
+void isClickedNext4(GtkWidget *widget, gpointer data);
 void isClickedColor1(GtkWidget *widget, gpointer data);
 void isClickedColor2(GtkWidget *widget, gpointer data);
+void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data);
+GtkWidget *crear_tablero();
 #endif /* SRC_DECLARACIONESGTK_H_ */

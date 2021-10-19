@@ -28,7 +28,7 @@ char pcName[50];
 	//los puntos del jugador en posi 0
 /*FUNCIONES*/
 int random_number(int max,int min);
-int check_size_board(int number);
+void check_size_board(int number);
 void line();
 int yes_no_options(int option);
 int play_game();
@@ -40,7 +40,7 @@ int select_color(int color);
 int verify_move(int **board,int *row,int *column,int player,int color);
 void choice_colors(int choice);
 int end_game(int **array);
-int **choice_board(void);
+void choice_board(int choice);
 void choice_turns(int choice);
 int move_pc(int **board,int color);
 int move_player(int **array,int color);

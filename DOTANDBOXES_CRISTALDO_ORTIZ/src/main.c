@@ -99,10 +99,10 @@ int main(int argc,char *argv[]) {
 	g_signal_connect(btn_next2,"clicked", G_CALLBACK(isClickedNext2),NULL);
 
 	btn_next3=GTK_WIDGET(gtk_builder_get_object(builder,"btn_next3"));
-	g_signal_connect(btn_next3,"clicked", G_CALLBACK(isClickedNext1),NULL);
+	g_signal_connect(btn_next3,"clicked", G_CALLBACK(isClickedNext3),NULL);
 
 	btn_next4=GTK_WIDGET(gtk_builder_get_object(builder,"btn_next4"));
-	g_signal_connect(btn_next4,"clicked", G_CALLBACK(isClickedNext1),NULL);
+	g_signal_connect(btn_next4,"clicked", G_CALLBACK(isClickedNext4),NULL);
 
 	/*BOTONES CANCEL*/
 
@@ -173,6 +173,10 @@ int main(int argc,char *argv[]) {
 	label_namePlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePlayer1"));
 
 	label_namePc1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePc1"));
+
+	box_board = GTK_WIDGET(gtk_builder_get_object(builder, "box_board"));
+
+	gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
 	/*
 	if(play_game() == 1){
 		start_game();
