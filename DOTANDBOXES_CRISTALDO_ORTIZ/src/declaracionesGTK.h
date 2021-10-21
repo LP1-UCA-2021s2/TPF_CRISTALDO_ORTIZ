@@ -62,6 +62,10 @@ GtkWidget *btn_daniela;
 GtkWidget *btn_color1;
 GtkWidget *btn_color2;
 GtkWidget *btn_ok;
+GtkWidget *btn_pause;
+GtkWidget *btn_continue;
+GtkWidget *btn_starAgain;
+GtkWidget *btn_menu;
 
 /*ENTRADAS*/
 GtkWidget *txt_player;
@@ -82,6 +86,8 @@ GtkWidget *dialog;
 /*OTROS*/
 GtkWidget *board;
 GtkWidget *box_board;
+GtkWidget *eventbox;
+GtkWidget *image;
 
 const gchar *name1;
 const gchar *name2;
@@ -89,6 +95,7 @@ const gchar *message;
 const gchar *FirtsTurn;
 
 /*FUNCIONES*/
+GtkWidget *crear_tablero();
 void open_statistics(GtkWidget *widget, gpointer data);
 void open_credits(GtkWidget *widget, gpointer data);
 void open_newGame(GtkWidget *widget, gpointer data);
@@ -108,5 +115,9 @@ void isClickedNext4(GtkWidget *widget, gpointer data);
 void isClickedColor1(GtkWidget *widget, gpointer data);
 void isClickedColor2(GtkWidget *widget, gpointer data);
 void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data);
-GtkWidget *crear_tablero();
+void isClickedPause(GtkWidget *widget, gpointer data);
+void isClickedContinue(GtkWidget *widget, gpointer data);
+void isClickedMenu(GtkWidget *widget, gpointer data);
+void isClickedStarAgain(GtkWidget *widget, gpointer data);
+void nose();
 #endif /* SRC_DECLARACIONESGTK_H_ */

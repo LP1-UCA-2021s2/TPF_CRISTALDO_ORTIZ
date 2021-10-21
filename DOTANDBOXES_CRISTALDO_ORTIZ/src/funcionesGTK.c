@@ -8,8 +8,8 @@
 #include "declaraciones.h"
 char *imagenes[] = {"img/punto.png",
 					"img/vacio1.png",
-					"img/linea.png",
-					"img/lineavertical.png"};
+					"img/linea1.png",
+					"img/lineavertical1.png"};
 /*FUNCIONES*/
 int random_number(int max,int min){
 	/*
@@ -40,6 +40,7 @@ void check_size_board(int number){
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
 	}else{
+		gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
 		gtk_widget_show_all(window_board);
 		gtk_widget_hide(window_choiceBoardSize);
 	}
@@ -97,6 +98,7 @@ void choice_board(int option){
 		cancel=5;
 		}else{
 			boardSize = random_number(15,3);
+			gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
 			gtk_widget_show_all(window_board);
 			gtk_widget_hide(window_colorSelected);
 		}
@@ -360,6 +362,7 @@ void isClickedNext4(GtkWidget *widget, gpointer data){
 	const gchar *size=gtk_entry_get_text(GTK_ENTRY(txt_boardSize));
 	char acumuletor[2];
 	sprintf(acumuletor,"%s",size);
+	boardSize=atoi(acumuletor);
 	check_size_board(atoi(acumuletor));
 }
 void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
@@ -368,17 +371,16 @@ void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	j = (GUINT_FROM_LE(event->x) / 15);
 
 	if(i%2==0 && j%2!=0){
-		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)), "img/linea.png");
+		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)),imagenes[2]);
 	}else{
 		if(i%2!=0 && j%2==0){
-			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)), "img/lineavertical.png");
+			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)),imagenes[3]);
 		}
 	}
 }
 GtkWidget *crear_tablero(){
 	int i, j;
-	GtkWidget *image; //auxiliar para cargar la imagen
-	GtkWidget *eventbox;
+ //auxiliar para cargar la imagen
 	eventbox = gtk_event_box_new();
 	board = gtk_grid_new();
 	for (i = 0; i < boardSize+(boardSize-1); i++) {
@@ -395,4 +397,58 @@ GtkWidget *crear_tablero(){
 	gtk_container_add(GTK_CONTAINER(eventbox), board);
 	g_signal_connect(eventbox, "button-press-event", G_CALLBACK(tablero_cb),board);
 	return eventbox;
+}
+void nose(){
+	int i, j;
+	puts("entra");
+	for (i = 0; i < boardSize+(boardSize-1); i++) {
+			for (j = 0; j < boardSize+(boardSize-1); j++) {
+				if(i%2==0 && j%2==0){
+					gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)),imagenes[0]);
+				}else{
+					gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),j,i)),imagenes[1]);
+				}
+			}
+		}
+}
+void isClickedPause(GtkWidget *widget, gpointer data){
+	gtk_widget_set_sensitive(window_board,FALSE);
+	gtk_widget_show_all(window_pause);
+}
+void isClickedContinue(GtkWidget *widget, gpointer data){
+	gtk_widget_hide(window_pause);
+	gtk_widget_set_sensitive(window_board,TRUE);
+}
+void isClickedStarAgain(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_pause),
+		         GTK_DIALOG_DESTROY_WITH_PARENT,
+		         GTK_MESSAGE_QUESTION,
+		         GTK_BUTTONS_YES_NO,
+		         "Estas seguro que desea salir?");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Consultita");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		gtk_widget_set_sensitive(window_board,TRUE);
+		gtk_widget_hide(window_pause);
+		nose();
+	}
+	gtk_widget_destroy(dialog);
+}
+void isClickedMenu(GtkWidget *widget, gpointer data){
+	emptyEntry(txt_player);
+	emptyEntry(txt_pc);
+	emptyEntry(txt_boardSize);
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_pause),
+	            GTK_DIALOG_DESTROY_WITH_PARENT,
+	            GTK_MESSAGE_QUESTION,
+	            GTK_BUTTONS_YES_NO,
+	            "Estas seguro que desea salir?");
+	  gtk_window_set_title(GTK_WINDOW(dialog), "Consultita");
+	  if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		  gtk_widget_hide(window_pause);
+		  gtk_widget_hide(window_board);
+		  gtk_widget_destroy(eventbox);
+		  gtk_widget_set_sensitive(window_board,TRUE);
+		  gtk_widget_show_all(window_menu);
+	  }
+	  gtk_widget_destroy(dialog);
 }

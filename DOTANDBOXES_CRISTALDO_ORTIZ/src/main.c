@@ -141,6 +141,18 @@ int main(int argc,char *argv[]) {
 	btn_color2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_color2"));
 	g_signal_connect(btn_color2,"clicked", G_CALLBACK(isClickedColor2),NULL);
 
+	btn_pause=GTK_WIDGET(gtk_builder_get_object(builder,"btn_pause"));
+	g_signal_connect(btn_pause,"clicked", G_CALLBACK(isClickedPause),NULL);
+
+	btn_continue=GTK_WIDGET(gtk_builder_get_object(builder,"btn_continue"));
+	g_signal_connect(btn_continue,"clicked", G_CALLBACK(isClickedContinue),NULL);
+
+	btn_starAgain=GTK_WIDGET(gtk_builder_get_object(builder,"btn_starAgain"));
+	g_signal_connect(btn_starAgain,"clicked", G_CALLBACK(isClickedStarAgain),NULL);
+
+	btn_menu=GTK_WIDGET(gtk_builder_get_object(builder,"btn_menu"));
+	g_signal_connect(btn_menu,"clicked", G_CALLBACK(isClickedMenu),NULL);
+
 	btn_ok=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ok"));
 	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isClickedPc),NULL);
 
@@ -176,14 +188,6 @@ int main(int argc,char *argv[]) {
 
 	box_board = GTK_WIDGET(gtk_builder_get_object(builder, "box_board"));
 
-	gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
-	/*
-	if(play_game() == 1){
-		start_game();
-	}else{
-		puts("Saliendo del juego");
-		exit(0);
-	}*/
 	gtk_widget_show_all(window_menu);
 	gtk_main();
 	return EXIT_SUCCESS;
