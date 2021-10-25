@@ -23,9 +23,6 @@ int yes_no_options(int option){
 	return option;
 }
 int **create_board(int size){
-	//Crea el tablero
-	int **array;
-	array=malloc(size*sizeof(int *));
 	/*
 	* Funcion que crea el tablero dependiendo del tamaño que recibe.
 	* Parametros:
@@ -36,10 +33,8 @@ int **create_board(int size){
 	int **board;
 	board=malloc(size*sizeof(int *));
 	for(int i=0;i<size;i++){
-		array[i]=malloc(size*sizeof(int *));
 		board[i]=malloc(size*sizeof(int *));
 	}
-	return array;
 	return board;
 }
 void initialize_board(int **array){
@@ -52,6 +47,7 @@ void initialize_board(int **array){
 	*/
 	for(int i=0;i<boardSize +(boardSize-1);i++){
 		for(int j=0;j<boardSize +(boardSize-1);j++){
+			array[i][j]=0;
 			if(i%2==0 && j%2==0){
 				array[i][j]=DOT;
 			}else{
@@ -186,39 +182,8 @@ int end_game(int **array){
 	}
 	return acumuletor;
 }
-int move_pc(int **board,int color){
-	/*
-	* Funcion que realiza los movimientos de la computadora.
-	* Parametros:
-	* 	board	-> posicion en la memoria del tablero.
-	* 	color 	-> color que corresponde para la CPU.
-	* Retorno:
-	* 	TRUE 	-> si se formo una caja.
-	* 	FALSE	-> si no se formo una caja.
-	*/
-	int max=(boardSize+(boardSize-1))-1;
-	int row,column,flag;
-	printf("\nTurno de la CPU");
-	line();
-	printf("\nEligiendo.....");
-	row=random_number(max,0);
-	column=random_number(max,0);
-	while(board[row][column]!=0){
-		row=random_number(max,0);
-		column=random_number(max,0);
-	}
-	printf("\nPosicion a poner la linea: %i, %i",row,column);
-	board[row][column]=select_color(color);
-	flag=verify_move(board,&row,&column,CPU,color);
-	printf("\nPuntaje CPU: %i",add_points[CPU]);
-	if(flag==TRUE){
-		return flag;
-	}else{
-		return flag;
-	}
-}
-int move_player(int **array,int color){
-	/*
+
+/*int move_player(int **array,int color){
 	* Funcion que realiza,verifica los movimientos del jugador.
 	* Parametros:
 	* 	board	-> posicion en la memoria del tablero.
@@ -226,7 +191,6 @@ int move_player(int **array,int color){
 	* Retorno:
  	* 	TRUE 	-> si se formo una caja.
 	* 	FALSE	-> si no se formo una caja.
-	*/
 	int row,column,flag;
 	printf("\nTurno del jugador");
 	line();
@@ -252,48 +216,6 @@ int move_player(int **array,int color){
 	}else{
 		return flag;
 	}
-}
-/*void start_game(){
-	* Procedimiento que se encarga de iniciar el juego, organizar los turnos por banderas y
-	* verificar si se termina el juego.
-	* Parametros:
-	* 	Ninguno.
-	* Retorno:
-	* 	Ninguno.
-	int **board =choice_board(),flag=FALSE,color1,color2;
-		if(choice_turns()==PLAYER){
-			choice_colors(&color1,&color2);
-			//Juega el jugador
-			while(end_game(board)<(boardSize+1)){
-				if(flag==FALSE){
-					flag=move_player(board,color1);
-					print_board(board);
-				}else{
-					flag=FALSE;
-				}
-				if(flag==FALSE){
-					flag=move_pc(board,color2);
-					print_board(board);
-				}else{
-					flag=FALSE;
-				}
-			}
-		}else{
-			//Juega la pc
-			choice_colors(&color1,&color2);
-			while(end_game(board)<(boardSize+1)){
-				if(flag==FALSE){
-					flag=move_pc(board,color2);
-					print_board(board);
-				}else{
-					flag=FALSE;
-				}
-				if(flag==FALSE){
-					flag=move_player(board,color1);
-					print_board(board);
-				}else{
-					flag=FALSE;
-				}
-			}
-		}
 }*/
+/*
+*/

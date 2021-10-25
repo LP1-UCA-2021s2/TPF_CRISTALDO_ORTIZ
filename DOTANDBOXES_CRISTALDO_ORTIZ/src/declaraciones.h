@@ -15,14 +15,15 @@
 #define PLAYER 1
 #define RED 4
 #define BLUE 5
-int boardSize;
-int back;
-int next;
-int cancel;
-int ColorPlayer1;
-int ColorPlayer2;
+int **logicBoard;
+int PlayerFirtsTurn;//	Primer jugador
+int boardSize;    // 	Tamaño del tablero
+int ColorPlayer1; // 	Color del jugador 1
+int ColorPlayer2; // 	Color del jugador 2
+int horizontal,vertical;
 char playerName[50];
 char pcName[50];
+int flag1;
 	//suma 10 puntos
 	//suma los puntos de la cpu en posi 1
 	//los puntos del jugador en posi 0
@@ -42,7 +43,5 @@ void choice_colors(int choice);
 int end_game(int **array);
 void choice_board(int choice);
 void choice_turns(int choice);
-int move_pc(int **board,int color);
-int move_player(int **array,int color);
-void start_game();
+int move_pc();
 #endif /* SRC_DATOS_H_ */

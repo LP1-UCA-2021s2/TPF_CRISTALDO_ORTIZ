@@ -91,8 +91,6 @@ GtkWidget *image;
 
 const gchar *name1;
 const gchar *name2;
-const gchar *message;
-const gchar *FirtsTurn;
 
 /*FUNCIONES*/
 GtkWidget *crear_tablero();
@@ -114,10 +112,24 @@ void isClickedNext3(GtkWidget *widget, gpointer data);
 void isClickedNext4(GtkWidget *widget, gpointer data);
 void isClickedColor1(GtkWidget *widget, gpointer data);
 void isClickedColor2(GtkWidget *widget, gpointer data);
-void tablero_cb(GtkWidget *event_box, GdkEventButton *event, gpointer data);
+void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data);
 void isClickedPause(GtkWidget *widget, gpointer data);
 void isClickedContinue(GtkWidget *widget, gpointer data);
 void isClickedMenu(GtkWidget *widget, gpointer data);
 void isClickedStarAgain(GtkWidget *widget, gpointer data);
-void nose();
+void isClickedBack1(GtkWidget *widget, gpointer data);
+void isClickedBack2(GtkWidget *widget, gpointer data);
+void isClickedBack3(GtkWidget *widget, gpointer data);
+void isClickedBack4(GtkWidget *widget, gpointer data);
+void isClickedBack5(GtkWidget *widget, gpointer data);
+void isClickedBack6(GtkWidget *widget, gpointer data);
+void isClickedBack7(GtkWidget *widget, gpointer data);
+void isClickedBack8(GtkWidget *widget, gpointer data);
+void isClickedCancel1(GtkWidget *widget, gpointer data);
+void isClickedCancel2(GtkWidget *widget, gpointer data);
+void isClickedCancel3(GtkWidget *widget, gpointer data);
+void isClickedCancel4(GtkWidget *widget, gpointer data);
+void isClickedCancel5(GtkWidget *widget, gpointer data);
+void getsPosition(int color);
+void emptyBoard();
 #endif /* SRC_DECLARACIONESGTK_H_ */
