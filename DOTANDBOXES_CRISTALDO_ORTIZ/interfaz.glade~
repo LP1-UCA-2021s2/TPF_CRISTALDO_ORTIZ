@@ -273,17 +273,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="window_chau">
-    <property name="can_focus">False</property>
-    <property name="default_width">440</property>
-    <property name="default_height">250</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-  </object>
   <object class="GtkWindow" id="window_choiceBoardSize">
     <property name="can_focus">False</property>
     <property name="default_width">400</property>
@@ -568,12 +557,18 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="btn_player">
-                    <property name="label" translatable="yes">Jugador</property>
                     <property name="width_request">250</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="pixbuf">img/jugador.jpg</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -608,12 +603,18 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="btn_pc">
-                    <property name="label" translatable="yes">Pc</property>
                     <property name="width_request">250</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="pixbuf">img/pc.jpg</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
