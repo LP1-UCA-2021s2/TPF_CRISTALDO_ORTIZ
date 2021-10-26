@@ -28,6 +28,9 @@ GtkWidget *image_programmer;
 GtkWidget *image_playerFirtsTurn;
 GtkWidget *image_color1;
 GtkWidget *image_color2;
+GtkWidget *image_player1;
+GtkWidget *image_player2;
+GtkWidget *image_winner;
 /*BOTONES*/
 //Botones del menu principal
 GtkWidget *btn_newGame;
@@ -71,7 +74,6 @@ GtkWidget *btn_menu;
 GtkWidget *txt_player;
 GtkWidget *txt_pc;
 GtkWidget *txt_boardSize;
-
 /*LABELS*/
 GtkWidget *label_description;
 GtkWidget *label_namePlayer;
@@ -79,6 +81,10 @@ GtkWidget *label_namePc;
 GtkWidget *label_nameFirtsTurn;
 GtkWidget *label_namePlayer1;
 GtkWidget *label_namePc1;
+GtkWidget *label_turn;
+GtkWidget *label_status;
+GtkWidget *label_pointsPlayer1;
+GtkWidget *label_pointsPlayer2;
 
 /*Dialogos*/
 GtkWidget *dialog;
@@ -132,4 +138,8 @@ void isClickedCancel4(GtkWidget *widget, gpointer data);
 void isClickedCancel5(GtkWidget *widget, gpointer data);
 void getsPosition(int color);
 void emptyBoard();
+void winer();
+void isCLickedOk(GtkWidget *widget, gpointer data);
+void setSquare(int row,int column,int color);
+void setPoints(int points,int player);
 #endif /* SRC_DECLARACIONESGTK_H_ */

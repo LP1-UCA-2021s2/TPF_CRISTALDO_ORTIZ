@@ -9,6 +9,7 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include<time.h>
+#include <gtk/gtk.h>
 #define DOT 1
 #define EMPTYBOX 3
 #define CPU 0
@@ -23,10 +24,9 @@ int ColorPlayer2; // 	Color del jugador 2
 int horizontal,vertical;
 char playerName[50];
 char pcName[50];
-int flag1;
 	//suma 10 puntos
-	//suma los puntos de la cpu en posi 1
-	//los puntos del jugador en posi 0
+	//suma los puntos de la PLAYER en posi 1
+	//los puntos del CPU en posi 0
 /*FUNCIONES*/
 int random_number(int max,int min);
 void check_size_board(int number);
@@ -43,5 +43,5 @@ void choice_colors(int choice);
 int end_game(int **array);
 void choice_board(int choice);
 void choice_turns(int choice);
-int move_pc();
+void move_pc();
 #endif /* SRC_DATOS_H_ */

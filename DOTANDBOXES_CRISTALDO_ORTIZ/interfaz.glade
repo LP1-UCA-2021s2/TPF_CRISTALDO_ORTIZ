@@ -84,6 +84,18 @@
               </packing>
             </child>
             <child>
+              <object class="GtkFixed">
+                <property name="width_request">50</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkBox">
                 <property name="width_request">0</property>
                 <property name="height_request">0</property>
@@ -123,12 +135,11 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkLabel" id="txt_turn">
+                      <object class="GtkLabel" id="label_turn">
                         <property name="width_request">100</property>
                         <property name="height_request">40</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">label</property>
                       </object>
                       <packing>
                         <property name="x">145</property>
@@ -152,7 +163,7 @@
                         <property name="height_request">290</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-missing-image</property>
+                        <property name="pixbuf">img/avatarPlayer.jpg</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -166,7 +177,7 @@
                         <property name="height_request">290</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">gtk-missing-image</property>
+                        <property name="pixbuf">img/avatarPc.jpg</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -192,12 +203,12 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="txt_pointsPlayer1">
+                          <object class="GtkLabel" id="label_pointsPlayer1">
                             <property name="width_request">100</property>
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Puntos</property>
+                            <property name="label" translatable="yes">Puntos : 0</property>
                           </object>
                           <packing>
                             <property name="x">40</property>
@@ -218,12 +229,12 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="txt_pointsPlayer2">
+                          <object class="GtkLabel" id="label_pointsPlayer2">
                             <property name="width_request">100</property>
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">puntos</property>
+                            <property name="label" translatable="yes">Puntos : 0</property>
                           </object>
                           <packing>
                             <property name="x">40</property>
@@ -248,7 +259,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
@@ -1433,10 +1444,9 @@ de nuevo</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkLabel" id="label_status">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">GANO</property>
               </object>
               <packing>
                 <property name="expand">True</property>

@@ -1,7 +1,4 @@
 #include "declaraciones.h"
-#define TRUE 1
-#define FALSE 0
-int add_points[2] = {0,0};
 void line(){
 	/*Procedimiento que imprime una linea larga para separacion de turnos.
 	 * Parametros:
@@ -106,62 +103,6 @@ int select_color(int color){
 		return BLUE;
 	}
 }
-int verify_move(int **board,int *row,int *column,int player,int color){
-	/*
-	* Funcion que verifica si en donde se puso la linea se formo una caja en el EMPTYBOX
-	* si se formo modifica el valor de este por RED o BLUE
-	* Parametros:
-	* 	board	-> posicion en la memoria del tablero.
-	* 	row		-> posicion del valor de la fila donde se realizo el movimiento.
-	* 	column	-> posicion del valor de la columna donde se realizo el movimiento.
-	* 	player  -> jugador que realizo el movimiento.
-	* 	color	-> color del jugador que corresponde la jugada.
-	* Retorno:
-	*  Retorna flag que es una bandera, puede tener valores 1 o 0
-	*  TRUE		-> si se formo la caja
-	*  FALSE	-> si no se formo una caja
-	*/
-	int acumuletor,flag=FALSE;
-	for(int i=0;i<boardSize+(boardSize-1);i++){
-		for(int j=0;j<boardSize+(boardSize-1);j++){
-			if(i%2!=0 && j%2!=0){
-				if(i-1==*row && j==*column){
-					if(box(board,*row+1,*column)){
-						acumuletor=*row+1;
-						board[acumuletor][*column]=select_color(color);
-						add_points[player]+= 10;
-						flag=TRUE;
-					}
-				}
-				if(i+1==*row && j==*column){
-					if(box(board,*row-1,*column)){
-						acumuletor=*row-1;
-						board[acumuletor][*column]=select_color(color);
-						add_points[player]+= 10;
-						flag=TRUE;
-					}
-				}
-				if(j-1==*column && i==*row){
-					if(box(board,*row,*column+1)){
-						acumuletor=*column+1;
-						board[*row][acumuletor]=select_color(color);
-						add_points[player]+= 10;
-						flag=TRUE;
-					}
-				}
-				if(j+1==*column && i==*row){
-					if(box(board,*row,*column-1)){
-						acumuletor=*column-1;
-						board[*row][acumuletor]=select_color(color);
-						add_points[player]+= 10;
-						flag=TRUE;
-					}
-				}
-			}
-		}
-	}
-	return flag;
-}
 int end_game(int **array){
 	/*
 	* Funcion que termina al verificar si ya se formaron todas las cajas posibles
@@ -182,7 +123,6 @@ int end_game(int **array){
 	}
 	return acumuletor;
 }
-
 /*int move_player(int **array,int color){
 	* Funcion que realiza,verifica los movimientos del jugador.
 	* Parametros:

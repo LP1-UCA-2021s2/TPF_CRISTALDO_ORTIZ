@@ -6,12 +6,18 @@
  */
 #include "declaracionesGTK.h"
 #include "declaraciones.h"
+int flag1=0;
 char *imagenes[] = {"img/punto.png",
 					"img/vacio1.png",
 					"img/linea.png",
 					"img/lineavertical.png",
 					"img/linea1.png",
-					"img/lineavertical1.png"};
+					"img/lineavertical1.png",
+					"img/lleno1.png",
+					"img/lleno2.png"};
+int add_points[2] = {0,0};
+//posi 0 para la pc
+//posi 1 para el jugador
 /*FUNCIONES*/
 int random_number(int max,int min){
 	/*
@@ -43,6 +49,8 @@ void check_size_board(int number){
 	gtk_widget_destroy(dialog);
 	}else{
 		gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
 		gtk_widget_show_all(window_board);
 		gtk_widget_hide(window_choiceBoardSize);
 	}
@@ -99,6 +107,8 @@ void choice_board(int option){
 		}else{
 			boardSize = random_number(15,3);
 			gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
 			gtk_widget_show_all(window_board);
 			gtk_widget_hide(window_colorSelected);
 		}
@@ -125,26 +135,29 @@ void choice_turns(int choice){
 		if(player == TRUE){
 			//empieza la pc
 			PlayerFirtsTurn=CPU;
+			gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/pc.jpg");
 			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
 		}else{
 			PlayerFirtsTurn=PLAYER;
+			gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpg");
 			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
 		}
 		gtk_widget_show_all(window_turnSelected);
 		gtk_widget_hide(window_name);
 	}
 }
-int move_pc(){
+void move_pc(){
 	/*
-	* Funcion que realiza los movimientos de la computadora.
-	* Parametros:
-	* 	board	-> posicion en la memoria del tablero.
-	* 	color 	-> color que corresponde para la CPU.
-	* Retorno:
-	* 	TRUE 	-> si se formo una caja.
-	* 	FALSE	-> si no se formo una caja.
-	*/
+	 * Funcion que realiza los movimientos de la computadora.
+	 * Parametros:
+	 * 	board	-> posicion en la memoria del tablero.
+	 * 	color 	-> color que corresponde para la CPU.
+	 * Retorno:
+	 * 	TRUE 	-> si se formo una caja.
+	 * 	FALSE	-> si no se formo una caja.
+	 */
 	int max=(boardSize+(boardSize-1))-1;
+	gtk_label_set_text(GTK_LABEL(label_turn),name2);
 	int row,column,flag;
 	getsPosition(ColorPlayer2);
 	printf("\nTurno de la CPU");
@@ -165,11 +178,64 @@ int move_pc(){
 			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
 		}
 	}
-	//flag=verify_move(board,&row,&column,CPU,color);
-	//printf("\nPuntaje CPU: %i",add_points[CPU]);
-	//if(flag==TRUE){
-		return 0;
-	//}else{
+	flag=verify_move(logicBoard,&row,&column,CPU,ColorPlayer2);
+	gtk_label_set_text(GTK_LABEL(label_turn),name1);
+	printf(" %i ",flag);
+	print_board(logicBoard);
+	if(end_game(logicBoard)==((boardSize-1)*(boardSize-1))){
+		winer();
+		flag=FALSE;
+	}else{
+		if(flag==TRUE){
+			move_pc();
+		}
+	}
+}
+void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data){
+	int row,column;
+	guint i,j;
+	i = (GUINT_FROM_LE(event->y) / 15); //las imagenes tienen son 50x50pixeles
+	j = (GUINT_FROM_LE(event->x) / 15);
+	row=i;
+	column=j;
+	gtk_label_set_text(GTK_LABEL(label_turn),name1);
+	if(logicBoard[row][column]==0){
+	//Parte logica
+	logicBoard[row][column]=select_color(ColorPlayer1);
+	flag1=verify_move(logicBoard,&row,&column,PLAYER,ColorPlayer1);
+	printf("\nTurno del jugador");
+	line();
+	print_board(logicBoard);
+	//Parte de alzar la imagen gtk
+	getsPosition(ColorPlayer1);
+	if(i%2==0 && j%2!=0){
+		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[horizontal]);
+	}else{
+		if(i%2!=0 && j%2==0){
+			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
+		}
+	}
+	if(flag1==FALSE){
+		move_pc();
+		print_board(logicBoard);
+	}else{
+		flag1=FALSE;
+	}
+	}else{
+		dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_OK,
+				"Error, seleccion una posicion valida.");
+		gtk_window_set_title(GTK_WINDOW(dialog), "Error");
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+	}
+	printf("\n%i",end_game(logicBoard));
+	printf("\n%i",boardSize+1);
+	if(end_game(logicBoard)==((boardSize-1)*(boardSize-1))){
+		winer();
+	}
 }
 void open_statistics(GtkWidget *widget, gpointer data){
 	/*
@@ -334,12 +400,14 @@ void isClickedPlayer(GtkWidget *widget, gpointer data){
 	/*Funcion cuando se apreta el boton para seleccionar quien comienza primero*/
 	PlayerFirtsTurn=PLAYER;
 	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpg");
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 }
 void isClickedPc(GtkWidget *widget, gpointer data){
 	PlayerFirtsTurn=CPU;
 	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name2);
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/pc.jpg");
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 }
@@ -438,36 +506,7 @@ void getsPosition(int color){
 		vertical=5;
 	}
 }
-void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data){
-	int row,column;
-	guint i,j;
-	i = (GUINT_FROM_LE(event->y) / 15); //las imagenes tienen son 50x50pixeles
-	j = (GUINT_FROM_LE(event->x) / 15);
-	row=i;
-	column=j;
-	if(logicBoard[row][column]==0){
-		logicBoard[row][column]=select_color(ColorPlayer1);
-		getsPosition(ColorPlayer1);
-		if(i%2==0 && j%2!=0){
-			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[horizontal]);
-		}else{
-			if(i%2!=0 && j%2==0){
-				gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
-			}
-		}
-		move_pc();
-		print_board(logicBoard);
-	}else{
-		dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
-				            GTK_DIALOG_DESTROY_WITH_PARENT,
-				            GTK_MESSAGE_WARNING,
-				            GTK_BUTTONS_OK,
-				            "Error, seleccion una posicion valida.");
-				  gtk_window_set_title(GTK_WINDOW(dialog), "Error");
-				  gtk_dialog_run(GTK_DIALOG(dialog));
-				  gtk_widget_destroy(dialog);
-	}
-}
+
 GtkWidget *crear_tablero(){
 	int i, j,size;
 	size=(boardSize+(boardSize+1));
@@ -489,6 +528,10 @@ GtkWidget *crear_tablero(){
 		}
 	}
 	gtk_container_add(GTK_CONTAINER(eventbox), board);
+	if(PlayerFirtsTurn==CPU){
+		move_pc();
+		gtk_label_set_text(GTK_LABEL(label_turn),name2);
+	}
 	g_signal_connect(eventbox, "button-press-event", G_CALLBACK(move_player),board);
 	return eventbox;
 }
@@ -520,11 +563,27 @@ void isClickedStarAgain(GtkWidget *widget, gpointer data){
 		         "Estas seguro que desea salir?");
 	gtk_window_set_title(GTK_WINDOW(dialog), "Consultita");
 	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		add_points[0]=0;
+		add_points[1]=0;
 		gtk_widget_set_sensitive(window_board,TRUE);
 		gtk_widget_hide(window_pause);
 		emptyBoard();
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
+		initialize_board(logicBoard);
 	}
 	gtk_widget_destroy(dialog);
+}
+void isCLickedOk(GtkWidget *widget, gpointer data){
+	emptyEntry(txt_player);
+	emptyEntry(txt_pc);
+	emptyEntry(txt_boardSize);
+	add_points[0]=0;
+	add_points[1]=0;
+	free(logicBoard);
+	gtk_widget_hide(window_winer);
+	gtk_widget_destroy(eventbox);
+	gtk_widget_show_all(window_menu);
 }
 void isClickedMenu(GtkWidget *widget, gpointer data){
 	emptyEntry(txt_player);
@@ -546,45 +605,104 @@ void isClickedMenu(GtkWidget *widget, gpointer data){
 	  }
 	  gtk_widget_destroy(dialog);
 }
-/*void start_game(){
-
-	* Procedimiento que se encarga de iniciar el juego, organizar los turnos por banderas y
-	* verificar si se termina el juego.
-	* Parametros:
-	* 	Ninguno.
-	* Retorno:
-	* 	Ninguno.
-	int flag=FALSE;
-		if(PlayerFirtsTurn==PLAYER){
-			//Juega primero el jugador
-			 //el end game retorna cuantas cajas hay y compara si estan todas las cajas
-			while(end_game(logicBoard)<(boardSize+1)){
-				if(flag==FALSE){
-					flag=move_player(logicBoard,ColorPlayer1);
-				}else{
-					flag=FALSE;
-				}
-				if(flag==FALSE){
-					flag=move_pc(logicBoard,ColorPlayer2);
-				}else{
-					flag=FALSE;
-				}
-			}
+void winer(){
+	if(add_points[CPU]>add_points[PLAYER]){
+		printf("GANO LA PC Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+		gtk_label_set_text(GTK_LABEL(label_status),"GANO LA PC");
+		gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/pc.jpg");
+	}else{
+		if(add_points[CPU]==add_points[PLAYER]){
+			printf("EMPATE Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+			gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
 		}else{
-			//Juega primero la pc
-			while(end_game(logicBoard)<(boardSize+1)){
-				if(flag==FALSE){
-					flag=move_pc(logicBoard,ColorPlayer2);
-					print_board(board);
-				}else{
-					flag=FALSE;
+			if(add_points[CPU]<add_points[PLAYER]){
+				printf("GANO EL JUGADOR Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+				gtk_label_set_text(GTK_LABEL(label_status),"GANO EL JUGADOR");
+				gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+			}
+		}
+	}
+	gtk_widget_hide(window_board);
+	gtk_widget_show_all(window_winer);
+}
+void setSquare(int row,int column,int color){
+	if(color==4){
+		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[6]);
+	}else{
+		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[7]);
+	}
+}
+int verify_move(int **board,int *row,int *column,int player,int color){
+	/*
+	* Funcion que verifica si en donde se puso la linea se formo una caja en el EMPTYBOX
+	* si se formo modifica el valor de este por RED o BLUE
+	* Parametros:
+	* 	board	-> posicion en la memoria del tablero.
+	* 	row		-> posicion del valor de la fila donde se realizo el movimiento.
+	* 	column	-> posicion del valor de la columna donde se realizo el movimiento.
+	* 	player  -> jugador que realizo el movimiento.
+	* 	color	-> color del jugador que corresponde la jugada.
+	* Retorno:
+	*  Retorna flag que es una bandera, puede tener valores 1 o 0
+	*  TRUE		-> si se formo la caja
+	*  FALSE	-> si no se formo una caja
+	*/
+	int acumuletor,flag=FALSE;
+	for(int i=0;i<boardSize+(boardSize-1);i++){
+		for(int j=0;j<boardSize+(boardSize-1);j++){
+			if(i%2!=0 && j%2!=0){
+				if(i-1==*row && j==*column){
+					if(box(board,*row+1,*column)){
+						acumuletor=*row+1;
+						board[acumuletor][*column]=select_color(color);
+						setSquare(acumuletor,*column,color);
+						add_points[player]+= 10;
+						setPoints(add_points[player],player);
+						flag=TRUE;
+					}
 				}
-				if(flag==FALSE){
-					flag=move_player(logicBoard,ColorPlayer1);
-					print_board(board);
-				}else{
-					flag=FALSE;
+				if(i+1==*row && j==*column){
+					if(box(board,*row-1,*column)){
+						acumuletor=*row-1;
+						board[acumuletor][*column]=select_color(color);
+						setSquare(acumuletor,*column,color);
+						add_points[player]+= 10;
+						setPoints(add_points[player],player);
+						flag=TRUE;
+					}
+				}
+				if(j-1==*column && i==*row){
+					if(box(board,*row,*column+1)){
+						acumuletor=*column+1;
+						board[*row][acumuletor]=select_color(color);
+						setSquare(*row,acumuletor,color);
+						add_points[player]+= 10;
+						setPoints(add_points[player],player);
+						flag=TRUE;
+					}
+				}
+				if(j+1==*column && i==*row){
+					if(box(board,*row,*column-1)){
+						acumuletor=*column-1;
+						board[*row][acumuletor]=select_color(color);
+						setSquare(*row,acumuletor,color);
+						add_points[player]+= 10;
+						setPoints(add_points[player],player);
+						flag=TRUE;
+					}
 				}
 			}
 		}
-}*/
+	}
+	return flag;
+}
+void setPoints(int points,int player){
+	gchar *temp = g_strdup_printf("Puntos : %i ",points);
+	if(player==PLAYER){
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),temp);
+	}else{
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),temp);
+	}
+	g_free(temp);
+}
+

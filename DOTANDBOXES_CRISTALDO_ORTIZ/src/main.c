@@ -151,7 +151,7 @@ int main(int argc,char *argv[]) {
 	g_signal_connect(btn_menu,"clicked", G_CALLBACK(isClickedMenu),NULL);
 
 	btn_ok=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ok"));
-	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isClickedPc),NULL);
+	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isCLickedOk),NULL);
 
 	/*IMAGENES*/
 	image_programmer=GTK_WIDGET(gtk_builder_get_object(builder,"image_programmer"));
@@ -162,6 +162,11 @@ int main(int argc,char *argv[]) {
 
 	image_color2=GTK_WIDGET(gtk_builder_get_object(builder,"image_color2"));
 
+	image_player1=GTK_WIDGET(gtk_builder_get_object(builder,"image_player1"));
+
+	image_player2=GTK_WIDGET(gtk_builder_get_object(builder,"image_player2"));
+
+	image_winner=GTK_WIDGET(gtk_builder_get_object(builder,"image_winner"));
 	/*ENTRADAS*/
 	txt_player=GTK_WIDGET(gtk_builder_get_object(builder,"txt_player"));
 
@@ -182,6 +187,14 @@ int main(int argc,char *argv[]) {
 	label_namePlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePlayer1"));
 
 	label_namePc1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePc1"));
+
+	label_turn=GTK_WIDGET(gtk_builder_get_object(builder,"label_turn"));
+
+	label_status=GTK_WIDGET(gtk_builder_get_object(builder,"label_status"));
+
+	label_pointsPlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer1"));
+
+	label_pointsPlayer2=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer2"));
 
 	box_board = GTK_WIDGET(gtk_builder_get_object(builder, "box_board"));
 	gtk_widget_show_all(window_menu);
