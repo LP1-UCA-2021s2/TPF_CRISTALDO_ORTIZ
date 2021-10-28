@@ -315,6 +315,7 @@
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">2</property>
           </object>
           <packing>
             <property name="x">70</property>
@@ -385,7 +386,9 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Elegir el color:</property>
+            <property name="label" translatable="yes">Elija el color que desea : 
+El otro sin seleccionar le tocara al rival</property>
+            <property name="justify">center</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -536,7 +539,8 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Elegir quien comienza:</property>
+            <property name="label" translatable="yes">Elija quien comienza:</property>
+            <property name="justify">center</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -710,7 +714,8 @@
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Colores seleccionados</property>
+            <property name="label" translatable="yes">Colores seleccionados para cada jugador</property>
+            <property name="justify">center</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1128,6 +1133,7 @@
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">50</property>
           </object>
           <packing>
             <property name="x">30</property>
@@ -1153,6 +1159,7 @@
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="max_length">50</property>
           </object>
           <packing>
             <property name="x">30</property>
@@ -1414,7 +1421,7 @@ de nuevo</property>
       </object>
     </child>
   </object>
-  <object class="GtkWindow" id="window_winer">
+  <object class="GtkWindow" id="window_winner">
     <property name="width_request">500</property>
     <property name="height_request">400</property>
     <property name="can_focus">False</property>

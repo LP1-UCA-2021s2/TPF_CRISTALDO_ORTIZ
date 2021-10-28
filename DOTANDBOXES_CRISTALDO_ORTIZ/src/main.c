@@ -46,8 +46,8 @@ int main(int argc,char *argv[]) {
 	window_board=GTK_WIDGET(gtk_builder_get_object(builder,"window_board"));
 	g_signal_connect(window_board,"destroy",gtk_main_quit,NULL);
 
-	window_winer=GTK_WIDGET(gtk_builder_get_object(builder,"window_winer"));
-	g_signal_connect(window_winer,"destroy",gtk_main_quit,NULL);
+	window_winner=GTK_WIDGET(gtk_builder_get_object(builder,"window_winner"));
+	g_signal_connect(window_winner,"destroy",gtk_main_quit,NULL);
 
 	/*BOTONES*/
 	btn_newGame=GTK_WIDGET(gtk_builder_get_object(builder,"btn_newGame"));
@@ -118,6 +118,7 @@ int main(int argc,char *argv[]) {
 
 	btn_cancel5=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel5"));
 	g_signal_connect(btn_cancel5,"clicked", G_CALLBACK(isClickedCancel5),NULL);
+
 	/*BOTONES OTROS*/
 
 	btn_ethel=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ethel"));

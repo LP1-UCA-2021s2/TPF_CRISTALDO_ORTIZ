@@ -10,19 +10,18 @@
 #include <gtk/gtk.h>
 GtkBuilder *builder;
 /*VENTANAS*/
-GtkWidget *window_menu;
-GtkWidget *window_name;
-GtkWidget *window_statistics;
-GtkWidget *window_credits;
-GtkWidget *window_choiceBoardSize;
-GtkWidget *window_choiceColor;
-GtkWidget *window_choiceTurn;
-GtkWidget *window_colorSelected;
-GtkWidget *window_pause;
-GtkWidget *window_turnSelected;
-GtkWidget *window_board;
-GtkWidget *window_winer;
-GtkWidget *window_chau;
+GtkWidget *window_menu; //Ventana del menu principial (lo que se ve al comienzo).
+GtkWidget *window_name; //Ventana para poder introducir los nombres, el del jugador y el rival.
+GtkWidget *window_statistics; //Ventana que se visualizara las estadisticas de las partidas.
+GtkWidget *window_credits; //Ventana para los creditos, donde aparecen los nombres de los integrates del proyecto
+GtkWidget *window_choiceBoardSize; //Ventana para que el usuario introduzca el tamaño del tablero.
+GtkWidget *window_choiceColor; //Ventana que permite seleccionar al jugador el color.
+GtkWidget *window_choiceTurn; //Ventana que permite al jugador que seleccione quien comienza primero.
+GtkWidget *window_colorSelected; //Ventana que visualiza el color que corresponde el color para cada jugador.
+GtkWidget *window_pause; //Ventana de pausa que tiene los botones continuar comenzar de nuevo y menu (para salir de la partida)
+GtkWidget *window_turnSelected; //Ventana que visualiza quien comenza primero si el jugador o el rival.
+GtkWidget *window_board; //Ventana en donde se desarrolla el juego, se muestra el tablero los turno y los puntos.
+GtkWidget *window_winner; //Ventana que visualiza quien gano el juego.
 /*IMAGENES*/
 GtkWidget *image_programmer;
 GtkWidget *image_playerFirtsTurn;
@@ -138,7 +137,7 @@ void isClickedCancel4(GtkWidget *widget, gpointer data);
 void isClickedCancel5(GtkWidget *widget, gpointer data);
 void getsPosition(int color);
 void emptyBoard();
-void winer();
+void winner();
 void isCLickedOk(GtkWidget *widget, gpointer data);
 void setSquare(int row,int column,int color);
 void setPoints(int points,int player);

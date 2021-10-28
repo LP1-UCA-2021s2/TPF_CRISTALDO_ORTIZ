@@ -24,9 +24,9 @@ int ColorPlayer2; // 	Color del jugador 2
 int horizontal,vertical;
 char playerName[50];
 char pcName[50];
-	//suma 10 puntos
-	//suma los puntos de la PLAYER en posi 1
-	//los puntos del CPU en posi 0
+//suma 10 puntos
+//suma los puntos de la PLAYER en posi 1
+//los puntos del CPU en posi 0
 /*FUNCIONES*/
 int random_number(int max,int min);
 void check_size_board(int number);
@@ -44,4 +44,5 @@ int end_game(int **array);
 void choice_board(int choice);
 void choice_turns(int choice);
 void move_pc();
+int getsSize(int size);
 #endif /* SRC_DATOS_H_ */

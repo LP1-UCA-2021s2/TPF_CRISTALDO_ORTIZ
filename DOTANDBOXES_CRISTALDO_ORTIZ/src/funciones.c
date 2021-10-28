@@ -9,10 +9,10 @@ void line(){
 }
 int yes_no_options(int option){
 	/*Funcion que verifica si el usuario introduce un numero valido 0 o 1.
-	* Parametros:
-	* 	option -> opcion introducida por el teclado
-	* Retorno:
-	*  El valor de option verificado */
+	 * Parametros:
+	 * 	option -> opcion introducida por el teclado
+	 * Retorno:
+	 *  El valor de option verificado */
 	while(option != 1 && option != 0){
 		puts("Opción inexistente. Intente de nuevo. 1- Si 0-No");
 		scanf("%i",&option);
@@ -21,12 +21,12 @@ int yes_no_options(int option){
 }
 int **create_board(int size){
 	/*
-	* Funcion que crea el tablero dependiendo del tamaño que recibe.
-	* Parametros:
-	* 	size -> tamaño introducido por el usuario.
-	* Retorno:
-	*  La posicion de memoria donde se encuentra el tablero creado.
-	*/
+	 * Funcion que crea el tablero dependiendo del tamaño que recibe.
+	 * Parametros:
+	 * 	size -> tamaño introducido por el usuario.
+	 * Retorno:
+	 *  La posicion de memoria donde se encuentra el tablero creado.
+	 */
 	int **board;
 	board=malloc(size*sizeof(int *));
 	for(int i=0;i<size;i++){
@@ -36,12 +36,12 @@ int **create_board(int size){
 }
 void initialize_board(int **array){
 	/*
-	* Procedimiento que inicializa el tablero. Se crean los puntos y las cajas vacias.
-	* Parametros:
-	* 	array -> posicion en la memoria del tablero.
-	* Retorno:
-	*  	Ninguno
-	*/
+	 * Procedimiento que inicializa el tablero. Se crean los puntos y las cajas vacias.
+	 * Parametros:
+	 * 	array -> posicion en la memoria del tablero.
+	 * Retorno:
+	 *  	Ninguno
+	 */
 	for(int i=0;i<boardSize +(boardSize-1);i++){
 		for(int j=0;j<boardSize +(boardSize-1);j++){
 			array[i][j]=0;
@@ -57,12 +57,12 @@ void initialize_board(int **array){
 }
 void print_board(int **array){
 	/*
-	* Procedimiento que imprime el tablero en la consola.
-	* Parametros:
-	* 	array -> posicion en la memoria del tablero.
-	* Retorno:
-	*  	Ninguno
-	*/
+	 * Procedimiento que imprime el tablero en la consola.
+	 * Parametros:
+	 * 	array -> posicion en la memoria del tablero.
+	 * Retorno:
+	 *  	Ninguno
+	 */
 	printf("\n");
 	for(int i=0;i<boardSize+(boardSize-1);i++){
 		for(int j=0;j<boardSize +(boardSize-1);j++){
@@ -72,15 +72,15 @@ void print_board(int **array){
 }
 int box(int **board,int row, int column){
 	/*
-	* Funcion que verifica si se formo una caja en una posicion del tablero
-	* Parametros:
-	* 	board 	-> posicion en la memoria del tablero.
-	* 	row 	-> fila del tablero a verificar.
-	* 	column	-> columna del tablero a verificar.
-	* Retorno:
-	*  TRUE 	-> Si se formo una caja
-	*  FALSE 	-> Si no se formo la caja
-	*/
+	 * Funcion que verifica si se formo una caja en una posicion del tablero
+	 * Parametros:
+	 * 	board 	-> posicion en la memoria del tablero.
+	 * 	row 	-> fila del tablero a verificar.
+	 * 	column	-> columna del tablero a verificar.
+	 * Retorno:
+	 *  TRUE 	-> Si se formo una caja
+	 *  FALSE 	-> Si no se formo la caja
+	 */
 	if((board[row][column+1]==RED || board[row][column+1]==BLUE) && (board[row][column-1]==RED || board[row][column-1]==BLUE) && (board[row+1][column]==RED || board[row+1][column]==BLUE) && (board[row-1][column]==RED || board[row-1][column]==BLUE)){
 		return TRUE;
 	}else{
@@ -90,13 +90,13 @@ int box(int **board,int row, int column){
 
 int select_color(int color){
 	/*
-	* Funcion que nos ayuda a identicar el color.
-	* Parametros:
-	* 	color	-> el color a verificar
-	* Retorno:
-	*  RED		-> Si el color es igual a rojo
-	*  BLUE 	-> Si el color no es igual a rojo
-	*/
+	 * Funcion que nos ayuda a identicar el color.
+	 * Parametros:
+	 * 	color	-> el color a verificar
+	 * Retorno:
+	 *  RED		-> Si el color es igual a rojo
+	 *  BLUE 	-> Si el color no es igual a rojo
+	 */
 	if(color==RED){
 		return RED;
 	}else{
@@ -105,32 +105,40 @@ int select_color(int color){
 }
 int end_game(int **array){
 	/*
-	* Funcion que termina al verificar si ya se formaron todas las cajas posibles
-	* Parametros:
-	* 	array	-> posicion en la memoria del tablero.
-	* Retorno:
-	* 	La cantidad de cajas formadas en el tablero
-	*/
+	 * Funcion que termina al verificar si ya se formaron todas las cajas posibles
+	 * Parametros:
+	 * 	array	-> posicion en la memoria del tablero.
+	 * Retorno:
+	 * 	La cantidad de cajas formadas en el tablero
+	 */
 	int acumuletor=0;
 	for(int i=0;i<boardSize+(boardSize-1);i++){
-			for(int j=0;j<boardSize +(boardSize-1);j++){
-				if(i%2!=0 && j%2!=0){
-					if(array[i][j]==RED || array[i][j]==BLUE){
-						acumuletor++;
-					}
+		for(int j=0;j<boardSize +(boardSize-1);j++){
+			if(i%2!=0 && j%2!=0){
+				if(array[i][j]==RED || array[i][j]==BLUE){
+					acumuletor++;
 				}
+			}
 		}
 	}
 	return acumuletor;
 }
+int getsSize(int size){
+	/*Funcion que recibe el tamaño del tablero y devuelve el tamaño que se utiliza para el proceso
+	 * Parametros:
+	 * 	size -> tamaño del tablero introducido por el jugador
+	 * Retorno:
+	 *  El tamaño nuevo para el tablero*/
+	return (size+(size-1));
+}
 /*int move_player(int **array,int color){
-	* Funcion que realiza,verifica los movimientos del jugador.
-	* Parametros:
-	* 	board	-> posicion en la memoria del tablero.
-	* 	color 	-> color que corresponde para el jugador.
-	* Retorno:
- 	* 	TRUE 	-> si se formo una caja.
-	* 	FALSE	-> si no se formo una caja.
+ * Funcion que realiza,verifica los movimientos del jugador.
+ * Parametros:
+ * 	board	-> posicion en la memoria del tablero.
+ * 	color 	-> color que corresponde para el jugador.
+ * Retorno:
+ * 	TRUE 	-> si se formo una caja.
+ * 	FALSE	-> si no se formo una caja.
 	int row,column,flag;
 	printf("\nTurno del jugador");
 	line();
@@ -158,4 +166,4 @@ int end_game(int **array){
 	}
 }*/
 /*
-*/
+ */
