@@ -154,6 +154,9 @@ int main(int argc,char *argv[]) {
 	btn_ok=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ok"));
 	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isCLickedOk),NULL);
 
+	btn_nextPlayer=GTK_WIDGET(gtk_builder_get_object(builder,"btn_nextPlayer"));
+	g_signal_connect(btn_nextPlayer,"clicked", G_CALLBACK(isCLickedNextPlayer),NULL);
+
 	/*IMAGENES*/
 	image_programmer=GTK_WIDGET(gtk_builder_get_object(builder,"image_programmer"));
 
@@ -196,6 +199,8 @@ int main(int argc,char *argv[]) {
 	label_pointsPlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer1"));
 
 	label_pointsPlayer2=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer2"));
+
+	label_points=GTK_WIDGET(gtk_builder_get_object(builder,"label_points"));
 
 	box_board = GTK_WIDGET(gtk_builder_get_object(builder, "box_board"));
 	gtk_widget_show_all(window_menu);

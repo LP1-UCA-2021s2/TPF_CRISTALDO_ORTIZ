@@ -68,6 +68,7 @@ GtkWidget *btn_pause;
 GtkWidget *btn_continue;
 GtkWidget *btn_starAgain;
 GtkWidget *btn_menu;
+GtkWidget *btn_nextPlayer;
 
 /*ENTRADAS*/
 GtkWidget *txt_player;
@@ -84,7 +85,7 @@ GtkWidget *label_turn;
 GtkWidget *label_status;
 GtkWidget *label_pointsPlayer1;
 GtkWidget *label_pointsPlayer2;
-
+GtkWidget *label_points;
 /*Dialogos*/
 GtkWidget *dialog;
 
@@ -141,4 +142,5 @@ void winner();
 void isCLickedOk(GtkWidget *widget, gpointer data);
 void setSquare(int row,int column,int color);
 void setPoints(int points,int player);
+void isCLickedNextPlayer(GtkWidget *widget, gpointer data);
 #endif /* SRC_DECLARACIONESGTK_H_ */

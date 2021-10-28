@@ -906,19 +906,28 @@ void winner(){
 	 * 	Ninguno
 	 * Retorno:
 	 * 	Ninguno.*/
+	gtk_widget_set_sensitive(btn_nextPlayer,FALSE);
 	if(add_points[CPU]>add_points[PLAYER]){
-		printf("GANO LA PC Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+		gchar *temp=g_strdup_printf("%i",add_points[CPU]);
 		gtk_label_set_text(GTK_LABEL(label_status),"GANO LA PC");
+		gtk_label_set_text(GTK_LABEL(label_points),temp);
 		gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/pc.jpg");
+		g_free(temp);
 	}else{
 		if(add_points[CPU]==add_points[PLAYER]){
-			printf("EMPATE Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+			gchar *temp=g_strdup_printf("%i",add_points[CPU]);
+			gtk_label_set_text(GTK_LABEL(label_points),temp);
+			gtk_widget_set_sensitive(btn_nextPlayer,TRUE);
+			gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/pc.jpg");
 			gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
+			g_free(temp);
 		}else{
 			if(add_points[CPU]<add_points[PLAYER]){
-				printf("GANO EL JUGADOR Puntos de la cpu: %i y del juagdor %i",add_points[CPU],add_points[PLAYER]);
+				gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
 				gtk_label_set_text(GTK_LABEL(label_status),"GANO EL JUGADOR");
+				gtk_label_set_text(GTK_LABEL(label_points),temp);
 				gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+				g_free(temp);
 			}
 		}
 	}
@@ -1019,4 +1028,17 @@ void setPoints(int points,int player){
 	}
 	g_free(temp);
 }
-
+void isCLickedNextPlayer(GtkWidget *widget, gpointer data){
+	/*Procedimiento que se utiliza para mostrar el otro jugador cuando hay un empate
+	 * Parametros
+	 * widget
+	 * data
+	 * Retorno
+	 * 	Ninguno*/
+	gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
+	gtk_widget_set_sensitive(btn_nextPlayer,FALSE);
+	gtk_label_set_text(GTK_LABEL(label_points),temp);
+	gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+	gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
+	g_free(temp);
+}
