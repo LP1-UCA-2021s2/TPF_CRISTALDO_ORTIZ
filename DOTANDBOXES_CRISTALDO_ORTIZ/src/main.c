@@ -10,6 +10,7 @@ int main(int argc,char *argv[]) {
 		g_print("Error en la funcion gtk_builder_add_from_file: \n");
 		return 1;
 	}
+
 	/*VENTANAS*/
 
 	window_menu=GTK_WIDGET(gtk_builder_get_object(builder,"window_menu"));
@@ -45,11 +46,8 @@ int main(int argc,char *argv[]) {
 	window_board=GTK_WIDGET(gtk_builder_get_object(builder,"window_board"));
 	g_signal_connect(window_board,"destroy",gtk_main_quit,NULL);
 
-	window_winer=GTK_WIDGET(gtk_builder_get_object(builder,"window_winer"));
-	g_signal_connect(window_winer,"destroy",gtk_main_quit,NULL);
-
-	window_chau=GTK_WIDGET(gtk_builder_get_object(builder,"window_chau"));
-	g_signal_connect(window_chau,"destroy",gtk_main_quit,NULL);
+	window_winner=GTK_WIDGET(gtk_builder_get_object(builder,"window_winner"));
+	g_signal_connect(window_winner,"destroy",gtk_main_quit,NULL);
 
 	/*BOTONES*/
 	btn_newGame=GTK_WIDGET(gtk_builder_get_object(builder,"btn_newGame"));
@@ -67,28 +65,28 @@ int main(int argc,char *argv[]) {
 	/*BOTONES BACK*/
 
 	btn_back1=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back1"));
-	g_signal_connect(btn_back1,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back1,"clicked", G_CALLBACK(isClickedBack1),NULL);
 
 	btn_back2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back2"));
-	g_signal_connect(btn_back2,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back2,"clicked", G_CALLBACK(isClickedBack2),NULL);
 
 	btn_back3=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back3"));
-	g_signal_connect(btn_back3,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back3,"clicked", G_CALLBACK(isClickedBack3),NULL);
 
 	btn_back4=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back4"));
-	g_signal_connect(btn_back4,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back4,"clicked", G_CALLBACK(isClickedBack4),NULL);
 
 	btn_back5=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back5"));
-	g_signal_connect(btn_back5,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back5,"clicked", G_CALLBACK(isClickedBack5),NULL);
 
 	btn_back6=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back6"));
-	g_signal_connect(btn_back6,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back6,"clicked", G_CALLBACK(isClickedBack6),NULL);
 
 	btn_back7=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back7"));
-	g_signal_connect(btn_back7,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back7,"clicked", G_CALLBACK(isClickedBack7),NULL);
 
 	btn_back8=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back8"));
-	g_signal_connect(btn_back8,"clicked", G_CALLBACK(isClickedBack),NULL);
+	g_signal_connect(btn_back8,"clicked", G_CALLBACK(isClickedBack8),NULL);
 
 	/*BOTONES NEXT*/
 
@@ -99,27 +97,27 @@ int main(int argc,char *argv[]) {
 	g_signal_connect(btn_next2,"clicked", G_CALLBACK(isClickedNext2),NULL);
 
 	btn_next3=GTK_WIDGET(gtk_builder_get_object(builder,"btn_next3"));
-	g_signal_connect(btn_next3,"clicked", G_CALLBACK(isClickedNext1),NULL);
+	g_signal_connect(btn_next3,"clicked", G_CALLBACK(isClickedNext3),NULL);
 
 	btn_next4=GTK_WIDGET(gtk_builder_get_object(builder,"btn_next4"));
-	g_signal_connect(btn_next4,"clicked", G_CALLBACK(isClickedNext1),NULL);
+	g_signal_connect(btn_next4,"clicked", G_CALLBACK(isClickedNext4),NULL);
 
 	/*BOTONES CANCEL*/
 
 	btn_cancel1=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel1"));
-	g_signal_connect(btn_cancel1,"clicked", G_CALLBACK(isClickedCancel),NULL);
+	g_signal_connect(btn_cancel1,"clicked", G_CALLBACK(isClickedCancel1),NULL);
 
 	btn_cancel2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel2"));
-	g_signal_connect(btn_cancel2,"clicked", G_CALLBACK(isClickedCancel),NULL);
+	g_signal_connect(btn_cancel2,"clicked", G_CALLBACK(isClickedCancel2),NULL);
 
 	btn_cancel3=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel3"));
-	g_signal_connect(btn_cancel3,"clicked", G_CALLBACK(isClickedCancel),NULL);
+	g_signal_connect(btn_cancel3,"clicked", G_CALLBACK(isClickedCancel3),NULL);
 
 	btn_cancel4=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel4"));
-	g_signal_connect(btn_cancel4,"clicked", G_CALLBACK(isClickedCancel),NULL);
+	g_signal_connect(btn_cancel4,"clicked", G_CALLBACK(isClickedCancel4),NULL);
 
 	btn_cancel5=GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancel5"));
-	g_signal_connect(btn_cancel5,"clicked", G_CALLBACK(isClickedCancel),NULL);
+	g_signal_connect(btn_cancel5,"clicked", G_CALLBACK(isClickedCancel5),NULL);
 
 	/*BOTONES OTROS*/
 
@@ -141,8 +139,23 @@ int main(int argc,char *argv[]) {
 	btn_color2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_color2"));
 	g_signal_connect(btn_color2,"clicked", G_CALLBACK(isClickedColor2),NULL);
 
+	btn_pause=GTK_WIDGET(gtk_builder_get_object(builder,"btn_pause"));
+	g_signal_connect(btn_pause,"clicked", G_CALLBACK(isClickedPause),NULL);
+
+	btn_continue=GTK_WIDGET(gtk_builder_get_object(builder,"btn_continue"));
+	g_signal_connect(btn_continue,"clicked", G_CALLBACK(isClickedContinue),NULL);
+
+	btn_starAgain=GTK_WIDGET(gtk_builder_get_object(builder,"btn_starAgain"));
+	g_signal_connect(btn_starAgain,"clicked", G_CALLBACK(isClickedStarAgain),NULL);
+
+	btn_menu=GTK_WIDGET(gtk_builder_get_object(builder,"btn_menu"));
+	g_signal_connect(btn_menu,"clicked", G_CALLBACK(isClickedMenu),NULL);
+
 	btn_ok=GTK_WIDGET(gtk_builder_get_object(builder,"btn_ok"));
-	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isClickedPc),NULL);
+	g_signal_connect(btn_ok,"clicked", G_CALLBACK(isCLickedOk),NULL);
+
+	btn_nextPlayer=GTK_WIDGET(gtk_builder_get_object(builder,"btn_nextPlayer"));
+	g_signal_connect(btn_nextPlayer,"clicked", G_CALLBACK(isCLickedNextPlayer),NULL);
 
 	/*IMAGENES*/
 	image_programmer=GTK_WIDGET(gtk_builder_get_object(builder,"image_programmer"));
@@ -153,6 +166,11 @@ int main(int argc,char *argv[]) {
 
 	image_color2=GTK_WIDGET(gtk_builder_get_object(builder,"image_color2"));
 
+	image_player1=GTK_WIDGET(gtk_builder_get_object(builder,"image_player1"));
+
+	image_player2=GTK_WIDGET(gtk_builder_get_object(builder,"image_player2"));
+
+	image_winner=GTK_WIDGET(gtk_builder_get_object(builder,"image_winner"));
 	/*ENTRADAS*/
 	txt_player=GTK_WIDGET(gtk_builder_get_object(builder,"txt_player"));
 
@@ -173,14 +191,21 @@ int main(int argc,char *argv[]) {
 	label_namePlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePlayer1"));
 
 	label_namePc1=GTK_WIDGET(gtk_builder_get_object(builder,"label_namePc1"));
-	/*
-	if(play_game() == 1){
-		start_game();
-	}else{
-		puts("Saliendo del juego");
-		exit(0);
-	}*/
+
+	label_turn=GTK_WIDGET(gtk_builder_get_object(builder,"label_turn"));
+
+	label_status=GTK_WIDGET(gtk_builder_get_object(builder,"label_status"));
+
+	label_pointsPlayer1=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer1"));
+
+	label_pointsPlayer2=GTK_WIDGET(gtk_builder_get_object(builder,"label_pointsPlayer2"));
+
+	label_points=GTK_WIDGET(gtk_builder_get_object(builder,"label_points"));
+
+	box_board = GTK_WIDGET(gtk_builder_get_object(builder, "box_board"));
 	gtk_widget_show_all(window_menu);
 	gtk_main();
+	print_board(logicBoard);
+
 	return EXIT_SUCCESS;
 }

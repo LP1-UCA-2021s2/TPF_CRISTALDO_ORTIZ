@@ -5,14 +5,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/funciones.c \
+../src/funcionesGTK.c \
 ../src/main.c 
 
 OBJS += \
 ./src/funciones.o \
+./src/funcionesGTK.o \
 ./src/main.o 
 
 C_DEPS += \
 ./src/funciones.d \
+./src/funcionesGTK.d \
 ./src/main.d 
 
 

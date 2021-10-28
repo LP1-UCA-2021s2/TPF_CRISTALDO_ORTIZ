@@ -1,4 +1,4 @@
-src/funciones.o: ../src/funciones.c ../src/declaraciones.h \
+src/funcionesGTK.o: ../src/funcionesGTK.c ../src/declaracionesGTK.h \
  /usr/include/gtk-3.0/gtk/gtk.h /usr/include/gtk-3.0/gdk/gdk.h \
  /usr/include/gtk-3.0/gdk/gdkconfig.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
@@ -596,9 +596,9 @@ src/funciones.o: ../src/funciones.c ../src/declaraciones.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscale.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvscrollbar.h \
  /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h \
- /usr/include/gtk-3.0/gtk/gtk-autocleanups.h
+ /usr/include/gtk-3.0/gtk/gtk-autocleanups.h ../src/declaraciones.h
 
-../src/declaraciones.h:
+../src/declaracionesGTK.h:
 
 /usr/include/gtk-3.0/gtk/gtk.h:
 
@@ -1887,3 +1887,5 @@ src/funciones.o: ../src/funciones.c ../src/declaraciones.h \
 /usr/include/gtk-3.0/gtk/deprecated/gtkvseparator.h:
 
 /usr/include/gtk-3.0/gtk/gtk-autocleanups.h:
+
+../src/declaraciones.h:
