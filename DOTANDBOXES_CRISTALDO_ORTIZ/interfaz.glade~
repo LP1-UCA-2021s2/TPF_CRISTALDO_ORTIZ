@@ -351,11 +351,7 @@
           </packing>
         </child>
         <child>
-<<<<<<< HEAD
-          <object class="GtkButton">
-=======
           <object class="GtkButton" id="btn_next4">
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
             <property name="label" translatable="yes">Siguiente</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
@@ -411,14 +407,6 @@ El otro sin seleccionar le tocara al rival</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkButton" id="btn_color1">
-<<<<<<< HEAD
-                    <property name="label" translatable="yes">Color 1</property>
-                    <property name="width_request">250</property>
-                    <property name="height_request">350</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-=======
                     <property name="width_request">250</property>
                     <property name="height_request">350</property>
                     <property name="visible">True</property>
@@ -433,7 +421,6 @@ El otro sin seleccionar le tocara al rival</property>
                         <property name="pixbuf">img/color1.png</property>
                       </object>
                     </child>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -455,21 +442,11 @@ El otro sin seleccionar le tocara al rival</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkButton" id="btn_color2">
-<<<<<<< HEAD
-                    <property name="label" translatable="yes">Color 2</property>
-=======
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                     <property name="width_request">250</property>
                     <property name="height_request">350</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-<<<<<<< HEAD
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-=======
                     <property name="relief">none</property>
                     <child>
                       <object class="GtkImage" id="btn_color">
@@ -482,7 +459,6 @@ El otro sin seleccionar le tocara al rival</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -756,11 +732,7 @@ El otro sin seleccionar le tocara al rival</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-<<<<<<< HEAD
-                  <object class="GtkLabel" id="txt_namePlayer1">
-=======
                   <object class="GtkLabel" id="label_namePlayer1">
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                     <property name="width_request">250</property>
                     <property name="height_request">50</property>
                     <property name="visible">True</property>
@@ -778,20 +750,12 @@ El otro sin seleccionar le tocara al rival</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-<<<<<<< HEAD
-                    <property name="stock">gtk-missing-image</property>
-=======
                     <property name="pixbuf">img/color1.png</property>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-<<<<<<< HEAD
-                    <property name="position">1</property>
-=======
                     <property name="position">2</property>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                   </packing>
                 </child>
               </object>
@@ -807,11 +771,7 @@ El otro sin seleccionar le tocara al rival</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-<<<<<<< HEAD
-                  <object class="GtkLabel" id="txt_namePc1">
-=======
                   <object class="GtkLabel" id="label_namePc1">
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                     <property name="width_request">250</property>
                     <property name="height_request">50</property>
                     <property name="visible">True</property>
@@ -829,20 +789,12 @@ El otro sin seleccionar le tocara al rival</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-<<<<<<< HEAD
-                    <property name="stock">gtk-missing-image</property>
-=======
                     <property name="pixbuf">img/color2.png</property>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-<<<<<<< HEAD
-                    <property name="position">1</property>
-=======
                     <property name="position">2</property>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
                   </packing>
                 </child>
               </object>
@@ -1481,13 +1433,6 @@ de nuevo</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-<<<<<<< HEAD
-          <object class="GtkLabel">
-            <property name="height_request">100</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">GANO </property>
-=======
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -1515,7 +1460,6 @@ de nuevo</property>
                 <property name="position">1</property>
               </packing>
             </child>
->>>>>>> f1b8b57ace042f6f9042835af0ca867cf003a10c
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1592,7 +1536,7 @@ de nuevo</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkButton" id="btn_NextPlayer">
+              <object class="GtkButton" id="btn_nextPlayer">
                 <property name="label" translatable="yes">Siguiente
 Jugador</property>
                 <property name="width_request">100</property>
