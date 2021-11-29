@@ -19,12 +19,19 @@
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_pause">
-                <property name="label" translatable="yes">Pausar</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/PAUSAR.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -34,11 +41,19 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_help">
-                <property name="label" translatable="yes">Ayuda</property>
                 <property name="width_request">100</property>
+                <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/AYUDA.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -308,6 +323,7 @@
     <child>
       <object class="GtkFixed">
         <property name="visible">True</property>
+        <property name="app_paintable">True</property>
         <property name="can_focus">False</property>
         <child>
           <object class="GtkLabel">
@@ -338,12 +354,19 @@
         </child>
         <child>
           <object class="GtkButton" id="btn_cancel5">
-            <property name="label" translatable="yes">Cancelar</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/CANCELAR.png</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="x">10</property>
@@ -352,29 +375,43 @@
         </child>
         <child>
           <object class="GtkButton" id="btn_back8">
-            <property name="label" translatable="yes">Volver</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/VOLVER.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">150</property>
+            <property name="x">193</property>
             <property name="y">250</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="btn_next4">
-            <property name="label" translatable="yes">Siguiente</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/SIGUIENTE.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">290</property>
+            <property name="x">373</property>
             <property name="y">250</property>
           </packing>
         </child>
@@ -498,12 +535,19 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_cancel3">
-                <property name="label" translatable="yes">Cancelar</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/CANCELAR.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="x">20</property>
@@ -512,15 +556,22 @@ El otro sin seleccionar le tocara al rival</property>
             </child>
             <child>
               <object class="GtkButton" id="btn_back6">
-                <property name="label" translatable="yes">Volver</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/VOLVER.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">200</property>
+                <property name="x">224</property>
                 <property name="y">5</property>
               </packing>
             </child>
@@ -673,12 +724,19 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_cancel1">
-                <property name="label" translatable="yes">Cancelar</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/CANCELAR.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="x">20</property>
@@ -687,15 +745,22 @@ El otro sin seleccionar le tocara al rival</property>
             </child>
             <child>
               <object class="GtkButton" id="btn_back4">
-                <property name="label" translatable="yes">Volver</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/VOLVER.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">200</property>
+                <property name="x">224</property>
                 <property name="y">5</property>
               </packing>
             </child>
@@ -740,6 +805,7 @@ El otro sin seleccionar le tocara al rival</property>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="spacing">66</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -833,12 +899,19 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_cancel4">
-                <property name="label" translatable="yes">Cancelar</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/CANCELAR.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="x">20</property>
@@ -847,12 +920,19 @@ El otro sin seleccionar le tocara al rival</property>
             </child>
             <child>
               <object class="GtkButton" id="btn_back7">
-                <property name="label" translatable="yes">Volver</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/VOLVER.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="x">200</property>
@@ -861,15 +941,22 @@ El otro sin seleccionar le tocara al rival</property>
             </child>
             <child>
               <object class="GtkButton" id="btn_next3">
-                <property name="label" translatable="yes">Siguiente</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/SIGUIENTE.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">370</property>
+                <property name="x">383</property>
                 <property name="y">5</property>
               </packing>
             </child>
@@ -1009,12 +1096,19 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_back2">
-                <property name="label" translatable="yes">Volver</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/VOLVER.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="x">20</property>
@@ -1032,8 +1126,9 @@ El otro sin seleccionar le tocara al rival</property>
     </child>
   </object>
   <object class="GtkWindow" id="window_menu">
+    <property name="width_request">420</property>
+    <property name="height_request">480</property>
     <property name="can_focus">False</property>
-    <property name="resizable">False</property>
     <property name="default_width">500</property>
     <property name="default_height">500</property>
     <child type="titlebar">
@@ -1043,60 +1138,98 @@ El otro sin seleccionar le tocara al rival</property>
       <object class="GtkFixed">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_top">6</property>
         <child>
-          <object class="GtkButton" id="btn_newGame">
-            <property name="label" translatable="yes">Juego nuevo</property>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/background.jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_credits">
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/CREDITOS.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">200</property>
-            <property name="y">231</property>
+            <property name="x">30</property>
+            <property name="y">313</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="btn_credits">
-            <property name="label" translatable="yes">Creditos</property>
-            <property name="width_request">105</property>
+          <object class="GtkButton" id="btn_newGame">
+            <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/juego-nuevo.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">200</property>
-            <property name="y">324</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_statistics">
-            <property name="label" translatable="yes">Estadisticas</property>
-            <property name="width_request">105</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-          </object>
-          <packing>
-            <property name="x">200</property>
-            <property name="y">278</property>
+            <property name="x">45</property>
+            <property name="y">406</property>
           </packing>
         </child>
         <child>
           <object class="GtkButton" id="btn_exit">
-            <property name="label" translatable="yes">Salir</property>
-            <property name="width_request">105</property>
+            <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/SALIR.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">200</property>
-            <property name="y">372</property>
+            <property name="x">250</property>
+            <property name="y">317</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_statistics">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/ESTADISTICAS.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">269</property>
+            <property name="y">406</property>
           </packing>
         </child>
         <child>
@@ -1105,11 +1238,11 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">img/cb1976b04347ead23051b5d63865c178.png</property>
+            <property name="pixbuf">img/TITULO.png</property>
           </object>
           <packing>
-            <property name="x">117</property>
-            <property name="y">52</property>
+            <property name="x">100</property>
+            <property name="y">50</property>
           </packing>
         </child>
       </object>
@@ -1117,9 +1250,7 @@ El otro sin seleccionar le tocara al rival</property>
   </object>
   <object class="GtkWindow" id="window_name">
     <property name="can_focus">False</property>
-    <property name="resizable">False</property>
-    <property name="default_width">500</property>
-    <property name="default_height">500</property>
+    <property name="hide_titlebar_when_maximized">True</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -1128,16 +1259,54 @@ El otro sin seleccionar le tocara al rival</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkLabel">
-            <property name="width_request">150</property>
-            <property name="height_request">40</property>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Introduzca su nombre : </property>
+            <property name="pixbuf">img/background.jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_next1">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/SIGUIENTE.png</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="x">30</property>
-            <property name="y">34</property>
+            <property name="x">294</property>
+            <property name="y">423</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_back3">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/VOLVER.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">21</property>
+            <property name="y">423</property>
           </packing>
         </child>
         <child>
@@ -1149,21 +1318,8 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="max_length">50</property>
           </object>
           <packing>
-            <property name="x">30</property>
-            <property name="y">80</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel">
-            <property name="width_request">100</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Introduzca el nombre para la pc : </property>
-          </object>
-          <packing>
-            <property name="x">30</property>
-            <property name="y">124</property>
+            <property name="x">97</property>
+            <property name="y">126</property>
           </packing>
         </child>
         <child>
@@ -1175,36 +1331,34 @@ El otro sin seleccionar le tocara al rival</property>
             <property name="max_length">50</property>
           </object>
           <packing>
-            <property name="x">30</property>
-            <property name="y">166</property>
+            <property name="x">97</property>
+            <property name="y">261</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="btn_next1">
-            <property name="label" translatable="yes">Siguiente</property>
+          <object class="GtkImage">
             <property name="width_request">100</property>
-            <property name="height_request">40</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/tile-name.png</property>
           </object>
           <packing>
-            <property name="x">350</property>
-            <property name="y">430</property>
+            <property name="x">120</property>
+            <property name="y">58</property>
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="btn_back3">
-            <property name="label" translatable="yes">Volver</property>
+          <object class="GtkImage">
             <property name="width_request">100</property>
-            <property name="height_request">40</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/title-pcLo.png</property>
           </object>
           <packing>
-            <property name="x">50</property>
-            <property name="y">430</property>
+            <property name="x">76</property>
+            <property name="y">186</property>
           </packing>
         </child>
       </object>
@@ -1281,6 +1435,199 @@ de nuevo</property>
       </object>
     </child>
   </object>
+  <object class="GtkWindow" id="window_pcName">
+    <property name="can_focus">False</property>
+    <property name="hide_titlebar_when_maximized">True</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/background.jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_back9">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/VOLVER.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">46</property>
+            <property name="y">432</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_next5">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/SIGUIENTE.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">293</property>
+            <property name="y">432</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="txt_pcLocal">
+            <property name="width_request">300</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="max_length">50</property>
+          </object>
+          <packing>
+            <property name="x">101</property>
+            <property name="y">151</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="txt_pcOponent">
+            <property name="width_request">300</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="max_length">50</property>
+          </object>
+          <packing>
+            <property name="x">101</property>
+            <property name="y">307</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/title-pcLo.png</property>
+          </object>
+          <packing>
+            <property name="x">81</property>
+            <property name="y">66</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/tile-pcOp.png</property>
+          </object>
+          <packing>
+            <property name="x">34</property>
+            <property name="y">210</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkWindow" id="window_playOptions">
+    <property name="can_focus">False</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="name">window_play_options</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/background (1).jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_pcVsplayer">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/PCVSplayer(1).png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">24</property>
+            <property name="y">250</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_pcVspc">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/pcVSpc.png</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">258</property>
+            <property name="y">250</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pixbuf">img/modo_juego (1).png</property>
+          </object>
+          <packing>
+            <property name="x">160</property>
+            <property name="y">45</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="window_statistics">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
@@ -1290,45 +1637,28 @@ de nuevo</property>
       <placeholder/>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkFixed">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkTextView">
+          <object class="GtkButton" id="btn_back1">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFixed">
-            <property name="height_request">50</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
             <child>
-              <object class="GtkButton" id="btn_back1">
-                <property name="label" translatable="yes">Volver</property>
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
+              <object class="GtkImage">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">img/VOLVER.png</property>
               </object>
-              <packing>
-                <property name="x">30</property>
-                <property name="y">5</property>
-              </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="x">33</property>
+            <property name="y">400</property>
           </packing>
         </child>
       </object>
@@ -1353,7 +1683,12 @@ de nuevo</property>
             <property name="height_request">70</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="has_tooltip">True</property>
             <property name="label" translatable="yes">Empieza primero </property>
+            <attributes>
+              <attribute name="font-desc" value="Suruma Bold 25"/>
+              <attribute name="weight" value="ultrabold"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -1408,43 +1743,64 @@ de nuevo</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="btn_cancel2">
-                <property name="label" translatable="yes">Cancelar</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/CANCELAR.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">30</property>
+                <property name="x">8</property>
                 <property name="y">5</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="btn_back5">
-                <property name="label" translatable="yes">Volver</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/VOLVER.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">200</property>
+                <property name="x">196</property>
                 <property name="y">5</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton" id="btn_next2">
-                <property name="label" translatable="yes">Siguiente</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixbuf">img/SIGUIENTE.png</property>
+                  </object>
+                </child>
               </object>
               <packing>
-                <property name="x">370</property>
+                <property name="x">394</property>
                 <property name="y">5</property>
               </packing>
             </child>
@@ -1459,62 +1815,59 @@ de nuevo</property>
     </child>
   </object>
   <object class="GtkWindow" id="window_winner">
-    <property name="width_request">500</property>
-    <property name="height_request">410</property>
     <property name="can_focus">False</property>
+    <property name="hide_titlebar_when_maximized">True</property>
     <child type="titlebar">
       <placeholder/>
     </child>
     <child>
-      <object class="GtkBox">
+      <object class="GtkFixed">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkImage">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <child>
-              <object class="GtkButton" id="btn_ok">
-                <property name="label" translatable="yes">ok</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_status">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
+            <property name="pixbuf">img/background (1).jpg</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkBox">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkImage" id="image_winner">
-                <property name="width_request">250</property>
-                <property name="height_request">300</property>
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkButton" id="btn_ok1">
+                    <property name="label" translatable="yes">ok</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_status1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1526,29 +1879,53 @@ de nuevo</property>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkImage" id="image_winner1">
                     <property name="width_request">250</property>
+                    <property name="height_request">300</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Puntos:
-</property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label_points">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">0</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width_request">250</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Puntos:
+</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_points1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">0</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
@@ -1561,38 +1938,22 @@ de nuevo</property>
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkFixed">
-            <property name="width_request">500</property>
-            <property name="height_request">50</property>
+          <object class="GtkButton" id="btn_nextPlayer1">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="relief">none</property>
             <child>
-              <object class="GtkButton" id="btn_nextPlayer">
-                <property name="label" translatable="yes">Siguiente
-Jugador</property>
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="x">387</property>
-                <property name="y">5</property>
-              </packing>
+              <placeholder/>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="x">342</property>
+            <property name="y">418</property>
           </packing>
         </child>
       </object>
