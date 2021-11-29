@@ -157,6 +157,9 @@ int main(int argc,char *argv[]) {
 	btn_nextPlayer=GTK_WIDGET(gtk_builder_get_object(builder,"btn_nextPlayer"));
 	g_signal_connect(btn_nextPlayer,"clicked", G_CALLBACK(isCLickedNextPlayer),NULL);
 
+	btn_help=GTK_WIDGET(gtk_builder_get_object(builder,"btn_help"));
+	g_signal_connect(btn_help,"clicked", G_CALLBACK(isClickedHelp),NULL);
+
 	/*IMAGENES*/
 	image_programmer=GTK_WIDGET(gtk_builder_get_object(builder,"image_programmer"));
 

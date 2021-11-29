@@ -57,6 +57,7 @@ GtkWidget *btn_cancel3;
 GtkWidget *btn_cancel4;
 GtkWidget *btn_cancel5;
 //Otros botones
+GtkWidget *btn_help;
 GtkWidget *btn_player;
 GtkWidget *btn_pc;
 GtkWidget *btn_ethel;
@@ -136,6 +137,7 @@ void isClickedCancel2(GtkWidget *widget, gpointer data);
 void isClickedCancel3(GtkWidget *widget, gpointer data);
 void isClickedCancel4(GtkWidget *widget, gpointer data);
 void isClickedCancel5(GtkWidget *widget, gpointer data);
+void isClickedHelp(GtkWidget *widget,gpointer data);
 void getsPosition(int color);
 void emptyBoard();
 void winner();

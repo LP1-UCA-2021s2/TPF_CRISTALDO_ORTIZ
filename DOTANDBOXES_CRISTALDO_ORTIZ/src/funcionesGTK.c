@@ -1298,3 +1298,23 @@ void placeLinesInTheGrid(int row,int column,int color){
 		}
 	}
 }
+void isClickedHelp(GtkWidget *widget,gpointer data){
+	/*Procedimiento para el btn_help del window_board
+		 * Parametros:
+		 * 	widget
+		 * 	data
+		 * Retorno:
+		 * 	Ninguno*/
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_board),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_QUESTION,
+				GTK_BUTTONS_OK,
+				"Unir los puntos de forma vertical u horizontal para crear cajas."
+				"\n El último en cerrar la caja, se lleva el punto y debe jugar de nuevo."
+				"\n Una caja vale 10 puntos."
+				"\n Se termina la partida al unir todos los puntos.");
+
+	gtk_window_set_title(GTK_WINDOW(dialog), "Ayudita");
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_destroy(dialog);
+}
