@@ -15,10 +15,19 @@ char *imagenes[] = {"img/punto.png",
 		"img/lleno1.png",
 		"img/lleno2.png"};//Vector de imagenes para el juego.
 int add_points[2] = {0,0}; //Acumulador de puntaje para los jugadores
+int chain[100];
 //posi 0 para la pc
 //posi 1 para el jugador
 
 /*FUNCIONES*/
+int randomOdd(int max,int min){
+    int number;
+    number=rand()%(max-min+1) + min;
+    while(number%2==0){
+        number=rand()%(max-min+1) + min;
+    }
+    return number;
+}
 int random_number(int max,int min){
 	/*
 	 * Funcion que me genera numeros aleatorios entre dos numeros.
@@ -154,59 +163,7 @@ void choice_turns(int choice){
 		gtk_widget_hide(window_name);
 	}
 }
-void move_pc(){
-	/*
-	 * Procedimiento que se encarga de realizar, verificar y colocar en el
-	 * tablero, los movimientos de la computadora.
-	 * Parametros:
-	 * 	Ninguno.
-	 * Retorno:
-	 * 	Ninguno.
-	 */
-	int max=(boardSize+(boardSize-1))-1;
-	gtk_label_set_text(GTK_LABEL(label_turn),name2);//Se envia el nombre de la pc en el apartado de turno
-	int row,column,flag;
-	getsPosition(ColorPlayer2);//Se obtienen las lineas (horizontal y vertical ) que corresponde al color seleccionado para la computadora.
-	printf("\nTurno de la CPU");
-	line();
-	printf("\nEligiendo.....");
-	row=random_number(max,0);
-	column=random_number(max,0);
-	while(logicBoard[row][column]!=0){
-		//Se verifica que la computadora ponga en un lugar valido su jugada.
-		//Si no se pide que vuelva a buscar un lugar que corresponda.
-		row=random_number(max,0);
-		column=random_number(max,0);
-	}
-	printf("\nPosicion a poner la linea: %i, %i",row,column);
-	//Se carga en el tablero logico la linea
-	logicBoard[row][column]=select_color(ColorPlayer2);
-	if(row%2==0 && column%2!=0){
-		//se verifica si en la posicion se pone una linea horizontal en el tablero del GTK
-		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[horizontal]);
-	}else{
-		//se verifica si en la posicion se pone una linea vertical en el tablero del GTK
-		if(row%2!=0 && column%2==0){
-			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
-		}
-	}
-	//Se llama a la funcion verify_move que se encarga de verficar si se formo una caja.
-	flag=verify_move(logicBoard,&row,&column,CPU,ColorPlayer2);
-	gtk_label_set_text(GTK_LABEL(label_turn),name1);
-	print_board(logicBoard);
-	//Se verifica si no termino aun el juego.
-	if(end_game(logicBoard)==((boardSize-1)*(boardSize-1))){
-		//Si termino el juego se llama la funcion winner que se encarga de mostrar que jugador gano.
-		winner();
-		flag=FALSE;
-	}else{
-		//Si no termino aun el juego y si se formo una caja vuelve a llamar a la funcion move_pc
-		//para que esta juegue de nuevo.
-		if(flag==TRUE){
-			move_pc();
-		}
-	}
-}
+
 void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	/*
 	 * Procedimiento que se encarga de realizar, verificar y colocar en el
@@ -245,8 +202,6 @@ void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 				gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
 			}
 		}
-		//Si flag1 es True es de nuevo el turno del jugador y no juega la pc
-		//Si flag1 es False es el turno de la pc para jugar
 		if(flag1==FALSE){
 			move_pc();
 			print_board(logicBoard);
@@ -278,7 +233,7 @@ void open_statistics(GtkWidget *widget, gpointer data){
 	 * Retorno:
 	 *  Ninguno.
 	 */
-	gtk_widget_show_all(window_statistics);
+	gtk_widget_show_all (window_statistics);
 	gtk_widget_hide(window_menu);
 }
 void open_credits(GtkWidget *widget, gpointer data){
@@ -792,26 +747,6 @@ void emptyBoard(){
 		}
 	}
 }
-void isClickedHelp(GtkWidget *widget,gpointer data){
-	/*Procedimiento para el btn_help del window_board
-		 * Parametros:
-		 * 	widget
-		 * 	data
-		 * Retorno:
-		 * 	Ninguno*/
-	dialog = gtk_message_dialog_new(GTK_WINDOW(window_board),
-				GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_QUESTION,
-				GTK_BUTTONS_OK,
-				"Unir los puntos de forma vertical u horizontal para crear cajas."
-				"\n El último en cerrar la caja, se lleva el punto y debe jugar de nuevo."
-				"\n Una caja vale 10 puntos."
-				"\n Se termina la partida al unir todos los puntos.");
-
-	gtk_window_set_title(GTK_WINDOW(dialog), "Ayudita");
-	gtk_dialog_run(GTK_DIALOG(dialog));
-	gtk_widget_destroy(dialog);
-}
 void isClickedPause(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_pause desplega el menu de pausa y bloquea el tablero
 	 * Parametro:
@@ -932,6 +867,7 @@ void winner(){
 		gtk_label_set_text(GTK_LABEL(label_status),"GANO LA PC");
 		gtk_label_set_text(GTK_LABEL(label_points),temp);
 		gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/pc.jpg");
+		statistics(2,name1);
 		g_free(temp);
 	}else{
 		if(add_points[CPU]==add_points[PLAYER]){
@@ -941,12 +877,14 @@ void winner(){
 			gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/pc.jpg");
 			gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
 			g_free(temp);
+			statistics(3,name1);
 		}else{
 			if(add_points[CPU]<add_points[PLAYER]){
 				gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
 				gtk_label_set_text(GTK_LABEL(label_status),"GANO EL JUGADOR");
 				gtk_label_set_text(GTK_LABEL(label_points),temp);
 				gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+				statistics(1,name1);
 				g_free(temp);
 			}
 		}
@@ -967,6 +905,200 @@ void setSquare(int row,int column,int color){
 		//Color azul
 		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[7]);
 	}
+}
+void setPoints(int points,int player){
+	/*Procedimiento que se encargar de actualizar los puntos para cada jugador.
+	 * Parametros:
+	 *	points -> puntos del jugador
+	 *	player -> jugador que se le actualiza los puntos
+	 * Retorno:
+	 * 	Ninguno.*/
+	gchar *temp = g_strdup_printf("Puntos : %i ",points);
+	if(player==PLAYER){
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),temp);
+	}else{
+		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),temp);
+	}
+	g_free(temp);
+}
+void isCLickedNextPlayer(GtkWidget *widget, gpointer data){
+	/*Procedimiento que se utiliza para mostrar el otro jugador cuando hay un empate
+	 * Parametros
+	 * widget
+	 * data
+	 * Retorno
+	 * 	Ninguno*/
+	gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
+	gtk_widget_set_sensitive(btn_nextPlayer,FALSE);
+	gtk_label_set_text(GTK_LABEL(label_points),temp);
+	gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+	gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
+	g_free(temp);
+}
+void move_pc(){
+	/*
+	 * Procedimiento que se encarga de realizar, verificar y colocar en el
+	 * tablero, los movimientos de la computadora.
+	 * Parametros:
+	 * 	Ninguno.
+	 * Retorno:
+	 * 	Ninguno.
+	 */
+	int max=getsSize(boardSize)-1;
+	gtk_label_set_text(GTK_LABEL(label_turn),name2);
+	int rowOdd=0,columnOdd=0;
+	int row=0,column=0,flag,numberOfBox=(((boardSize-1)*(boardSize-1))),aux=0;
+	getsPosition(ColorPlayer2);
+	printf("\nTurno de la CPU");
+	line();
+	printf("\nEligiendo.....");
+	flag=markFourthLine(logicBoard,&row,&column,ColorPlayer2,CPU);
+	if(flag==FALSE){
+		row=randomOdd(max,1);
+		column=randomOdd(max,1);
+		while(getNumberLines(logicBoard,row,column)>=2 && exitsMoves(logicBoard)<numberOfBox){
+			row=randomOdd(max,1);
+			column=randomOdd(max,1);
+		}
+		if(exitsMoves(logicBoard)<numberOfBox){
+			puts("Entro en exitsMoves<numberBox");
+			if(getNumberLines(logicBoard,row,column)<2){
+				puts("getNumberLines(logicBoard,row,column)<2");
+				validMove(logicBoard,&row,&column,0);
+			}
+		}else{
+			if(exitsMoves(logicBoard)==numberOfBox){
+				cleanChain(logicBoard);
+				searchChains(logicBoard);
+				selectSmallestChain(logicBoard,&row,&column);
+				printf("\n%i %i ",row,column);
+				aux=random_number(4,1);
+				printf("\n%i",aux);
+				rowOdd=row;
+				columnOdd=column;
+				randomLine(aux,&row,&column);
+				while(logicBoard[row][column]!=0){
+					aux=random_number(4,1);
+					row=rowOdd;
+					column=columnOdd;
+					randomLine(aux,&row,&column);
+				}
+
+			}
+		}
+
+	}
+	printf("\nSe selecciono en la posicion %i %i",row,column);
+	logicBoard[row][column]=select_color(ColorPlayer2);
+	placeLinesInTheGrid(row,column,ColorPlayer2);
+	flag=verify_move(logicBoard,&row,&column,CPU,ColorPlayer2);
+	gtk_label_set_text(GTK_LABEL(label_turn),name1);
+	print_board(logicBoard);
+	if(end_game(logicBoard)==numberOfBox){
+		winner();
+		flag=FALSE;
+	}else{
+		if(flag==TRUE){
+			move_pc();
+		}
+	}
+}
+int markFourthLine(int **array,int *row,int *column,int color,int player){
+	int i,j,flag=FALSE;
+	for(i=0;i<getsSize(boardSize);i++){
+		for(j=0;j<getsSize(boardSize);j++){
+			if(i%2!=0 && j%2!=0){
+				if(getNumberLines(array,i,j)==3){
+					*row=i;
+					*column=j;
+					getEmptyLine(array,row,column);
+					flag=TRUE;
+					break;
+				}
+			}
+		}
+	}
+	return flag;
+}
+int createChains(int **array,int rowOdd,int columnOdd,int id,int size){
+	array[rowOdd][columnOdd]=id;
+	//Arriba
+	if(array[rowOdd-1][columnOdd]==0){
+		if(rowOdd-2>=1 && array[rowOdd-2][columnOdd]%3!=0){
+			size=createChains(array,rowOdd-2,columnOdd,id,size);
+		}
+	}
+	//Abajo
+	if(array[rowOdd+1][columnOdd]==0){
+		if(rowOdd+2<getsSize(boardSize)-1 && array[rowOdd+2][columnOdd]%3!=0){
+			size=createChains(array,rowOdd+2,columnOdd,id,size);
+		}
+	}
+	//Izquierda
+	if(array[rowOdd][columnOdd-1]==0){
+		if(columnOdd-2>=1 && array[rowOdd][columnOdd-2]%3!=0){
+			size=createChains(array,rowOdd,columnOdd-2,id,size);
+		}
+	}
+	//Derecha
+	if(array[rowOdd][columnOdd+1]==0){
+		if(columnOdd+2<getsSize(boardSize)-1 && array[rowOdd][columnOdd+2]%3!=0){
+			size=createChains(array,rowOdd,columnOdd+2,id,size);
+		}
+	}
+	return ++size;
+}
+void searchChains(int **board){
+	int size,id=1;
+	for(int i=0;i<getsSize(boardSize);i++){
+		for(int j=0;j<getsSize(boardSize);j++){
+			if(i%2!=0 && j%2!=0){
+				if(board[i][j]==2){
+					size=createChains(board,i,j,id*3,0);
+					chain[id]=size;
+					id++;
+				}
+			}
+		}
+	}
+	chain[0]=id-1;
+}
+void cleanChain(int **board){
+	for(int k=0;k<100;k++){
+		if(chain[k]!=0){
+			chain[k]=0;
+		}
+	}
+	for(int i=0;i<getsSize(boardSize);i++){
+		for(int j=0;j<getsSize(boardSize);j++){
+			if(i%2!=0 && j%2!=0){
+				if(board[i][j]!=BLUE && board[i][j]!=RED){
+					board[i][j]=2;
+				}
+			}
+		}
+	}
+}
+void selectSmallestChain(int **board,int *row,int *column){
+	int max=(getsSize(boardSize)-1);
+	int minor=chain[1],id=1;
+	for(int i=0;i<100;i++){
+		if(chain[i]!=0){
+			printf("\nLA longi de la cadena id %i es: %i",i*3,chain[i]);
+		}
+	}
+	for(int i=1;i<100;i++){
+		if(chain[i]<minor && chain[i]!=0){
+			minor=chain[i];
+			id=i;
+		}
+	}
+	while(board[*row][*column]!=id*3){
+		*row=randomOdd(max,1);
+		*column=randomOdd(max,1);
+	}
+	printf("\n-%i-",id);
+	printf("\nLa caja seleccionada es: %i %i el peso es de %i",*row,*column,minor);
 }
 int verify_move(int **board,int *row,int *column,int player,int color){
 	/*
@@ -1006,6 +1138,7 @@ int verify_move(int **board,int *row,int *column,int player,int color){
 						add_points[player]+= 10;
 						setPoints(add_points[player],player);
 						flag=TRUE;
+						flag=TRUE;
 					}
 				}
 				if(j-1==*column && i==*row){
@@ -1033,32 +1166,135 @@ int verify_move(int **board,int *row,int *column,int player,int color){
 	}
 	return flag;
 }
-void setPoints(int points,int player){
-	/*Procedimiento que se encargar de actualizar los puntos para cada jugador.
-	 * Parametros:
-	 *	points -> puntos del jugador
-	 *	player -> jugador que se le actualiza los puntos
-	 * Retorno:
-	 * 	Ninguno.*/
-	gchar *temp = g_strdup_printf("Puntos : %i ",points);
-	if(player==PLAYER){
-		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),temp);
-	}else{
-		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),temp);
+void randomLine(int number,int *row,int *column){
+	switch(number){
+	case 1:
+		*row=*row+1;
+		break;
+	case 2:
+		*row=*row-1;
+		break;
+	case 3:
+		*column=*column+1;
+		break;
+	case 4:
+		*column=*column-1;
+		break;
 	}
-	g_free(temp);
 }
-void isCLickedNextPlayer(GtkWidget *widget, gpointer data){
-	/*Procedimiento que se utiliza para mostrar el otro jugador cuando hay un empate
-	 * Parametros
-	 * widget
-	 * data
-	 * Retorno
-	 * 	Ninguno*/
-	gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
-	gtk_widget_set_sensitive(btn_nextPlayer,FALSE);
-	gtk_label_set_text(GTK_LABEL(label_points),temp);
-	gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
-	gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
-	g_free(temp);
+void validMove(int **board,int *rowOdd,int *columnOdd,int aux1){
+	int aux=0,row=*rowOdd,column=*columnOdd;
+	if(aux1!=0){
+		randomLine(aux1,&row,&column);
+	}else{
+		aux=random_number(4,1);
+		randomLine(aux,&row,&column);
+		while(board[row][column]!=0){
+			aux=random_number(4,1);
+			row=*rowOdd;
+			column=*columnOdd;
+			randomLine(aux,&row,&column);
+		}
+	}
+	if(board[row][column]==0){
+		//Arriba
+		if(*rowOdd-1==row && *rowOdd%2!=0 && *columnOdd%2!=0){
+			if(*rowOdd-2>=1){
+				if(getNumberLines(board,*rowOdd-2,*columnOdd)!=2){
+					puts("arriba");
+					*rowOdd=row;
+				}else{
+					puts("xd1");
+
+				}
+			}else{
+				puts("arriba");
+				*rowOdd=row;
+			}
+		}
+		//Abajo
+		if(*rowOdd+1==row && *rowOdd%2!=0 && *columnOdd%2!=0){
+			if(*rowOdd+2<getsSize(boardSize)-1){
+				if(getNumberLines(board,*rowOdd+2,*columnOdd)!=2){
+					puts("abajo");
+					*rowOdd=row;
+				}else{
+					puts("xd2");
+				}
+			}else{
+				puts("abajo");
+				*rowOdd=row;
+			}
+		}
+		//Izquierda
+		if(*columnOdd-1==column && *rowOdd%2!=0 && *columnOdd%2!=0){
+			if(*columnOdd-2>=1){
+				if(getNumberLines(board,*rowOdd,*columnOdd-2)!=2){
+					puts("izquierda");
+					*columnOdd=column;
+				}else{
+					puts("xd3");
+				}
+			}else{
+				puts("izquierda");
+				*columnOdd=column;
+			}
+		}
+		//Derecha
+		if(*columnOdd+1==column && *rowOdd%2!=0 && *columnOdd%2!=0){
+			if(*columnOdd+2<getsSize(boardSize)-1){
+				if(getNumberLines(board,*rowOdd,*columnOdd+2)!=2){
+					*columnOdd=column;
+					puts("derecha");
+				}else{
+					puts("xd4");
+				}
+			}else{
+				*columnOdd=column;
+				puts("derecha");
+			}
+		}
+	}
+	if(aux1>4){
+		printf("entro en de rodeado sin movi posible jaja");
+		aux=random_number(4,1);
+		randomLine(aux,&row,&column);
+		while(board[row][column]!=0){
+			aux=random_number(4,1);
+			row=*rowOdd;
+			column=*columnOdd;
+			randomLine(aux,&row,&column);
+		}
+		*rowOdd=row;
+		*columnOdd=column;
+	}
+	if(*columnOdd%2!=0 && *rowOdd%2!=0){
+		puts("ENtro en el recursiva");
+		printf("%i %i",*rowOdd,*columnOdd);
+		aux1++;
+		validMove(board,rowOdd,columnOdd,aux1);
+	}
+}
+int exitsMoves(int **board){
+	int sum=0;
+	for(int i=0;i<getsSize(boardSize);i++){
+		for(int j=0;j<getsSize(boardSize);j++){
+			if(i%2!=0 && j%2!=0){
+				if(getNumberLines(board,i,j)>=2){
+					sum++;
+				}
+			}
+		}
+	}
+	return sum;
+}
+void placeLinesInTheGrid(int row,int column,int color){
+	getsPosition(color);
+	if(row%2==0 && column%2!=0){
+		gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[horizontal]);
+	}else{
+		if(row%2!=0 && column%2==0){
+			gtk_image_set_from_file(GTK_IMAGE(gtk_grid_get_child_at(GTK_GRID(board),column,row)),imagenes[vertical]);
+		}
+	}
 }

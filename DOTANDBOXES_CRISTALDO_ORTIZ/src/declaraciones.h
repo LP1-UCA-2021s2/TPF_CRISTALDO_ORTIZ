@@ -11,7 +11,7 @@
 #include<time.h>
 #include <gtk/gtk.h>
 #define DOT 1
-#define EMPTYBOX 3
+#define EMPTYBOX 2
 #define CPU 0
 #define PLAYER 1
 #define RED 4
@@ -45,4 +45,12 @@ void choice_board(int choice);
 void choice_turns(int choice);
 void move_pc();
 int getsSize(int size);
+int getNumberLines(int **board,int rowOdd,int columnOdd);
+void getEmptyLine(int **board,int *row,int *column);
+void searchChains(int **board);
+int createChains(int **array,int rowOdd,int columnOdd,int id,int size);
+void selectSmallestChain(int **board,int *row,int *column);
+void statistics(int result,const gchar *name);
+char *readText(FILE *fp);
+void copyArray(char*to, char*from);
 #endif /* SRC_DATOS_H_ */

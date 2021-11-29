@@ -69,7 +69,7 @@ GtkWidget *btn_continue;
 GtkWidget *btn_starAgain;
 GtkWidget *btn_menu;
 GtkWidget *btn_nextPlayer;
-GtkWidget *btn_help;
+
 /*ENTRADAS*/
 GtkWidget *txt_player;
 GtkWidget *txt_pc;
@@ -143,5 +143,11 @@ void isCLickedOk(GtkWidget *widget, gpointer data);
 void setSquare(int row,int column,int color);
 void setPoints(int points,int player);
 void isCLickedNextPlayer(GtkWidget *widget, gpointer data);
-void isClickedHelp(GtkWidget *widget,gpointer data);
+int markFourthLine(int **logicBoard,int *row,int *column,int color,int player);
+void placeLinesInTheGrid(int row,int column,int color);
+void randomLine(int number,int *row,int *column);
+int exitsMoves(int **board);
+void cleanChain(int **board);
+void placeLine(int **board,int *rowOdd,int *columnOdd);
+void validMove(int **board,int *rowOdd,int *columnOdd,int aux1);
 #endif /* SRC_DECLARACIONESGTK_H_ */

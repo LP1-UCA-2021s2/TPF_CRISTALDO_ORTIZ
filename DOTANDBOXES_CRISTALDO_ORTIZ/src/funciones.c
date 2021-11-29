@@ -131,39 +131,113 @@ int getsSize(int size){
 	 *  El tamaño nuevo para el tablero*/
 	return (size+(size-1));
 }
-/*int move_player(int **array,int color){
- * Funcion que realiza,verifica los movimientos del jugador.
- * Parametros:
- * 	board	-> posicion en la memoria del tablero.
- * 	color 	-> color que corresponde para el jugador.
- * Retorno:
- * 	TRUE 	-> si se formo una caja.
- * 	FALSE	-> si no se formo una caja.
-	int row,column,flag;
-	printf("\nTurno del jugador");
-	line();
-	puts("\nIntroduzca la Posicion a colocar la raya. Considerar que los 1 son los puntos y los 3 son vacío ");
-	printf("\nFila: ");
-	scanf("%i",&row);
-	printf("\nColumna: ");
-	scanf("%i",&column);
-	printf("\nPosición %i, %i",row,column);
-	while(array[row][column]!=0){ //verificar que no esta ocupado
-		printf("\nPosicion ocupada o no existe. Intente de nuevo");
-		printf("\nFila: ");
-		scanf("%i",&row);
-		printf("\nColumna: ");
-		scanf("%i",&column);
-		printf("\nPosición %i, %i",row,column);
+int getNumberLines(int **board,int rowOdd,int columnOdd){
+    int acumuletor=0;
+	if(board[rowOdd-1][columnOdd]==BLUE || board[rowOdd-1][columnOdd]==RED){
+		acumuletor++;
 	}
-	array[row][column] = select_color(color);
-	flag=verify_move(array,&row,&column,PLAYER,color);
-	printf("\nPuntaje Jugador: %i",add_points[PLAYER]);
-	if(flag==TRUE){
-		return flag;
-	}else{
-		return flag;
+	if(board[rowOdd+1][columnOdd]==BLUE || board[rowOdd+1][columnOdd]==RED){
+		acumuletor++;
 	}
-}*/
-/*
- */
+	if(board[rowOdd][columnOdd-1]==BLUE || board[rowOdd][columnOdd-1]==RED){
+		acumuletor++;
+	}
+	if(board[rowOdd][columnOdd+1]==BLUE || board[rowOdd][columnOdd+1]==RED){
+		acumuletor++;
+	}
+    //Retorna cuantas lineas hay en la posicion
+    return acumuletor;
+}
+void getEmptyLine(int **board,int *row,int *column){
+	if(board[*row-1][*column]==0){
+		*row=*row-1;
+	}
+	if(board[*row+1][*column]==0){
+		*row=*row+1;
+	}
+	if(board[*row][*column-1]==0){
+		*column=*column-1;
+	}
+	if(board[*row][*column+1]==0){
+		*column=*column+1;
+	}
+}
+void copyArray(char*array1, char*array2){
+	//funcion para copiar el texto de un array a otro asumiendo que hay memoria suficiente
+	int i=0;
+	while (i<strlen(array2)){
+		array1[i]=array2[i];
+		i++;
+	}
+	array1[i]='\0';
+}
+
+char *readText(FILE *fp){
+    char *contents = NULL;
+    size_t len = 0;
+    getline(&contents,&len,fp);
+    return contents;
+}
+void statistics(int result,const gchar *name){
+	char file[]="estadisticas.txt";
+	char aux[21], *token=NULL, **contents = NULL;
+	int win,loss,draws,flag=FALSE, cont = 1, rowPlayer=-1;
+
+	FILE *fileP = fopen(file,"r");
+	if(fileP==NULL){
+		fileP=fopen(file,"w");
+		fprintf(fileP,"Nombre \tG\tP\tE");
+		fclose(fileP);
+		fileP=fopen(file,"r");
+	}
+	contents = (char**)malloc(sizeof(char*));
+	while(feof(fileP)==0){
+		if (cont!=1){
+			contents = (char**)realloc(contents,(cont)*sizeof(char*));
+		}
+		contents[cont-1]=readText(fileP);
+		copyArray(aux,contents[cont-1]);
+		token= strtok(aux," ");
+		if(strcmp(token,name)==0) {
+			flag = TRUE;
+			rowPlayer = cont-1;
+			win = atoi(strtok (NULL, " "));
+			loss = atoi(strtok (NULL, " "));
+			draws= atoi(strtok (NULL, " "));
+		}
+		cont++;
+	}
+	fclose(fileP);
+	cont--;
+	fileP = fopen (file, "w");
+	for (int i=0; i < cont; i++) {
+		if (i != rowPlayer && *contents[i] != '\n'){
+			fprintf (fileP,"%s",contents[i]);
+		}
+		free (contents[i]);
+	}
+	if (contents!=NULL){
+		free (contents);
+	}
+	if (!flag) {
+		win=0;
+		loss=0;
+		draws=0;;
+	}
+	switch(result){
+		case 1:
+			win++;
+			break;
+		case 2:
+			loss++;
+			break;
+		case 3:
+			draws++;
+			break;
+
+	}
+	fprintf (fileP, "\n%s %d %d %d",name,win,loss,draws);  //escribe los datos del jugador
+	fclose (fileP);
+}
+//--------------------------------------------------------------------------------------------------------
+
