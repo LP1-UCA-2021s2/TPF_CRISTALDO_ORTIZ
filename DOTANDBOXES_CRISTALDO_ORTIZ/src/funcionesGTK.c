@@ -225,16 +225,52 @@ void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data){
 	}
 }
 void open_statistics(GtkWidget *widget, gpointer data){
-	/*
-	 * Procedimiento que abre la ventana de estadisticas.
-	 * Parametros:
-	 * 	widget
-	 * 	data
-	 * Retorno:
-	 *  Ninguno.
-	 */
-	gtk_widget_show_all (window_statistics);
-	gtk_widget_hide(window_menu);
+	char *content=NULL;
+	char buff[100];
+	int sizeCont=1;
+	char file[]="estadisticas.txt";
+	FILE *fileP = fopen(file,"r");
+	if(fileP==NULL){
+		fileP=fopen(file,"w");
+		fprintf(fileP,"Nombre \tG\tP\tE");
+		fclose(fileP);
+		fileP=fopen(file,"r");
+	}
+	content=(char*)malloc(sizeof(char));
+	content[0]='\0';
+	while(fgets(buff,100,fileP)){
+		sizeCont=sizeCont+strlen(buff);
+		content=(char*)realloc(content,sizeCont*sizeof(char));
+		strcat(content,buff);
+	}
+	fclose(fileP);
+
+	GtkWidget *window;
+	GtkWidget *view;
+	GtkWidget *vbox;
+	GtkWidget *scrolledwindow;
+	GtkTextBuffer *buffer;
+	GtkTextIter iter;
+
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+	gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
+	gtk_window_set_title(GTK_WINDOW(window), "Estadisticas");
+
+	vbox = gtk_box_new(FALSE, 0);
+	scrolledwindow = gtk_scrolled_window_new(NULL, NULL);
+	view = gtk_text_view_new();
+	gtk_box_pack_start(GTK_BOX(vbox), view, TRUE, TRUE, 0);
+
+	buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
+
+	gtk_text_buffer_get_iter_at_offset(buffer, &iter, 0);
+
+	gtk_text_buffer_insert(buffer, &iter,content, -1);
+	 gtk_container_add(GTK_CONTAINER(scrolledwindow),vbox);
+	gtk_container_add(GTK_CONTAINER(window),scrolledwindow);
+
+	gtk_widget_show_all(window);
 }
 void open_credits(GtkWidget *widget, gpointer data){
 	/*

@@ -181,12 +181,12 @@ char *readText(FILE *fp){
 void statistics(int result,const gchar *name){
 	char file[]="estadisticas.txt";
 	char aux[21], *token=NULL, **contents = NULL;
-	int win,loss,draws,flag=FALSE, cont = 1, rowPlayer=-1;
+	int game,win,loss,draws,flag=FALSE, cont = 1, rowPlayer=-1;
 
 	FILE *fileP = fopen(file,"r");
 	if(fileP==NULL){
 		fileP=fopen(file,"w");
-		fprintf(fileP,"Nombre \tG\tP\tE");
+		fprintf(fileP,"Nombre J\tG\tP\tE");
 		fclose(fileP);
 		fileP=fopen(file,"r");
 	}
@@ -222,7 +222,8 @@ void statistics(int result,const gchar *name){
 	if (!flag) {
 		win=0;
 		loss=0;
-		draws=0;;
+		draws=0;
+		game=0;
 	}
 	switch(result){
 		case 1:
@@ -236,7 +237,8 @@ void statistics(int result,const gchar *name){
 			break;
 
 	}
-	fprintf (fileP, "\n%s %d %d %d",name,win,loss,draws);  //escribe los datos del jugador
+	game++;
+	fprintf (fileP, "\n%s %d %d %d %d",name,game,win,loss,draws);  //escribe los datos del jugador
 	fclose (fileP);
 }
 //--------------------------------------------------------------------------------------------------------
