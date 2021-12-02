@@ -16,6 +16,7 @@ char *imagenes[] = {"img/punto.png",
 		"img/lleno2.png"};//Vector de imagenes para el juego.
 int add_points[2] = {0,0}; //Acumulador de puntaje para los jugadores
 int chain[100];
+int modo=0;
 //posi 0 para la pc
 //posi 1 para el jugador
 
@@ -58,11 +59,20 @@ void check_size_board(int number){
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		gtk_widget_destroy(dialog);
 	}else{
-		gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
-		gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
-		gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
-		gtk_widget_show_all(window_board);
-		gtk_widget_hide(window_choiceBoardSize);
+		if(modo==1){
+			gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
+			gtk_widget_show_all(window_board);
+			gtk_widget_hide(window_choiceBoardSize);
+		}else{
+			gtk_box_pack_start(GTK_BOX(box_board), crear_tablero(), TRUE, FALSE, 20);
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer1),"Puntos : 0");
+			gtk_label_set_text(GTK_LABEL(label_pointsPlayer2),"Puntos : 0");
+			gtk_widget_show_all(window_board);
+			gtk_widget_hide(window_choiceBoardSize);
+		}
+
 	}
 }
 void choice_colors(int option){
@@ -232,7 +242,7 @@ void open_statistics(GtkWidget *widget, gpointer data){
 	FILE *fileP = fopen(file,"r");
 	if(fileP==NULL){
 		fileP=fopen(file,"w");
-		fprintf(fileP,"Nombre \tG\tP\tE");
+		fprintf(fileP,"Nombre\tJ\tG\tP\tE");
 		fclose(fileP);
 		fileP=fopen(file,"r");
 	}
@@ -293,7 +303,7 @@ void open_newGame(GtkWidget *widget, gpointer data){
 	 * Retorno:
 	 *  Ninguno.
 	 */
-	gtk_widget_show_all(window_name);
+	gtk_widget_show_all(window_choiceModo);
 	gtk_widget_hide(window_menu);
 }
 void emptyLabels(GtkWidget *label){
@@ -327,6 +337,54 @@ void isClickedExit(GtkWidget *widget, gpointer data){
 	 * 	Ninguno*/
 	exit(1);
 }
+void isClickedPcVsPlayer(GtkWidget *widget, gpointer data){
+	/*Procedimiento para el btn_back1 que sirve para volver de estadisticas al menu
+	 * Parametros:
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	modo=1;
+	gtk_widget_hide(window_choiceModo);
+	gtk_widget_show_all(window_name);
+}
+void isClickedPcVsPc(GtkWidget *widget, gpointer data){
+	/*Procedimiento para el btn_back1 que sirve para volver de estadisticas al menu
+	 * Parametros:
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	modo=0;
+	gtk_widget_hide(window_choiceModo);
+	gtk_widget_show_all(window_pcName);
+}
+void isClickedPcLocal(GtkWidget *widget, gpointer data){
+	/*Procedimiento para el btn_back1 que sirve para volver de estadisticas al menu
+	 * Parametros:
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	PlayerFirtsTurn=PCLOCAL;
+	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn1),namepc1);
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn1),"img/jugador.jpg");
+	gtk_widget_hide(window_choiceTurn1);
+	gtk_widget_show_all(window_turnSelected1);
+}
+void isClickedPcOponent(GtkWidget *widget, gpointer data){
+	/*Procedimiento para el btn_back1 que sirve para volver de estadisticas al menu
+	 * Parametros:
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	PlayerFirtsTurn=PCOPONENT;
+	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn1),namepc2);
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn1),"img/pc.jpg");
+	gtk_widget_hide(window_choiceTurn1);
+	gtk_widget_show_all(window_turnSelected1);
+}
 void isClickedBack1(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_back1 que sirve para volver de estadisticas al menu
 	 * Parametros:
@@ -356,19 +414,8 @@ void isClickedBack3(GtkWidget *widget, gpointer data){
 	 * 	data
 	 * Retorno:
 	 *  Ninguno.*/
-	dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_QUESTION,
-			GTK_BUTTONS_YES_NO,
-			"Estas seguro que desea salir?, no se guardara la partida actual.");
-	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
-	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
-		emptyEntry(txt_player);
-		emptyEntry(txt_pc);
-		gtk_widget_hide(window_name);
-		gtk_widget_show_all(window_menu);
-	}
-	gtk_widget_destroy(dialog);
+	gtk_widget_hide(window_name);
+	gtk_widget_show_all(window_choiceModo);
 }
 void isClickedBack4(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_back4 que sirve para volver de window_choiceTurn al window_name
@@ -378,6 +425,7 @@ void isClickedBack4(GtkWidget *widget, gpointer data){
 	 *  Ninguno.*/
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_name);
+
 }
 void isClickedBack5(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_back5 que sirve para volver de window_turnSelected al window_choiceTurn
@@ -414,6 +462,10 @@ void isClickedBack8(GtkWidget *widget, gpointer data){
 	 *  Ninguno.*/
 	gtk_widget_hide(window_choiceBoardSize);
 	gtk_widget_show_all(window_colorSelected);
+}
+void isClickedBack9(GtkWidget *widget, gpointer data){
+	gtk_widget_hide(window_pcName);
+	gtk_widget_show_all(window_choiceModo);
 }
 void isClickedCancel1(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_cancel1 que sirve para volver al menu del window_choiceTurn
@@ -512,15 +564,95 @@ void isClickedCancel5(GtkWidget *widget, gpointer data){
 			"Estas seguro que desea salir?, no se guardara la partida actual.");
 	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
 	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
-		emptyEntry(txt_player);
-		emptyEntry(txt_pc);
+		if(modo==1){
+			emptyEntry(txt_player);
+			emptyEntry(txt_pc);
+
+		}else{
+			emptyEntry(txt_pcLocal);
+			emptyEntry(txt_pcOponent);
+		}
 		emptyEntry(txt_boardSize);
 		gtk_widget_hide(window_choiceBoardSize);
 		gtk_widget_show_all(window_menu);
 	}
 	gtk_widget_destroy(dialog);
 }
-
+void isClickedCancel6(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_choiceTurn1),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_QUESTION,
+			GTK_BUTTONS_YES_NO,
+			"Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		emptyEntry(txt_pcLocal);
+		emptyEntry(txt_pcOponent);
+		gtk_widget_hide(window_choiceColor1);
+		gtk_widget_show_all(window_menu);
+	}
+	gtk_widget_destroy(dialog);
+}
+void isClickedCancel7(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_choiceTurn1),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_QUESTION,
+			GTK_BUTTONS_YES_NO,
+			"Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		emptyEntry(txt_pcLocal);
+		emptyEntry(txt_pcOponent);
+		gtk_widget_hide(window_choiceTurn1);
+		gtk_widget_show_all(window_menu);
+	}
+	gtk_widget_destroy(dialog);
+}
+void isClickedCancel8(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_pcName),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_QUESTION,
+			GTK_BUTTONS_YES_NO,
+			"Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		emptyEntry(txt_pcLocal);
+		emptyEntry(txt_pcOponent);
+		gtk_widget_hide(window_pcName);
+		gtk_widget_show_all(window_menu);
+	}
+	gtk_widget_destroy(dialog);
+}
+void isClickedCancel9(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_pcName),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_QUESTION,
+			GTK_BUTTONS_YES_NO,
+			"Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		emptyEntry(txt_pcLocal);
+		emptyEntry(txt_pcOponent);
+		gtk_widget_hide(window_turnSelected1);
+		gtk_widget_show_all(window_menu);
+	}
+	gtk_widget_destroy(dialog);
+}
+void isClickedCancel10(GtkWidget *widget, gpointer data){
+	dialog = gtk_message_dialog_new(GTK_WINDOW(window_pcName),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_QUESTION,
+			GTK_BUTTONS_YES_NO,
+			"Estas seguro que desea salir?, no se guardara la partida actual.");
+	gtk_window_set_title(GTK_WINDOW(dialog), "Salir?");
+	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
+		emptyEntry(txt_pcLocal);
+		emptyEntry(txt_pcOponent);
+		gtk_widget_hide(window_colorSelected1);
+		gtk_widget_show_all(window_menu);
+	}
+	gtk_widget_destroy(dialog);
+}
 void isClickedPlayer(GtkWidget *widget, gpointer data){
 	/*Procedimiento cuando se clickea el btn_player en la ventana window_choiceTurn para la
 	 * seleccion de quien comienza primero
@@ -598,6 +730,38 @@ void isClickedColor2(GtkWidget *widget, gpointer data){
 	gtk_label_set_text(GTK_LABEL(label_namePc1),name2);
 	gtk_image_set_from_file(GTK_IMAGE(image_color1),"img/color2.png");
 	gtk_image_set_from_file(GTK_IMAGE(image_color2),"img/color1.png");
+}
+void isClickedColor3(GtkWidget *widget, gpointer data){
+	/*Procedimiento cuando se clickea el btn_color2 en window_choiceColor para la seleccion de color para
+	 * cada jugador
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	ColorPlayer1=RED;
+	ColorPlayer2=BLUE;
+	gtk_widget_hide(window_choiceColor1);
+	gtk_widget_show_all(window_colorSelected1);
+	gtk_label_set_text(GTK_LABEL(label_namePcLocal2),namepc1);
+	gtk_label_set_text(GTK_LABEL(label_namePcOponent2),namepc2);
+	gtk_image_set_from_file(GTK_IMAGE(image_color3),"img/color1.png");
+	gtk_image_set_from_file(GTK_IMAGE(image_color4),"img/color2.png");
+}
+void isClickedColor4(GtkWidget *widget, gpointer data){
+	/*Procedimiento cuando se clickea el btn_color2 en window_choiceColor para la seleccion de color para
+	 * cada jugador
+	 * 	widget
+	 * 	data
+	 * Retorno:
+	 *  Ninguno.*/
+	ColorPlayer1=BLUE;
+	ColorPlayer2=RED;
+	gtk_widget_hide(window_choiceColor);
+	gtk_widget_show_all(window_colorSelected1);
+	gtk_label_set_text(GTK_LABEL(label_namePcLocal2),namepc1);
+	gtk_label_set_text(GTK_LABEL(label_namePcOponent2),namepc2);
+	gtk_image_set_from_file(GTK_IMAGE(image_color3),"img/color2.png");
+	gtk_image_set_from_file(GTK_IMAGE(image_color4),"img/color1.png");
 }
 void isClickedNext1(GtkWidget *widget, gpointer data){
 	/*Procedimiento para el btn_next1 del window_name
@@ -710,6 +874,39 @@ void isClickedNext4(GtkWidget *widget, gpointer data){
 	boardSize=atoi(acumuletor); //Se carga en la variable global del tamaño del tablero
 	check_size_board(atoi(acumuletor)); //Se envia en la funcion para verificar que sea un tamaño correcto
 }
+void isClickedNext5(GtkWidget *widget, gpointer data){
+		pcLocal[0]='\0';
+		pcOponent[0]='\0';
+		namepc1=gtk_entry_get_text(GTK_ENTRY(txt_pcLocal));
+		namepc2=gtk_entry_get_text(GTK_ENTRY(txt_pcOponent));
+		sprintf(pcLocal,"%s",namepc1);
+		sprintf(pcOponent,"%s",namepc2);
+		if(pcLocal[0]=='\0' || pcOponent[0]=='\0'){
+			//Verifica que se completaran los campos
+			dialog = gtk_message_dialog_new(GTK_WINDOW(window_name),
+					GTK_DIALOG_DESTROY_WITH_PARENT,
+					GTK_MESSAGE_WARNING,
+					GTK_BUTTONS_OK,
+					"Error, complete los campos.");
+			gtk_window_set_title(GTK_WINDOW(dialog), "Error");
+			gtk_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(dialog);
+		}else{
+			gtk_widget_hide(window_pcName);
+			gtk_widget_show_all(window_choiceTurn1);
+			gtk_label_set_text(GTK_LABEL(label_namePcLocal),namepc1);
+			gtk_label_set_text(GTK_LABEL(label_namePcOponent),namepc2);
+		}
+}
+void isClickedNext6(GtkWidget *widget, gpointer data){
+	gtk_widget_show_all(window_choiceColor1);
+	gtk_widget_hide(window_turnSelected1);
+}
+void isClickedNext7(GtkWidget *widget, gpointer data){
+	gtk_widget_show_all(window_choiceBoardSize);
+	gtk_widget_hide(window_colorSelected1);
+}
+
 void getsPosition(int color){
 	/*Procedimiento encargado de obtener la posicion de la imagen en el vector imagenes (las lineas en especial)
 	 * Parametros:

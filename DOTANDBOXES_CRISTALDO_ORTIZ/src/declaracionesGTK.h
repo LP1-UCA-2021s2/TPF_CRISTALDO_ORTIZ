@@ -22,11 +22,20 @@ GtkWidget *window_pause; //Ventana de pausa que tiene los botones continuar come
 GtkWidget *window_turnSelected; //Ventana que visualiza quien comenza primero si el jugador o el rival.
 GtkWidget *window_board; //Ventana en donde se desarrolla el juego, se muestra el tablero los turno y los puntos.
 GtkWidget *window_winner; //Ventana que visualiza quien gano el juego.
+GtkWidget *window_choiceModo;
+GtkWidget *window_pcName;
+GtkWidget *window_choiceTurn1;
+GtkWidget *window_choiceColor1;
+GtkWidget *window_turnSelected1;
+GtkWidget *window_colorSelected1;
 /*IMAGENES*/
 GtkWidget *image_programmer;
 GtkWidget *image_playerFirtsTurn;
+GtkWidget *image_playerFirtsTurn1;
 GtkWidget *image_color1;
 GtkWidget *image_color2;
+GtkWidget *image_color3;
+GtkWidget *image_color4;
 GtkWidget *image_player1;
 GtkWidget *image_player2;
 GtkWidget *image_winner;
@@ -45,17 +54,26 @@ GtkWidget *btn_back5;
 GtkWidget *btn_back6;
 GtkWidget *btn_back7;
 GtkWidget *btn_back8;
+GtkWidget *btn_back9;
 //Botones next
 GtkWidget *btn_next1;
 GtkWidget *btn_next2;
 GtkWidget *btn_next3;
 GtkWidget *btn_next4;
+GtkWidget *btn_next5;
+GtkWidget *btn_next6;
+GtkWidget *btn_next7;
 //Botones cancel
 GtkWidget *btn_cancel1;
 GtkWidget *btn_cancel2;
 GtkWidget *btn_cancel3;
 GtkWidget *btn_cancel4;
 GtkWidget *btn_cancel5;
+GtkWidget *btn_cancel6;
+GtkWidget *btn_cancel7;
+GtkWidget *btn_cancel8;
+GtkWidget *btn_cancel9;
+GtkWidget *btn_cancel10;
 //Otros botones
 GtkWidget *btn_help;
 GtkWidget *btn_player;
@@ -64,22 +82,35 @@ GtkWidget *btn_ethel;
 GtkWidget *btn_daniela;
 GtkWidget *btn_color1;
 GtkWidget *btn_color2;
+GtkWidget *btn_color3;
+GtkWidget *btn_color4;
 GtkWidget *btn_ok;
 GtkWidget *btn_pause;
 GtkWidget *btn_continue;
 GtkWidget *btn_starAgain;
 GtkWidget *btn_menu;
 GtkWidget *btn_nextPlayer;
-
+GtkWidget *btn_pcVspc;
+GtkWidget *btn_pcVsplayer;
+GtkWidget *btn_pcLocal;
+GtkWidget *btn_pcOponent;
 /*ENTRADAS*/
 GtkWidget *txt_player;
 GtkWidget *txt_pc;
 GtkWidget *txt_boardSize;
+GtkWidget *txt_pcLocal;
+GtkWidget *txt_pcOponent;
 /*LABELS*/
 GtkWidget *label_description;
+GtkWidget *label_namePcLocal;
+GtkWidget *label_namePcOponent;
+GtkWidget *label_namePcLocal2;
+GtkWidget *label_namePcOponent2;
+GtkWidget *label_namePlayer2;
 GtkWidget *label_namePlayer;
 GtkWidget *label_namePc;
 GtkWidget *label_nameFirtsTurn;
+GtkWidget *label_nameFirtsTurn1;
 GtkWidget *label_namePlayer1;
 GtkWidget *label_namePc1;
 GtkWidget *label_turn;
@@ -98,6 +129,8 @@ GtkWidget *image;
 
 const gchar *name1;
 const gchar *name2;
+const gchar *namepc1;
+const gchar *namepc2;
 
 /*FUNCIONES*/
 GtkWidget *crear_tablero();
@@ -106,6 +139,8 @@ void open_credits(GtkWidget *widget, gpointer data);
 void open_newGame(GtkWidget *widget, gpointer data);
 void emptyLabels(GtkWidget *label);
 void emptyEntry(GtkWidget *entry);
+void isClickedPcVsPlayer(GtkWidget *widget, gpointer data);
+void isClickedPcVsPc(GtkWidget *widget, gpointer data);
 void isClickedExit(GtkWidget *widget, gpointer data);
 void isClickedBack(GtkWidget *widget, gpointer data);
 void isClickedCancel(GtkWidget *widget, gpointer data);
@@ -117,6 +152,7 @@ void isClickedNext1(GtkWidget *widget, gpointer data);
 void isClickedNext2(GtkWidget *widget, gpointer data);
 void isClickedNext3(GtkWidget *widget, gpointer data);
 void isClickedNext4(GtkWidget *widget, gpointer data);
+void isClickedNext5(GtkWidget *widget, gpointer data);
 void isClickedColor1(GtkWidget *widget, gpointer data);
 void isClickedColor2(GtkWidget *widget, gpointer data);
 void move_player(GtkWidget *event_box, GdkEventButton *event, gpointer data);
@@ -137,6 +173,7 @@ void isClickedCancel2(GtkWidget *widget, gpointer data);
 void isClickedCancel3(GtkWidget *widget, gpointer data);
 void isClickedCancel4(GtkWidget *widget, gpointer data);
 void isClickedCancel5(GtkWidget *widget, gpointer data);
+void isClickedCancel8(GtkWidget *widget, gpointer data);
 void isClickedHelp(GtkWidget *widget,gpointer data);
 void getsPosition(int color);
 void emptyBoard();
@@ -152,4 +189,15 @@ int exitsMoves(int **board);
 void cleanChain(int **board);
 void placeLine(int **board,int *rowOdd,int *columnOdd);
 void validMove(int **board,int *rowOdd,int *columnOdd,int aux1);
+void isClickedBack9(GtkWidget *widget, gpointer data);
+void isClickedPcLocal(GtkWidget *widget, gpointer data);
+void isClickedNext6(GtkWidget *widget, gpointer data);
+void isClickedPcOponent(GtkWidget *widget, gpointer data);
+void isClickedCancel7(GtkWidget *widget, gpointer data);
+void isClickedCancel6(GtkWidget *widget, gpointer data);
+void isClickedCancel9(GtkWidget *widget, gpointer data);
+void isClickedColor3(GtkWidget *widget, gpointer data);
+void isClickedColor4(GtkWidget *widget, gpointer data);
+void isClickedCancel10(GtkWidget *widget, gpointer data);
+void isClickedNext7(GtkWidget *widget, gpointer data);
 #endif /* SRC_DECLARACIONESGTK_H_ */

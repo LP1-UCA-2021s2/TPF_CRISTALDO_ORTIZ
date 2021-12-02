@@ -14,6 +14,8 @@
 #define EMPTYBOX 2
 #define CPU 0
 #define PLAYER 1
+#define PCLOCAL 2
+#define PCOPONENT 3
 #define RED 4
 #define BLUE 5
 int **logicBoard;
@@ -24,6 +26,8 @@ int ColorPlayer2; // 	Color del jugador 2
 int horizontal,vertical;
 char playerName[50];
 char pcName[50];
+char pcLocal[25];
+char pcOponent[25];
 //suma 10 puntos
 //suma los puntos de la PLAYER en posi 1
 //los puntos del CPU en posi 0

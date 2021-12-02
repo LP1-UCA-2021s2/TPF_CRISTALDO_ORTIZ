@@ -186,7 +186,7 @@ void statistics(int result,const gchar *name){
 	FILE *fileP = fopen(file,"r");
 	if(fileP==NULL){
 		fileP=fopen(file,"w");
-		fprintf(fileP,"Nombre J\tG\tP\tE");
+		fprintf(fileP,"Nombre\tJ\tG\tP\tE");
 		fclose(fileP);
 		fileP=fopen(file,"r");
 	}
