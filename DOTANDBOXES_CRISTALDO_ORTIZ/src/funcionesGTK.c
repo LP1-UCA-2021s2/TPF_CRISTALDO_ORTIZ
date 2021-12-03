@@ -121,6 +121,7 @@ void PC_VS_PC(){
 	}else{
 		winner();
 	}
+	firts=1;
 }
 int randomOdd(int max,int min){
     int number;
@@ -1019,6 +1020,7 @@ void getsPosition(int color){
 	}
 }
 void isClickedActualizarTablero(GtkWidget *widget, gpointer data){
+	printf("xd");
 	PC_VS_PC();
 }
 GtkWidget *crear_tablero(){
