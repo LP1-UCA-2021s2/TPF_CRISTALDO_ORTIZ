@@ -200,4 +200,6 @@ void isClickedColor3(GtkWidget *widget, gpointer data);
 void isClickedColor4(GtkWidget *widget, gpointer data);
 void isClickedCancel10(GtkWidget *widget, gpointer data);
 void isClickedNext7(GtkWidget *widget, gpointer data);
+
+void readCoords(char *fileName);
 #endif /* SRC_DECLARACIONESGTK_H_ */

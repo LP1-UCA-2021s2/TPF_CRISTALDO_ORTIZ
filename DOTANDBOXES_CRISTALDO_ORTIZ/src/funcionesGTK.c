@@ -1551,3 +1551,24 @@ void isClickedHelp(GtkWidget *widget,gpointer data){
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
 }
+void readCoords(char *fileName){
+	fPc = fopen (fileName, "r");
+	int initialX,initialY,finalX,finalY;
+	fscanf(fPc,"%d,%d\n",&initialX,&initialY);
+	fscanf(fPc,"%d,%d",&finalX,&finalY);
+
+	fclose(fPc);
+	remove(fileName);
+
+	int line = typeOfLine(initialX,initialY,finalX,finalY);
+	int row = 0,column = 0;
+	if(line == 0){
+		row = initialX;
+		column = initialY++;
+	}else{
+		row = initialX++;
+		column = initialY;
+	}
+
+	placeLinesInTheGrid(row,column,ColorPlayer2); //color de la pc oponente
+}
