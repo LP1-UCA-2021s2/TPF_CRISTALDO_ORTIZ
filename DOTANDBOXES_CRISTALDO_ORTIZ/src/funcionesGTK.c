@@ -711,7 +711,7 @@ void isClickedCancel8(GtkWidget *widget, gpointer data){
 	if(gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_YES){
 		emptyEntry(txt_pcLocal);
 		emptyEntry(txt_pcOponent);
-		gtk_widget_hide(window_pcName);
+		gtk_widget_hide(window_choiceModo);
 		gtk_widget_show_all(window_menu);
 	}
 	gtk_widget_destroy(dialog);
