@@ -103,8 +103,6 @@ int main(int argc,char *argv[]) {
 	btn_back7=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back7"));
 	g_signal_connect(btn_back7,"clicked", G_CALLBACK(isClickedBack7),NULL);
 
-	btn_back8=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back8"));
-	g_signal_connect(btn_back8,"clicked", G_CALLBACK(isClickedBack8),NULL);
 
 	btn_back9=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back9"));
 	g_signal_connect(btn_back9,"clicked", G_CALLBACK(isClickedBack9),NULL);
@@ -222,6 +220,9 @@ int main(int argc,char *argv[]) {
 
 	btn_pcOponent=GTK_WIDGET(gtk_builder_get_object(builder,"btn_pcOponent"));
 	g_signal_connect(btn_pcOponent,"clicked", G_CALLBACK(isClickedPcOponent),NULL);
+
+	btn_actualizarTablero=GTK_WIDGET(gtk_builder_get_object(builder,"btn_actualizarTablero"));
+	g_signal_connect(btn_actualizarTablero,"clicked", G_CALLBACK(isClickedActualizarTablero),NULL);
 
 	/*IMAGENES*/
 	image_programmer=GTK_WIDGET(gtk_builder_get_object(builder,"image_programmer"));

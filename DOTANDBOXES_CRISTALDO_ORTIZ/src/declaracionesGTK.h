@@ -94,6 +94,7 @@ GtkWidget *btn_pcVspc;
 GtkWidget *btn_pcVsplayer;
 GtkWidget *btn_pcLocal;
 GtkWidget *btn_pcOponent;
+GtkWidget *btn_actualizarTablero;
 /*ENTRADAS*/
 GtkWidget *txt_player;
 GtkWidget *txt_pc;
@@ -125,6 +126,7 @@ GtkWidget *dialog;
 GtkWidget *board;
 GtkWidget *box_board;
 GtkWidget *eventbox;
+GtkWidget *box1;
 GtkWidget *image;
 
 const gchar *name1;
@@ -187,6 +189,7 @@ void placeLinesInTheGrid(int row,int column,int color);
 void randomLine(int number,int *row,int *column);
 int exitsMoves(int **board);
 void cleanChain(int **board);
+GtkWidget *crear_tableropcvspc();
 void placeLine(int **board,int *rowOdd,int *columnOdd);
 void validMove(int **board,int *rowOdd,int *columnOdd,int aux1);
 void isClickedBack9(GtkWidget *widget, gpointer data);
@@ -200,4 +203,8 @@ void isClickedColor3(GtkWidget *widget, gpointer data);
 void isClickedColor4(GtkWidget *widget, gpointer data);
 void isClickedCancel10(GtkWidget *widget, gpointer data);
 void isClickedNext7(GtkWidget *widget, gpointer data);
+void isClickedActualizarTablero(GtkWidget *widget, gpointer data);
+void PCVSPC();
+GtkWidget *crear_tablero2();
+void convertLinesToDots(int *row1,int *column1,int *row2,int *column2,int row,int column);
 #endif /* SRC_DECLARACIONESGTK_H_ */

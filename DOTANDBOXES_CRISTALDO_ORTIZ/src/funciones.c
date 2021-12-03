@@ -181,7 +181,7 @@ char *readText(FILE *fp){
 void statistics(int result,const gchar *name){
 	char file[]="estadisticas.txt";
 	char aux[21], *token=NULL, **contents = NULL;
-	int game,win,loss,draws,flag=FALSE, cont = 1, rowPlayer=-1;
+	int game=0,win,loss,draws,flag=FALSE, cont = 1, rowPlayer=-1;
 
 	FILE *fileP = fopen(file,"r");
 	if(fileP==NULL){
