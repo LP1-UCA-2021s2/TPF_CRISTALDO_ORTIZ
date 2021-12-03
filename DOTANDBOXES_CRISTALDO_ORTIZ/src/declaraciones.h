@@ -32,7 +32,7 @@ char pcOponent[25];
 //suma los puntos de la PLAYER en posi 1
 //los puntos del CPU en posi 0
 /*FUNCIONES*/
-int random_number(int max,int min);
+
 void check_size_board(int number);
 void line();
 int yes_no_options(int option);

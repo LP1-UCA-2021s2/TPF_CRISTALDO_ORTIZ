@@ -136,6 +136,8 @@ const gchar *namepc2;
 
 /*FUNCIONES*/
 GtkWidget *crear_tablero();
+int random_number(int max,int min);
+int randomOdd(int max,int min);
 void open_statistics(GtkWidget *widget, gpointer data);
 void open_credits(GtkWidget *widget, gpointer data);
 void open_newGame(GtkWidget *widget, gpointer data);
