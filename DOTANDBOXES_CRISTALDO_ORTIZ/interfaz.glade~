@@ -1220,7 +1220,7 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_player1">
+                  <object class="GtkButton" id="btn_pcLocal">
                     <property name="width_request">250</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>

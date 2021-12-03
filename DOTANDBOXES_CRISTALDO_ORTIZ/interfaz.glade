@@ -1220,7 +1220,7 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_player1">
+                  <object class="GtkButton" id="btn_pcLocal">
                     <property name="width_request">250</property>
                     <property name="height_request">330</property>
                     <property name="visible">True</property>
@@ -2468,51 +2468,6 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
           <packing>
             <property name="x">90</property>
             <property name="y">210</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkWindow" id="window_statistics">
-    <property name="can_focus">False</property>
-    <property name="resizable">False</property>
-    <property name="default_width">300</property>
-    <property name="default_height">500</property>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-    <child>
-      <object class="GtkFixed">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkImage">
-            <property name="width_request">100</property>
-            <property name="height_request">80</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="pixbuf">img/background (1).jpg</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_back">
-            <property name="width_request">100</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
-            <property name="relief">none</property>
-            <child>
-              <object class="GtkImage" id="btn_back1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixbuf">img/VOLVER.png</property>
-              </object>
-            </child>
-          </object>
-          <packing>
-            <property name="x">35</property>
-            <property name="y">376</property>
           </packing>
         </child>
       </object>

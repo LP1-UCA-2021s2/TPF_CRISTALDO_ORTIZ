@@ -201,9 +201,10 @@ void statistics(int result,const gchar *name){
 		if(strcmp(token,name)==0) {
 			flag = TRUE;
 			rowPlayer = cont-1;
-			win = atoi(strtok (NULL, " "));
-			loss = atoi(strtok (NULL, " "));
-			draws= atoi(strtok (NULL, " "));
+			game = atoi(strtok(NULL, " "));
+			win = atoi(strtok(NULL, " "));
+			loss = atoi(strtok(NULL, " "));
+			draws= atoi(strtok(NULL, " "));
 		}
 		cont++;
 	}

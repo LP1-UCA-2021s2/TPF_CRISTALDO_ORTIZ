@@ -16,9 +16,6 @@ int main(int argc,char *argv[]) {
 	window_menu=GTK_WIDGET(gtk_builder_get_object(builder,"window_menu"));
 	g_signal_connect(window_menu,"destroy",gtk_main_quit,NULL);
 
-	window_statistics=GTK_WIDGET(gtk_builder_get_object(builder,"window_statistics"));
-	g_signal_connect(window_statistics,"destroy",gtk_main_quit,NULL);
-
 	window_credits=GTK_WIDGET(gtk_builder_get_object(builder,"window_credits"));
 	g_signal_connect(window_credits,"destroy",gtk_main_quit,NULL);
 
@@ -81,9 +78,6 @@ int main(int argc,char *argv[]) {
 	g_signal_connect(btn_exit,"clicked", G_CALLBACK(isClickedExit),NULL);
 
 	/*BOTONES BACK*/
-
-	btn_back1=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back1"));
-	g_signal_connect(btn_back1,"clicked", G_CALLBACK(isClickedBack1),NULL);
 
 	btn_back2=GTK_WIDGET(gtk_builder_get_object(builder,"btn_back2"));
 	g_signal_connect(btn_back2,"clicked", G_CALLBACK(isClickedBack2),NULL);
