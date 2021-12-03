@@ -203,13 +203,8 @@ void isClickedColor3(GtkWidget *widget, gpointer data);
 void isClickedColor4(GtkWidget *widget, gpointer data);
 void isClickedCancel10(GtkWidget *widget, gpointer data);
 void isClickedNext7(GtkWidget *widget, gpointer data);
-<<<<<<< HEAD
-
-void readCoords(char *fileName);
-=======
 void isClickedActualizarTablero(GtkWidget *widget, gpointer data);
 void PCVSPC();
 GtkWidget *crear_tablero2();
 void convertLinesToDots(int *row1,int *column1,int *row2,int *column2,int row,int column);
->>>>>>> d7310458cf2284e5bd98d7451e19532c25ae27e8
 #endif /* SRC_DECLARACIONESGTK_H_ */

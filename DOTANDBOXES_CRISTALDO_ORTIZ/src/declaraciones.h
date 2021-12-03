@@ -28,10 +28,6 @@ char playerName[50];
 char pcName[50];
 char pcLocal[25];
 char pcOponent[25];
-//PC VS PC
-FILE *fPc;
-
-char
 //suma 10 puntos
 //suma los puntos de la PLAYER en posi 1
 //los puntos del CPU en posi 0
@@ -61,7 +57,4 @@ void selectSmallestChain(int **board,int *row,int *column);
 void statistics(int result,const gchar *name);
 char *readText(FILE *fp);
 void copyArray(char*to, char*from);
-
-int typeOfLine(int number1, int number2, int number3, int number4);
-//void readCoords(char *fileName);
 #endif /* SRC_DATOS_H_ */

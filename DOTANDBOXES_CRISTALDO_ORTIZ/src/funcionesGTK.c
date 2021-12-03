@@ -263,7 +263,7 @@ void choice_turns(int choice){
 		}else{
 			//empieza el jugador
 			PlayerFirtsTurn=PLAYER;
-			gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpg");
+			gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpeg");
 			gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
 		}
 		gtk_widget_show_all(window_turnSelected);
@@ -461,7 +461,7 @@ void isClickedPcLocal(GtkWidget *widget, gpointer data){
 	 *  Ninguno.*/
 	PlayerFirtsTurn=PCLOCAL;
 	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn1),namepc1);
-	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn1),"img/jugador.jpg");
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn1),"img/jugador.jpeg");
 	gtk_widget_hide(window_choiceTurn1);
 	gtk_widget_show_all(window_turnSelected1);
 }
@@ -755,7 +755,7 @@ void isClickedPlayer(GtkWidget *widget, gpointer data){
 	 *  Ninguno.*/
 	PlayerFirtsTurn=PLAYER;
 	gtk_label_set_text(GTK_LABEL(label_nameFirtsTurn),name1);
-	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpg");
+	gtk_image_set_from_file(GTK_IMAGE(image_playerFirtsTurn),"img/jugador.jpeg");
 	gtk_widget_hide(window_choiceTurn);
 	gtk_widget_show_all(window_turnSelected);
 }
@@ -779,7 +779,7 @@ void isClickedEthel(GtkWidget *widget, gpointer data){
 	 * 	data
 	 * Retorno:
 	 *  Ninguno.*/
-	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Ethel.jpg");
+	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Ethel.png");
 	gtk_label_set_text(GTK_LABEL(label_description),"Ayudo con el diseño de la interfaz");
 }
 void isClickedDaniela(GtkWidget *widget, gpointer data){
@@ -789,7 +789,7 @@ void isClickedDaniela(GtkWidget *widget, gpointer data){
 	 * 	data
 	 * Retorno:
 	 *  Ninguno.*/
-	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Danusita.jpg");
+	gtk_image_set_from_file(GTK_IMAGE(image_programmer),"img/Danusita.png");
 	gtk_label_set_text(GTK_LABEL(label_description),"Programo y lloro");
 }
 void isClickedColor1(GtkWidget *widget, gpointer data){
@@ -1275,7 +1275,7 @@ void winner(){
 					gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
 					gtk_label_set_text(GTK_LABEL(label_status),"GANO EL JUGADOR");
 					gtk_label_set_text(GTK_LABEL(label_points),temp);
-					gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+					gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpeg");
 					statistics(1,name1);
 					g_free(temp);
 				}
@@ -1353,7 +1353,7 @@ void isCLickedNextPlayer(GtkWidget *widget, gpointer data){
 	gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
 	gtk_widget_set_sensitive(btn_nextPlayer,FALSE);
 	gtk_label_set_text(GTK_LABEL(label_points),temp);
-	gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+	gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpeg");
 	gtk_label_set_text(GTK_LABEL(label_status),"EMPATE");
 	g_free(temp);
 }
@@ -1712,25 +1712,4 @@ void isClickedHelp(GtkWidget *widget,gpointer data){
 	gtk_window_set_title(GTK_WINDOW(dialog), "Ayudita");
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_destroy(dialog);
-}
-void readCoords(char *fileName){
-	fPc = fopen (fileName, "r");
-	int initialX,initialY,finalX,finalY;
-	fscanf(fPc,"%d,%d\n",&initialX,&initialY);
-	fscanf(fPc,"%d,%d",&finalX,&finalY);
-
-	fclose(fPc);
-	remove(fileName);
-
-	int line = typeOfLine(initialX,initialY,finalX,finalY);
-	int row = 0,column = 0;
-	if(line == 0){
-		row = initialX;
-		column = initialY++;
-	}else{
-		row = initialX++;
-		column = initialY;
-	}
-
-	placeLinesInTheGrid(row,column,ColorPlayer2); //color de la pc oponente
 }
