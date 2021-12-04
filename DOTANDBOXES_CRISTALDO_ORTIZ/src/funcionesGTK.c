@@ -1306,7 +1306,7 @@ void winner(){
 					gchar *temp=g_strdup_printf("%i",add_points[PLAYER]);
 					gtk_label_set_text(GTK_LABEL(label_status),"GANO LA PC OPONENTE");
 					gtk_label_set_text(GTK_LABEL(label_points),temp);
-					gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpg");
+					gtk_image_set_from_file(GTK_IMAGE(image_winner),"img/jugador.jpeg");
 					g_free(temp);
 				}
 			}

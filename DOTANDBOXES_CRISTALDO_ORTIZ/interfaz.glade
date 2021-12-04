@@ -1245,7 +1245,7 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="pixbuf">img/jugador.jpg</property>
+                        <property name="pixbuf">img/jugador.jpeg</property>
                       </object>
                     </child>
                   </object>
@@ -2499,6 +2499,7 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
     <property name="height_request">500</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -2697,6 +2698,7 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
     <property name="height_request">500</property>
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <child type="titlebar">
       <placeholder/>
     </child>
@@ -2975,6 +2977,10 @@ EL OTRO SIN SELECCIONAR SE ASIGNARÁ AL RIVAL</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="label" translatable="yes">0</property>
+                        <attributes>
+                          <attribute name="font-desc" value="Ubuntu Bold 30"/>
+                          <attribute name="background" value="#b6b6e3e3e9e9"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">True</property>

@@ -1,1 +1,3 @@
 Nombre	J	G	P	E
+
+madre 2 0 2 0
